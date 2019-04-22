@@ -136,11 +136,7 @@
                                     <a href="{{ action('PerfilUsuarioController@DatosUsuario') }}" class="nav-link dropdown-toggle text-muted waves-effect waves-dark">Perfil</a>
                                 </li>
 
-                            @else
-                            <!--
-                            <li><a class="color_animation" href="{{ url('/login') }}">LOGIN</a></li>
-                            <li><a class="color_animation" href="{{ url('/register') }}">REGISTRO</a></li>
-                            -->   
+                            @else 
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="{{ url('/login') }}" ><b>Login</b></a>
                             </li>
