@@ -69,81 +69,26 @@
 @section('content')
 
 <section class="col-lg-12 connectedSortable">
-<!--
-<div class="row">
-  
 
-  <div class="col-lg-3 center-block" align='center'  >
-    <a class="" href="#home"  id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-      <div class="center  cuadro connectedSortable">
-      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
-        <p class="center-block"><b>Informacion Personal</b></p>
-      </div>
-    </a>
+  <div class="col-sm-12 center-block">
+    @include('flash-message')
   </div>
-
-  <div class="col-lg-3 center-block" align='center'>
-    <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
-      <div class="center-block  cuadro connectedSortable">
-      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
-        <p class="center-block"><b>Cambiar Clave</b></p>
-      </div>
-    </a>
-  </div>
-
-  <div class="col-lg-3 center-block" align='center'  >
-    <a class="" href="#home"  id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
-      <div class="center-block  cuadro connectedSortable">
-        <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
-        <p class="center-block"><b>Bandeja de Mensaje</b></p>
-      </div>
-    </a>
-  </div>
-
-  <div class="col-lg-3 center-block" align='center'  >
-    <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
-      <div class="center-block  cuadro connectedSortable">
-      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
-        <p class="center-block"><b>Preguntas frecuentes</b></p>
-      </div>
-    </a>
-  </div>
-
-</div>
--->
-@include('flash-message')
-
-</section>
-<section class="col-md-12 ">
-
-
-<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
-   
-    <div id="myTabContent" class="tab-content">
-      
-      <div role="tabpanel" class="tab-pane center-block  fade in active espacio col-md-offset-3" id="home" aria-labelledby="home-tab">
-          <div class="col-sm-3"></div>
-          <div class="col-sm-6 col-md-offset-3 center-block ">
-         <div class="box-body box-profile ">
-            @php
-            $foto=$data_form->avatar;
-            @endphp 
-            @if($data_form->avatar=="")
-              <img class="center-block profile-user-img img-responsive img-circle" src="{{asset('imagenes/avatar.jpg')}}" alt="User profile picture">
-            @else
-              <img class="center-block profile-user-img img-responsive img-circle" src='{{ asset("perfil_usuario/$foto")}}'   alt="User profile picture">
-                 
-            @endif
-              
-                  
-            <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
-
-            <p class="text-muted text-center">Foto de usuario</p>
-
-            </div>
-          <!--  
-            <form class="form-horizontal" id="formmass" role="form" accept-charset="UTF-8" enctype="multipart/form-data" >
-           -->
+    <div class="col-sm-3 center-block ">
+      <h1>Datos de perfil</h1>
+              <div class="box-body box-profile ">
+                @php
+                $foto=$data_form->avatar;
+                @endphp 
+                @if($data_form->avatar=="")
+                  <img class="center-block profile-user-img img-responsive img-circle" src="{{asset('imagenes/avatar.jpg')}}" alt="User profile picture">
+                @else
+                
+                  <img class="center-block profile-user-img img-responsive img-circle" src='{{ asset("perfil_usuario/$foto")}}'   alt="User profile picture">
+                @endif
+                <h3 class="profile-username text-center">{{ Auth::user()->name }}</h3>
+                <p class="text-muted text-center">Foto de usuario</p>
+              </div>
+          
            {!! Form::model($data_form, ['method' => 'PUT','enctype'=>'multipart/form-data', 'route' => [
             'PerfilUsuario.update',
             
@@ -234,36 +179,19 @@
               @endif
             </div>
 
-            <div class="col-xs-12 form-group">
-              {!! Form::label('estado_id', 'estado_id*', ['class' => 'control-label']) !!}
-              {!! Form::text('estado_id', old('estado_id'), ['class' => 'form-control', 'placeholder' => '']) !!}
-              @if($errors->has('estado_id'))
-              <div class="alert alert-danger" role="alert">
-                  <b >{{ $errors->first('estado_id') }}</b>
-              </div>
-              @endif
-            </div>
+         
 
             {!! Form::submit('Aceptar', ['class' => 'btn btn-primary']) !!}  
             {!! Form::close() !!}
 
-            <?php var_dump($errors) ?>
+            
     @foreach($errors as $men)
            <h1>sss  $men->messages
     @endforeach
 
           </div>
-
-
-
-
-
-
-
-
-      </div>
-      <div role="tabpanel" class="tab-pane fade espacio" id="profile" aria-labelledby="profile-tab">
-        
+           <div class="col-md-4">
+          <h1>Cambiar la contraseña </h1>
 
           {!! Form::open(['method' => 'POST', 'route' => ['Perfil.Edit_password']]) !!}
             {{ csrf_field() }}
@@ -304,6 +232,74 @@
 
 
       </div>
+
+
+
+<!--
+<div class="row">
+  
+
+  <div class="col-lg-3 center-block" align='center'  >
+    <a class="" href="#home"  id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+      <div class="center  cuadro connectedSortable">
+      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
+        <p class="center-block"><b>Informacion Personal</b></p>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-lg-3 center-block" align='center'>
+    <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
+      <div class="center-block  cuadro connectedSortable">
+      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
+        <p class="center-block"><b>Cambiar Clave</b></p>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-lg-3 center-block" align='center'  >
+    <a class="" href="#home"  id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="true">
+      <div class="center-block  cuadro connectedSortable">
+        <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
+        <p class="center-block"><b>Bandeja de Mensaje</b></p>
+      </div>
+    </a>
+  </div>
+
+  <div class="col-lg-3 center-block" align='center'  >
+    <a href="#profile" role="tab" id="profile-tab" data-toggle="tab" aria-controls="profile">
+      <div class="center-block  cuadro connectedSortable">
+      <i class="fa fa-user" style="font-size:50px;margin-top: 15px;"></i>
+        <p class="center-block"><b>Preguntas frecuentes</b></p>
+      </div>
+    </a>
+  </div>
+
+</div>
+-->
+
+
+</section>
+<section class="col-md-12 ">
+
+
+<div class="bs-example bs-example-tabs" data-example-id="togglable-tabs">
+   
+    <div id="myTabContent" class="tab-content">
+      
+      <div role="tabpanel" class="tab-pane center-block  fade in active espacio col-md-offset-3" id="home" aria-labelledby="home-tab">
+         
+        
+
+
+
+
+
+
+
+
+      </div>
+     
      
     </div>
   </div>

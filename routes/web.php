@@ -79,8 +79,9 @@ Route::post('Solicitude_estado/changeStatus', array('as' => 'changeStatus', 'use
 
   
 
-Route::get('Perfil', 'PerfilUsuarioController@DatosUsuario');
+Route::get('Perfil','PerfilUsuarioController@DatosUsuario' );
 Route::get('Perfil/editar', 'PerfilUsuarioController@editar');
+
 
 Route::post('Perfil/subir', array('as' => 'changeStatus', 'uses' => 'PerfilUsuarioController@subir'));
 Route::post('Perfil/Edit_password', [ 'as' => 'Perfil.Edit_password', 'uses' => 'PerfilUsuariocontroller@Edit_password']);

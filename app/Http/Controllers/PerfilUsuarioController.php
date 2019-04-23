@@ -172,7 +172,8 @@ class PerfilUsuariocontroller extends Controller {
         $Perfil_Usuario->save();
         //return response()->json($Perfil_Usuario);
         //Perfil/Usuario
-        return redirect()->route('dashboard')->with('success','User successfully edited.');
+
+        return redirect('Perfil')->with('success','Datos de perfil modificado.');
         
     }
 

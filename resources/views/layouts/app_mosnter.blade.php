@@ -25,11 +25,11 @@
     <link rel="icon" type="image/png" sizes="16x16" href="assets-mosnter/images/favicon.png">
     <title>Monster Admin Template - The Most Complete & Trusted Bootstrap 4 Admin Template</title>
     <!-- Bootstrap Core CSS -->
-    <link href="assets-mosnter/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ asset('assets-mosnter/plugins/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="css-mosnter/style.css" rel="stylesheet">
+    <link href="{{ asset('css-mosnter/style.css')}}" rel="stylesheet">
     <!-- You can change the theme colors from here -->
-    <link href="css-mosnter/colors/blue.css" id="theme" rel="stylesheet">
+    <link href="{{ asset('css-mosnter/colors/blue.css')}}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -84,15 +84,17 @@
                         <!-- Logo icon -->
                         <b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon -->
+                            <!-- Dark Logo icon 
                             <img src="{{ asset('assets-mosnter/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
+                            -->
                             
                         </b>
                         <!--End Logo icon -->
                         <!-- Logo text -->
                         <span>
                          <!-- dark Logo text -->
-                         <img   src="{{ asset('assets-mosnter/images/logo-text.png')}}" alt="homepage" class="dark-logo" />
+                         <?php $foto=auth()->user()->avatar;?>
+                        
                          </span> </a>
                 </div>
                 <!-- ============================================================== -->
@@ -120,7 +122,7 @@
                             @if (Auth::check())
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <img src='{{ asset("perfil_usuario/auth()->user()->avatar")}}' 
+                                        <img src='{{ asset("perfil_usuario/$foto")}}' 
                                          alt="user" class="profile-pic m-r-5" /><b class="menu_info" >{{auth()->user()->name}}</b></a>
 
                                 </li>

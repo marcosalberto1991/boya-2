@@ -5,11 +5,11 @@
 @section("content")
 <section class="content">
 	<div class="row">
-        <div class="col-xs-12">
+        <div class="col-md-12">
 
         <div class="box">
             <div class="box-header">
-				<h3 class="box-title">DatosDispositivo</h3>
+				<h3 class="box-title">Datos de los Dispositivos</h3>
 				@can('DatosDispositivo Add')	
 					<button type="button" class="btn btn-success mass-add-modal" data-toggle="modal" data-target=".bd-example-modal-lg">Añadir DatosDispositivo</button>
         		@endcan
@@ -21,11 +21,11 @@
         		<table id="myTable" class="table display table-striped table-bordered table-hover compact nowrap">
 					<thead>						   
 						<tr>
-							<th>id</th>
-							<th>nivel_rio</th>
-							<th>velocidad_corriente</th>
-							<th>temperatura</th>
-							<th>dispositivo_id</th>
+							<th>ID</th>
+							<th>Nivel de rio</th>
+							<th>Velocidad de la corriente</th>
+							<th>Temperatura</th>
+							<th>Dispositivo</th>
 							<th>Ultima Modificacion</th>	<th>Accion</th>		
 						</tr>
 					{{ csrf_field() }}
@@ -34,12 +34,12 @@
 
 					@foreach($listmysql as $lists)
 						  
-					<tr id="item_{{$lists->id}}"" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
+					<tr id="item_{{$lists->id}}" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
 						<td class="col1">{{ $lists->id }}</td>
 							<td class="col1">{{ $lists->nivel_rio }}</td>
 							<td class="col1">{{ $lists->velocidad_corriente }}</td>
 							<td class="col1">{{ $lists->temperatura }}</td>
-							<td class="col1">{{ $lists->dispositivo_id }}</td>
+							<td class="col1">{{ $lists->dispositivo_id_pk->nombre }}</td>
 							
 						<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}</td>
 						<td>
@@ -90,6 +90,16 @@
         	</div>
     	</div>
     </div>
+    <div class="col-md-12">
+     	<div class="box">
+            <div class="box-header">
+				<h3 class="box-title">DatosDispositivo</h3>
+            </div>
+        </div>
+
+        
+    </div>
+
 </div>
 @endsection
 
@@ -105,19 +115,8 @@
 					<h3 class="text-center" id="msdelete">¿Seguro que quieres borrar los  datos?</h3>
 					<form class="form-horizontal" id="formmass" role="form">
 						
+						<input type='hidden' class='form-control' id='id_mass' required='required' autofocus>
 						
-
-							<!-- 
-						<div class='form-group'>
-							<label class='control-label col-sm-2' for='descripcion'>id:</label>
-							<div class='col-sm-10'>
-							-->
-								<input type='hidden' class='form-control' id='id_mass' required='required' autofocus>
-							<!--
-								<p class='errorid text-center alert alert-danger d-none'></p>
-							</div>
-						</div>
-						-->
 							
 						<div class='form-group col-sm-12' id='nivel_rio' >
 							<label>nivel_rio:</label>
