@@ -93,7 +93,6 @@
                         <!-- Logo text -->
                         <span>
                          <!-- dark Logo text -->
-                         <?php $foto=auth()->user()->avatar;?>
                         
                          </span> </a>
                 </div>
@@ -120,6 +119,7 @@
                         
                         @if (Route::has('login'))
                             @if (Auth::check())
+                                <?php $foto=auth()->user()->avatar;?>
                                 <li class="nav-item dropdown">
                                     <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                         <img src='{{ asset("perfil_usuario/$foto")}}' 
@@ -249,8 +249,9 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"/></script>
 
     <script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
-
+<!--
     <script type="text/javascript" src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+    -->
     <script type="text/javascript" src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
     <script src="{{ asset('js/select2.min.js') }}"></script>
 

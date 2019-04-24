@@ -40,7 +40,7 @@ Route::get('intervenir/{file}', function ($file) {
 
 Auth::routes();
 
-
+Route::resource('ayuda','ayudaController');
 
 Route::resource('Dispositivo','DispositivoController');
 
@@ -49,6 +49,7 @@ Route::resource('DatosDispositivo','DatosDispositivoController');
 
 
 Route::get('Grafica', 'DatosDispositivoController@DatosGrafica');
+Route::get('{id}/DatoDispositivo', 'DatosDispositivoController@DatoDispositivo');
 
 Route::get('backup', 'BackupController@index');
 Route::get('backup/create', 'BackupController@create');

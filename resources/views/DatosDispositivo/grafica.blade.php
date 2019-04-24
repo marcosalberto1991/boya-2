@@ -24,11 +24,13 @@
     	
     		@foreach($datosdispositivo as $lists)
     		<div class="col-lg-12 col-md-12 col-sm-12 ">
-    			<div class="card card-stats color-azul ">
-              		<div class="card-body  ">
-						<h2 style="color:#0275d8">{{$lists->dispositivo_id_pk->nombre}}</h2>
-					</div>
-				</div>
+    			<a href="{{ action('DatosDispositivoController@DatoDispositivo',['id'=>$lists->dispositivo_id]) }}">
+                    <div class="card card-stats color-azul ">
+                  		<div class="card-body  ">
+        					<h2 style="color:#0275d8">{{$lists->dispositivo_id_pk->nombre}}</h2>
+        				</div>
+        			</div>
+                </a>
     		</div>	
 			<div class="row">
 
