@@ -30,13 +30,11 @@ class PrecioEstacionamientosController extends Controller
 	*/
 	protected $rules =
 	[
-		
 				'id' => 'required|min:1|max:99999999',
 	   			'nombre' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'precio' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'tiempo' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'tipo_vehiculo_id' => 'required|min:1|max:99999999',
-	   			
 	];
 	 /**
 	 * Display a listing of the resource.

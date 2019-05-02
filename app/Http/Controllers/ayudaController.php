@@ -32,7 +32,7 @@ class ayudaController extends Controller
 	protected $rules =
 	[
 		
-				'id' => 'required|min:1|max:99999999',
+				//'id' => 'required|min:1|max:99999999',
 	   			'nombre' => 'required|min:1|max:99999999',
 	   			'descricion' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			

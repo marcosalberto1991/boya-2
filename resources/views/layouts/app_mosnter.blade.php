@@ -4,6 +4,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets-mosnter/images/favicon.png')}}">
@@ -37,25 +39,19 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-<!--
--->
-<link href="{{ asset('scss-mosnter/icons/font-awesome/css/font-awesome.min.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/simple-line-icons/css/simple-line-icons.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/weather-icons/css/weather-icons.min.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/linea-icons/linea.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/themify-icons/themify-icons.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/flag-icon-css/flag-icon.min.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('scss-mosnter/icons/material-design-iconic-font/css/materialdesignicons.min.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('css-mosnter/spinners.css')}}" id="theme" rel="stylesheet">
-<link href="{{ asset('css-mosnter/animate.css')}}" id="theme" rel="stylesheet">
-
-
-
-
-
-
-
+    <!--
+    -->
+    <link href="{{ asset('scss-mosnter/icons/font-awesome/css/font-awesome.min.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/simple-line-icons/css/simple-line-icons.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/weather-icons/css/weather-icons.min.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/linea-icons/linea.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/themify-icons/themify-icons.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/flag-icon-css/flag-icon.min.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('scss-mosnter/icons/material-design-iconic-font/css/materialdesignicons.min.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('css-mosnter/spinners.css')}}" id="theme" rel="stylesheet">
+    <link href="{{ asset('css-mosnter/animate.css')}}" id="theme" rel="stylesheet">
     <link href="{{ asset('css-mosnter/style.css" rel="stylesheet')}}">
+    <link href="{{ asset('css/app.css')}}" id="theme" rel="stylesheet">
 
 </head>
 
@@ -79,23 +75,37 @@
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
+                
                 <div class="navbar-header">
                     <a class="navbar-brand" href="index.html">
-                        <!-- Logo icon -->
-                        <b>
+                        <!-- Logo icon --><b>
                             <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
-                            <!-- Dark Logo icon 
-                            <img src="{{ asset('assets-mosnter/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
-                            -->
-                            
+                            <!-- Dark Logo icon -->
+                            <img src="../assets/images/logo-icon.png" alt="homepage" class="dark-logo">
+                            <!-- Light Logo icon -->
+                            <img src="../assets/images/logo-light-icon.png" alt="homepage" class="light-logo">
                         </b>
                         <!--End Logo icon -->
-                        <!-- Logo text -->
-                        <span>
+                        <!-- Logo text --><span style="">
                          <!-- dark Logo text -->
+                         <img src="../assets/images/logo-text.png" alt="homepage" class="dark-logo">
+                         <!-- Light Logo text -->    
+                         <img src="../assets/images/logo-light-text.png" class="light-logo" alt="homepage"></span> </a>
+                </div>
+<!--
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="{{ asset('assets-mosnter/images/logo-icon.png')}}" alt="homepage" class="dark-logo" />
+                        <b>
+                           
+                            
+                        </b>
+                  
+                        <span>
                         
                          </span> </a>
                 </div>
+    -->
                 <!-- ============================================================== -->
                 <!-- End Logo -->
                 <!-- ============================================================== -->
@@ -116,7 +126,12 @@
                     <!-- User profile and search -->
                     <!-- ============================================================== -->
                     <ul class="navbar-nav my-lg-0">
-                        
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="{{ url('lang', ['es']) }}" ><b>Español</b></a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle text-muted waves-effect waves-dark" href="{{ url('lang', ['en']) }}" ><b>English</b></a>
+                        </li>
                         @if (Route::has('login'))
                             @if (Auth::check())
                                 <?php $foto=auth()->user()->avatar;?>
@@ -129,13 +144,13 @@
                                 <li class="nav-item dropdown">
                                     <a href="{{ route('logout') }}" class="nav-link dropdown-toggle text-muted waves-effect waves-dark" 
                                     onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();"><b class="menu_info">Salir</b></a>
+                                    document.getElementById('logout-form').submit();"><b class="menu_info"><p>{{ trans('welcome.salir') }}</p></b></a>
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                       {{ csrf_field() }}
                                     </form>
                                 </li>
                                 <li class="nav-item dropdown">
-                                    <a href="{{ action('PerfilUsuarioController@DatosUsuario') }}" class="nav-link dropdown-toggle text-muted waves-effect waves-dark">Perfil</a>
+                                    <a href="{{ action('PerfilUsuarioController@DatosUsuario') }}" class="nav-link dropdown-toggle text-muted waves-effect waves-dark"><b>Perfil</b></a>
                                 </li>
 
                             @else 
@@ -212,11 +227,17 @@
         <!-- ============================================================== -->
         <!-- Page wrapper  -->
         <!-- ============================================================== -->
+
         <div class="page-wrapper">
             <!-- ============================================================== -->
             <!-- Container fluid  -->
-            <div class="container-fluid">
+            <div class="container-fluid" >
                 @yield('content')
+                <div id="appss">
+                </div>
+                    
+                
+                    
             <!-- ============================================================== 
                 <div class="row">
                     <div class="col-12">
@@ -234,6 +255,7 @@
             </footer>
         </div>
     </div>
+    <script src="{{asset('js/app.js')}}"></script>
     <script src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">

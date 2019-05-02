@@ -10,6 +10,29 @@
 | contains the "web" middleware group. Now create something great!
 |
  */
+
+
+
+Route::group(['middleware' => ['web']], function () {
+
+    Route::get('/', function () {
+        return view('layout');
+    });
+
+    Route::get('lang/{lang}', function ($lang) {
+        session(['lang' => $lang]);
+        return \Redirect::back();
+    })->where([
+        'lang' => 'en|es'
+    ]);
+    Route::get('/', 'IndexController@index');
+
+});
+
+
+
+
+
 use App\municipiosModel;
 //URL::forceSchema('https');
 
@@ -30,7 +53,6 @@ Route::get('intervenir/{file}', function ($file) {
 });
 /*
 */
-    Route::get('/', 'IndexController@index');
 
 //Route::get('/', function () {
  //   return view('inicio');

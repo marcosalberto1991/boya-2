@@ -190,6 +190,7 @@ return [
         Arcanedev\LogViewer\LogViewerServiceProvider::class,
         Spatie\Backup\BackupServiceProvider::class,//spatie/laravel-backup
         UxWeb\SweetAlert\SweetAlertServiceProvider::class,
+        Unisharp\Ckeditor\ServiceProvider::class,
 
         
 

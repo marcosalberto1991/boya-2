@@ -58,7 +58,7 @@
 	border-radius: 10px 10px 10px 10px;
 	-moz-border-radius: 10px 10px 10px 10px;
 	-webkit-border-radius: 10px 10px 10px 10px;
-	border: 3px solid #2c33bd;
+	border: 1px solid #2c33bd;
 	margin-top: 15px;
  
     -ms-flex-align: center;
@@ -84,6 +84,16 @@
 	.margin-top-15{
 		margin-top: 15px;
 	}
+	.hljs{
+	background: #f5f5f5;
+    color: #292b2ccf;
+    display: block;
+    overflow-x: auto;
+    padding: 0.5em;
+	}
+	.panel{
+		padding: 15px;
+	}
 
 </style>
 <script>
@@ -93,10 +103,14 @@
 
 <section class="col-md-12 connectedSortable">
 	<div class="box box-warning">
-		<div class="box-header with-border">
+
+		<div class="box-header with-border" id="app">
 			<h3 class="box-descripcion">Lista de ayuda</h3>
-		</div>          
+		<ayuda-component></ayuda-component>
+		</div>
+
 		@foreach($listmysql as $lists)
+		
 		<div class="box-body">
 			<div class="col-md-12 panel panel-default">
 				<div class="footers">
@@ -106,13 +120,15 @@
 					
 				</div>	
 	   			<div>
-	   				<p class="letra-2 margin-top-15">Descricion</p><br>
+	   				<p class="letra-2 margin-top-15"><b>Descricion</b></p><br>
 					<p class="letra-2">{{ $lists->descricion }}</p>
 				</div>
 				<div>
+					<!--
 					<pre class="letra-2 brush: php ">
 						{{ $lists->fuente_codigo }}
 					</pre>
+					-->
 					<pre>
     				<code class="letra-2 hljs HTML">{{ $lists->fuente_codigo }}</code>
 					</pre>
@@ -120,7 +136,18 @@
 					</p>
 				</div>
 		
+				<br>
+			<button class="edit-modal btn btn-info" 
+				data-id="{{ $lists->id}}"
+				data-nombre="{{ $lists->nombre}}"
+				data-descricion="{{ $lists->descricion}}"
+				data-fuente_codigo="{{ $lists->fuente_codigo}}"
+				data-created_at="{{ $lists->created_at}}"
+				data-updated_at="{{ $lists->updated_at}}"		
+				><span class="glyphicon glyphicon-edit"></span> Editar</button>
+			<br>
 			</div>
+
 		</div>
 		@endforeach
 	</div>
@@ -137,8 +164,8 @@
 				<div class="panel-heading">
 					<ul>
 						<li><i class="fa fa-file-text-o"></i> Acciones</li>
+							<a href="#" id="massadd-modal" class="massmodal" data-target=".bd-example-modal-lg"><li>Añadir un ayuda</li></a>
 						@can('ayuda Add')
-							<a href="#" id="massadd-modal" class="massmodal"><li>Añadir un ayuda</li></a>
 						@endcan
 					</ul>
 				</div>
@@ -175,7 +202,6 @@
 						
 						<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}</td>
 						<td>
-						@can('ayuda Show')
 						<button class="massshow-modal btn btn-success" 
 						data-id="{{ $lists->id}}"
 						data-nombre="{{ $lists->nombre}}"
@@ -187,6 +213,7 @@
 						
 						>
 						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+						@can('ayuda Show')
 						@endcan		
 						@can('ayuda Editar')
 						<button class="edit-modal btn btn-info" 
@@ -232,8 +259,8 @@
 @endsection
 
 	<!-- Modal form to mass a form -->
-	<div id="massModal" class="modal fade" role="dialog">
-		<div class="modal-dialog">
+	<div id="massModal" class="modal fade bd-example-modal-lg" role="dialog">
+		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -250,18 +277,12 @@
 							</div>
 						</div>
 
-						<div class='form-group' id='id' >
-							<label class='control-label col-sm-2' for='descripcion'>id:</label>
-							<div class='col-sm-10'>
-								<input type='text' class='form-control' id='id_mass' maxlength='11'   required='required' autofocus>
-								<p class='errorid text-center alert alert-danger hidden'></p>
-							</div>
-						</div>
+					
 						
 						<div class='form-group' id='nombre' >
 							<label class='control-label col-sm-2' for='descripcion'>nombre:</label>
 							<div class='col-sm-10'>
-								<input type='text' class='form-control' id='nombre_mass' maxlength='11'   required='required' autofocus>
+								<input type='text' class='form-control' id='nombre_mass' maxlength='191'   required='required' autofocus>
 								<p class='errornombre text-center alert alert-danger hidden'></p>
 							</div>
 						</div>
@@ -277,7 +298,8 @@
 						<div class='form-group' id='fuente_codigo' >
 							<label class='control-label col-sm-2' for='descripcion'>fuente_codigo:</label>
 							<div class='col-sm-10'>
-								<input type='text' class='form-control' id='fuente_codigo_mass'     required='required' autofocus>
+								<pre><code><textarea type='textarea' rows="20" cols="100%" class='form-control' id='fuente_codigo_mass'     required='required' autofocus>
+								</textarea></code></pre>
 								<p class='errorfuente_codigo text-center alert alert-danger hidden'></p>
 							</div>
 						</div>
@@ -319,16 +341,34 @@
 <!--
 	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-	-->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-heath-dark.min.css" />
 	<script type="text/javascript" src="syntaxhighlighter-master/src/highlighters.js"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atelier-heath-dark.min.css" />
+	-->
 
+
+<script src="vendor/unisharp/laravel-ckeditor/ckeditor.js"></script>
+<script src="vendor/unisharp/laravel-ckeditor/adapters/jquery.js"></script>
 @stop	
 @section("page-js-script")
 	
 			
 <script type='text/javascript'>
-	</script>
+ //CKEDITOR.replace('#fuente_codigo_mass');
+  
+  $('#fuente_codigo_mass').ckeditor().then(editor => {
+          editor.keystrokes.set( 'Tab', ( data, cancel ) => {
+             editor.model.change( writer => {
+                  writer.insertText("    ", editor.model.document.selection.getFirstPosition()) 
+             });
+             cancel();
+           });
+        myEditor = editor;
+     })
+     .catch(error => {
+          console.error(error);
+     });
+    
+</script>
 
 	<script type='text/javascript'>
 		 $(document).on('click','.massmodal', function() {

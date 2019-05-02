@@ -47,6 +47,7 @@ class DatosDispositivoController extends Controller
 
 		//$id_tipo = Solicitude_tipo::select("solicitude_tipos.id","solicitude_tipos.descripcion as nombre")->get();
 
+		//select('datos_dispositivo_bolla.*',"sum('velocidad_corriente.temperatura)")
 		$DatosDispositivo = DatosDispositivoModel::with('dispositivo_id_pk')->get();
 
 		$dispositivo_id = DatosDispositivoModel::select("id","id as nombre")->get();
