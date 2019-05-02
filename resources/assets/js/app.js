@@ -2,7 +2,7 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-//ss
+//ss  
 Vue.component('ayuda-component', require('./components/AyudaComponent.vue'));
  
 const app = new Vue({
