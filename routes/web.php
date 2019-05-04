@@ -31,7 +31,7 @@ Route::group(['middleware' => ['web']], function () {
 
 
 
-
+Route::resource('Producto','ProductoController');
 
 use App\municipiosModel;
 //URL::forceSchema('https');
