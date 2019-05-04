@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-05-2019 a las 17:29:08
+-- Tiempo de generación: 04-05-2019 a las 19:02:45
 -- Versión del servidor: 10.1.37-MariaDB
 -- Versión de PHP: 7.0.33
 
@@ -466,8 +466,7 @@ INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
 (1, 'App\\User', 1),
 (2, 'App\\User', 1),
 (3, 'App\\User', 1),
-(3, 'App\\User', 2),
-(4, 'App\\User', 3);
+(3, 'App\\User', 2);
 
 -- --------------------------------------------------------
 
@@ -529,7 +528,60 @@ INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at
 (88, 'Dispositivo Show', 'web', '2019-04-11 00:19:26', '2019-04-11 00:19:26'),
 (89, 'Dispositivo Editar', 'web', '2019-04-11 00:19:41', '2019-04-11 00:19:41'),
 (90, 'Dispositivo Add', 'web', '2019-04-11 00:19:50', '2019-04-11 00:19:50'),
-(91, 'Dispositivo Eliminar', 'web', '2019-04-11 00:19:59', '2019-04-11 00:19:59');
+(91, 'Dispositivo Eliminar', 'web', '2019-04-11 00:19:59', '2019-04-11 00:19:59'),
+(92, 'Producto Add', 'web', '2019-05-04 16:14:17', '2019-05-04 16:14:17'),
+(93, 'Producto Editar', 'web', '2019-05-04 16:14:41', '2019-05-04 16:14:41');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `producto`
+--
+
+CREATE TABLE `producto` (
+  `id` int(11) NOT NULL,
+  `nombre_proveedor` varchar(45) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `imagen` varchar(45) NOT NULL,
+  `precio_caja` int(11) NOT NULL,
+  `cantidad_caja` int(11) NOT NULL,
+  `precio_unidad` int(11) NOT NULL,
+  `iva` int(11) NOT NULL,
+  `porcentaje_ganacia` int(11) NOT NULL,
+  `precio_venta` int(11) NOT NULL,
+  `ganacia` int(11) NOT NULL,
+  `proveedor_id` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id`, `nombre_proveedor`, `nombre`, `imagen`, `precio_caja`, `cantidad_caja`, `precio_unidad`, `iva`, `porcentaje_ganacia`, `precio_venta`, `ganacia`, `proveedor_id`, `created_at`, `updated_at`) VALUES
+(3, 'EEE', 'EE', 'EE', 44, 44, 43, 43, 43, 43, 43, 1, '2019-05-04 16:53:36', '2019-05-21 05:00:00');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proveedor`
+--
+
+CREATE TABLE `proveedor` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `descricion` varchar(45) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id`, `nombre`, `descricion`, `created_at`, `updated_at`) VALUES
+(1, 'COCA COLA', 'NO TR', '2019-05-04 16:52:19', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -689,7 +741,13 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (88, 3),
 (89, 3),
 (90, 3),
-(91, 3);
+(91, 3),
+(92, 1),
+(92, 2),
+(92, 3),
+(92, 4),
+(93, 2),
+(93, 3);
 
 -- --------------------------------------------------------
 
@@ -710,6 +768,31 @@ CREATE TABLE `tipo_dispositivo` (
 
 INSERT INTO `tipo_dispositivo` (`id`, `nombre`, `created_at`, `updated_at`) VALUES
 (1, 'bolla', '2019-04-11 00:15:51', '2019-04-11 00:15:51');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_productos`
+--
+
+CREATE TABLE `tipo_productos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(45) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tipo_productos_has_producto`
+--
+
+CREATE TABLE `tipo_productos_has_producto` (
+  `id` int(11) NOT NULL,
+  `tipo_productos_id` int(11) NOT NULL,
+  `producto_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -746,8 +829,7 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `nickname`, `avatar`, `remember_token`, `created_at`, `updated_at`, `stripe_id`, `card_brand`, `card_last_four`, `trial_ends_at`, `nombre`, `apellido`, `cedula`, `correo`, `celular`, `telefono_fijo`, `direccion_correo`) VALUES
 (1, 'marcos alberto saavedra', 'once.marcos.alberto@gmail.com', '$2y$10$7ULrAbLcMD8BiPyZ3UqcEOAU2944pzdvDORQiL7RGyYdiM5n7lF36', NULL, '1555985093pH0j7.jpg', 'bkWb1oA7r82WsuFujobP8cwmWflppdf41brbHBmzhuBMvwg4tbqwqNnUut7H', '2019-01-05 03:53:36', '2019-04-23 02:04:53', NULL, NULL, NULL, NULL, 'marcus', 'saavedra', 1069176309, 'once.marcos.alberto@gmail.com', 2147483647, 32456, 'como esta tu'),
-(2, 'marcos alberto', 'once.marcos@gmail.com', '$2y$10$7ULrAbLcMD8BiPyZ3UqcEOAU2944pzdvDORQiL7RGyYdiM5n7lF36', NULL, '', NULL, '2019-02-06 01:29:23', '2019-02-06 01:29:23', NULL, NULL, NULL, NULL, '', '', 0, '', 0, 0, ''),
-(3, 'juan sebastian', 'sebastian@gmail.com', '$2y$10$7ULrAbLcMD8BiPyZ3UqcEOAU2944pzdvDORQiL7RGyYdiM5n7lF36', NULL, '1552359159CfDfk.png', 'pnIeqNb2zcNt3tKlhMeodZuDqpQ82ByEk92ZlyRf6lqqjf0cNUQP9WoQGCR9', '2019-01-05 03:53:36', '2019-04-03 00:48:35', NULL, NULL, NULL, NULL, 'juan', 'sebastian', 1069176309, 'sebastian@gmail.com', 2147483647, 32456, 'como esta');
+(2, 'marcos alberto', 'once.marcos@gmail.com', '$2y$10$7ULrAbLcMD8BiPyZ3UqcEOAU2944pzdvDORQiL7RGyYdiM5n7lF36', NULL, '', NULL, '2019-02-06 01:29:23', '2019-02-06 01:29:23', NULL, NULL, NULL, NULL, '', '', 0, '', 0, 0, '');
 
 --
 -- Índices para tablas volcadas
@@ -822,6 +904,19 @@ ALTER TABLE `permissions`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_producto_proveedor1_idx` (`proveedor_id`);
+
+--
+-- Indices de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `roles`
 --
 ALTER TABLE `roles`
@@ -839,6 +934,20 @@ ALTER TABLE `role_has_permissions`
 --
 ALTER TABLE `tipo_dispositivo`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_productos`
+--
+ALTER TABLE `tipo_productos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tipo_productos_has_producto`
+--
+ALTER TABLE `tipo_productos_has_producto`
+  ADD PRIMARY KEY (`id`,`tipo_productos_id`,`producto_id`),
+  ADD KEY `fk_tipo_productos_has_producto_producto1_idx` (`producto_id`),
+  ADD KEY `fk_tipo_productos_has_producto_tipo_productos1_idx` (`tipo_productos_id`);
 
 --
 -- Indices de la tabla `users`
@@ -891,7 +1000,19 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=94;
+
+--
+-- AUTO_INCREMENT de la tabla `producto`
+--
+ALTER TABLE `producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `proveedor`
+--
+ALTER TABLE `proveedor`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `roles`
@@ -904,6 +1025,18 @@ ALTER TABLE `roles`
 --
 ALTER TABLE `tipo_dispositivo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_productos`
+--
+ALTER TABLE `tipo_productos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tipo_productos_has_producto`
+--
+ALTER TABLE `tipo_productos_has_producto`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `users`
@@ -939,6 +1072,19 @@ ALTER TABLE `model_has_permissions`
 --
 ALTER TABLE `model_has_roles`
   ADD CONSTRAINT `model_has_roles_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `producto`
+--
+ALTER TABLE `producto`
+  ADD CONSTRAINT `fk_producto_proveedor1` FOREIGN KEY (`proveedor_id`) REFERENCES `proveedor` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+
+--
+-- Filtros para la tabla `tipo_productos_has_producto`
+--
+ALTER TABLE `tipo_productos_has_producto`
+  ADD CONSTRAINT `fk_tipo_productos_has_producto_producto1` FOREIGN KEY (`producto_id`) REFERENCES `producto` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `fk_tipo_productos_has_producto_tipo_productos1` FOREIGN KEY (`tipo_productos_id`) REFERENCES `tipo_productos` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
