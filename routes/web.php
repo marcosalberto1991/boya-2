@@ -29,7 +29,7 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
-
+Route::resource('Lista_mesa','Lista_mesaController');
 Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');
 

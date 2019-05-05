@@ -61,14 +61,16 @@
         padding-top: 2px;
         padding-bottom: 2px;   
     }
-    .table{
-        
-        font-family: 'Lucida Console', Monaco, monospace;
-        src: 
-        url("{{ asset('fuente_texto/LemonMilk.otf')}}") format("truetype"),
-
-
+    .table{   
+        font-family: 'Rubik';
+        src: url("{{ asset('fuente_texto/LemonMilk.otf')}}") format("truetype"),
     }
+    .modal{
+        font-family: 'Rubik', Times, serif;
+        font-size: 17px;
+    }
+
+
     @font-face{
 
         
