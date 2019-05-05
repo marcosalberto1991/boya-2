@@ -11,6 +11,7 @@ use View;
 use App\HasRoles;
 use App\Roles;
 use App\User;
+use App\ProveedorModel;
 
 use Spatie\Permission\Namecontrollers\Role;
 use Spatie\Permission\Namecontrollers\Permission;
@@ -24,7 +25,7 @@ class ProductoController extends Controller
 	protected $rules =
 	[
 		
-				'id' => 'required|min:1|max:99999999',
+				//'id' => 'required|min:1|max:99999999',
 	   			'nombre_proveedor' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'nombre' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'imagen' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
@@ -45,7 +46,7 @@ class ProductoController extends Controller
 
 		$Producto = ProductoModel::all();
 
-		$proveedor_id = ProductoModel::select("id","id as nombre")->get();
+		$proveedor_id = ProveedorModel::select("id","nombre")->get();
 		   	
 		return view('Producto.index', [ "proveedor_id" => $proveedor_id, 'listmysql' => $Producto] );
 

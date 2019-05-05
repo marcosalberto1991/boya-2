@@ -25,7 +25,7 @@
             <div class="box-body">
 
 				<div class="panel-body" style="overflow-x:auto;">
-					<table class="table table-striped table-bordered table-hover" id="postTable" >
+					<table class="table table-striped table-bordered table-hover compact nowrap" id="myTable" >
 					<thead>
 					   
 
@@ -125,13 +125,9 @@
 						data-precio_venta="{{ $lists->precio_venta}}"
 						data-ganacia="{{ $lists->ganacia}}"
 						data-proveedor_id="{{ $lists->proveedor_id}}"
-						
-						
 						><span class="glyphicon glyphicon-trash"></span>Eliminar</button>
 				
 						@endcan
-										
-
 
 						</td>
 					</tr>
@@ -170,7 +166,7 @@
 
 						
 					<div class='form-group' id='nombre_proveedor' >
-						<label class='control-label ' for='descripcion'>nombre_proveedor:</label>
+						<label class='control-label ' for='descripcion'>nombre de producto del proveedor:</label>
 							<input type='text' name='nombre_proveedor' class='form-control' id='nombre_proveedor_mass' maxlength='45'   required='required' autofocus>
 							<p class='errornombre_proveedor text-center alert alert-danger d-none'>
 							favor llena</p>
@@ -190,40 +186,40 @@
 					
 					<div class='form-group' id='precio_caja' >
 						<label class='control-label ' for='descripcion'>precio_caja:</label>
-							<input type='text' name='precio_caja' class='form-control' id='precio_caja_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='precio_caja' class='form-control calculo' id='precio_caja_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorprecio_caja text-center alert alert-danger d-none'></p>
+					</div>
+					<div class='form-group' id='cantidad_caja' >
+						<label class='control-label ' for='descripcion'>cantidad_caja:</label>
+							<input type='text' name='cantidad_caja' class='form-control calculo' id='cantidad_caja_mass' maxlength='11'   required='required' autofocus>
+							<p class='errorcantidad_caja text-center alert alert-danger d-none'></p>
 					</div>
 				</div>
 				<div class="col-md-6">
 
-					<div class='form-group' id='cantidad_caja' >
-						<label class='control-label ' for='descripcion'>cantidad_caja:</label>
-							<input type='text' name='cantidad_caja' class='form-control' id='cantidad_caja_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorcantidad_caja text-center alert alert-danger d-none'></p>
-					</div>
 					<div class='form-group' id='precio_unidad' >
 						<label class='control-label ' for='descripcion'>precio_unidad:</label>
-							<input type='text' name='precio_unidad' class='form-control' id='precio_unidad_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='precio_unidad' class='form-control calculo' id='precio_unidad_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorprecio_unidad text-center alert alert-danger d-none'></p>
 					</div>
 					<div class='form-group' id='iva' >
 						<label class='control-label ' for='descripcion'>iva:</label>
-							<input type='text' name='iva' class='form-control' id='iva_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='iva' class='form-control calculo' id='iva_mass' maxlength='11'   required='required' autofocus>
 							<p class='erroriva text-center alert alert-danger d-none'></p>
 					</div>
 					<div class='form-group' id='porcentaje_ganacia' >
 						<label class='control-label ' for='descripcion'>porcentaje_ganacia:</label>
-							<input type='text' name='porcentaje_ganacia' class='form-control' id='porcentaje_ganacia_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='porcentaje_ganacia' class='form-control calculo' id='porcentaje_ganacia_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorporcentaje_ganacia text-center alert alert-danger d-none'></p>
 					</div>
 					<div class='form-group' id='precio_venta' >
 						<label class='control-label ' for='descripcion'>precio_venta:</label>
-							<input type='text' name='precio_venta' class='form-control' id='precio_venta_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='precio_venta' class='form-control calculo' id='precio_venta_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorprecio_venta text-center alert alert-danger d-none'></p>
 					</div>
 					<div class='form-group' id='ganacia' >
 						<label class='control-label ' for='descripcion'>ganacia:</label>
-							<input type='text' name='ganacia' class='form-control' id='ganacia_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='ganacia' class='form-control calculo' id='ganacia_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorganacia text-center alert alert-danger d-none'></p>
 					</div>
 					<div class="form-group">
@@ -315,23 +311,12 @@ function obtener_data(data) {
 $(document).on('click', '.massadd', function() {
 	$('.modal-descripcion').text('Añadir un nuevo registro');
 	$('#msdelete').text(' ');
-	alert('lcomoesta ');
+	//(alert('lcomoesta ');
 	$('#massModal').modal('show');
 	$('#acciones').text('Añadir Nuevos ');
 	$('#acciones').attr('class', 'btn btn-success add');
 	//$('#formmass').attr('id', 'form_add');
 });
-/*
-$(document).on('click', '.masssssmodal', function() {
-	$('.modal-descripcion').text('Añadir un nuevo registro');
-	$('#msdelete').text(' ');
-
-	$('#massmodal').modal('show');
-	$('#acciones').attr('class', 'btn btn-success add');
-	$('#formmass').attr('id', 'form_add');
-	$('#acciones').text('Añadir Nuevos ');
-});
-*/
 
 // Vista de un registro
 $(document).on('click', '.massshow-modal', function() {
@@ -344,16 +329,6 @@ $(document).on('click', '.massshow-modal', function() {
 	$('#acciones').attr('disabled');
 });
 
-// Eliminar un registro
-$(document).on('click', '.massdelete-modal', function() {
-	obtener_data($(this));
-	$('.modal-descripcion').text('Eliminar los datos');
-	$('#msdelete').text('¿Seguro que quieres borrar los datos?');		
-	$('#massModal').modal('show');
-	id = $('#id_mass').val();           
-	$('#acciones').attr('class', 'btn btn-danger delete');
-	$('#acciones').text('Eliminar');
-});
 
 // Editar un registro
 $(document).on('click', '.edit-modal', function() {	
@@ -366,6 +341,12 @@ $(document).on('click', '.edit-modal', function() {
 	$('#msdelete').text(' ');
 });
 
+// Eliminar un registro
+$(document).on('click', '.massdelete-modal', function() {
+	$('#id_mass').val($(this).data('id'));
+	id = $('#id_mass').val();           
+	$('#DeleteModal').modal('show');
+});
 
 
 //enviar registro para eiminar
@@ -399,7 +380,7 @@ $('.modal-footer').on('click', '.add', function() {
 		success: function(data) { 
 			if ((data.errors)) {
 				verificar(data);
-				$('#massModal').modal('show');
+				//$('#massModal').modal('show');
             	toastr.error('Formato Inválido!', 'En la verificación de datos <br>', {timeOut: 5000});	
 			} else {
 				toastr.success('Operación Exitosa!', 'Datos Guardados', {timeOut: 5000});
@@ -424,7 +405,7 @@ $('.modal-footer').on('click', '.edit', function() {
 			if(data.errors){
 				verificar(data);
             	toastr.error('Formato Inválido!', 'Formato invalido en el formulario <br>', {timeOut: 5000});	
-				$('#massModal').modal('show');
+				//$('#massModal').modal('show');
 			} else {
                	toastr.success('Modificación Exitosa Producto!', 'Datos Modificados', {timeOut: 5000});
                 operaciones(data,'edit');
@@ -432,6 +413,34 @@ $('.modal-footer').on('click', '.edit', function() {
             }
         }
     });
+});
+
+
+$(document).on('change', '.calculo', function() {
+
+	var precio_caja =$('#precio_caja_mass').val()
+	var cantidad_caja =$('#cantidad_caja_mass').val()
+	var  precio_unidad =precio_caja / cantidad_caja;
+	$('#precio_unidad_mass').val(precio_unidad);
+	var iva =$('#iva_mass').val()
+	var porcentaje_ganacia =$('#porcentaje_ganacia_mass').val()
+	
+		iva=(iva/100)
+	if (iva>0) {
+	}else{
+		//iva=0
+	}
+		porcentaje_ganacia=(porcentaje_ganacia/100)
+	if (porcentaje_ganacia>0) {
+	}else{
+		//porcentaje_ganacia=0
+	}
+
+	var precio_venta = (iva + porcentaje_ganacia+1)*precio_unidad 
+
+	$('#precio_venta_mass').val(precio_venta);
+	$('#ganacia_mass').val(precio_venta-precio_unidad);
+
 });
 </script>
 

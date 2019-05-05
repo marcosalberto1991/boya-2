@@ -52,6 +52,28 @@
     <link href="{{ asset('css-mosnter/animate.css')}}" id="theme" rel="stylesheet">
     <link href="{{ asset('css-mosnter/style.css" rel="stylesheet')}}">
     <link href="{{ asset('css/app.css')}}" id="theme" rel="stylesheet">
+    <style type="text/css">
+    .edit-modal{
+        padding-top: 2px;
+        padding-bottom: 2px;
+    }
+    .massdelete-modal{
+        padding-top: 2px;
+        padding-bottom: 2px;   
+    }
+    .table{
+        
+        font-family: 'Lucida Console', Monaco, monospace;
+        src: 
+        url("{{ asset('fuente_texto/LemonMilk.otf')}}") format("truetype"),
+
+
+    }
+    @font-face{
+
+        
+    }
+    </style>
 
 </head>
 
@@ -255,8 +277,8 @@
             </footer>
         </div>
     </div>
-    <script src="{{asset('js/app.js')}}"></script>
     <script src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
+    <script src="{{asset('js/app.js')}}"></script>
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
     <script src="{{asset('assets-mosnter/plugins/jquery/jquery.min.js')}}"></script>

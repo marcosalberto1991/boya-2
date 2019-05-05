@@ -30,7 +30,7 @@ Route::group(['middleware' => ['web']], function () {
 });
 
 
-
+Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');
 
 use App\municipiosModel;
