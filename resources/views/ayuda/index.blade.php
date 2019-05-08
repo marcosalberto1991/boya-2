@@ -200,7 +200,7 @@
 						<td class="col1">{{ $lists->created_at }}</td>
 						<td class="col1">{{ $lists->updated_at }}</td>
 						
-						<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}</td>
+						<td>\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() </td>
 						<td>
 						<button class="massshow-modal btn btn-success" 
 						data-id="{{ $lists->id}}"

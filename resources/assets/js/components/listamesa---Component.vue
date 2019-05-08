@@ -1,6 +1,8 @@
 <template>
-    
- <div class='col-lg-4 card mesa'>
+
+<div class=''>
+        
+    <div class='col-lg-4 card mesa'>
         <!--
             -->
         
@@ -52,40 +54,14 @@
         </blockquote>
 
     </div>
+</div>
    
 </template>
 
-
 <script>
     export default {
-        props: ['thought'],
-        data() {
-            return {
-                editMode: false
-            };
-        },
         mounted() {
             console.log('Component mounted.')
-        },
-        methods: {
-            onClickDelete() {
-                axios.delete(`thoughts/${this.thought.id}`).then(() => {
-                    this.$emit('delete');
-                });
-            },
-            onClickEdit() {
-                this.editMode = true;
-            },
-            onClickUpdate() {
-                const params = {
-                    description: this.thought.description
-                };
-                axios.put(`thoughts/${this.thought.id}`, params).then((response) => {
-                    this.editMode = false;
-                    const thought = response.data;
-                    this.$emit('update', thought);
-                });
-            }
         }
     }
 </script>

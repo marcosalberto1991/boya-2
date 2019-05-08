@@ -22,6 +22,8 @@
 				@endcan
             </div>
 
+             <null-component></null-component>
+
             <div class="box-body">
 
 				<div class="panel-body" style="overflow-x:auto;">
@@ -52,7 +54,7 @@
 
 					@foreach($listmysql as $lists)
 						  
-					<tr id="item_{{$lists->id}}"" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
+					<tr id="item_{{$lists->id}}" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
 						<td class="col1">{{ $lists->id }}</td>
 						<td class="col1">{{ $lists->nombre_proveedor }}</td>
 						<td class="col1">{{ $lists->nombre }}</td>
@@ -280,10 +282,7 @@
 </div>	
 	
 @section("page-js-files")	
-<!--
-	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-	-->
+
 @stop	
 @section("page-js-script")
 	
@@ -311,11 +310,11 @@ function obtener_data(data) {
 $(document).on('click', '.massadd', function() {
 	$('.modal-descripcion').text('Añadir un nuevo registro');
 	$('#msdelete').text(' ');
-	//(alert('lcomoesta ');
-	$('#massModal').modal('show');
+	//alert('lcomoesta ');
 	$('#acciones').text('Añadir Nuevos ');
 	$('#acciones').attr('class', 'btn btn-success add');
 	//$('#formmass').attr('id', 'form_add');
+	$('#massModal').modal('show');
 });
 
 // Vista de un registro

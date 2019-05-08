@@ -12,6 +12,11 @@
  */
 
 
+//Route::apiResource('thoughts', 'ThoughtController');
+Route::Resource('thoughts', 'ThoughtController');
+Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
+Route::Resource('ventas', 'VentasController');
+
 
 Route::group(['middleware' => ['web']], function () {
 

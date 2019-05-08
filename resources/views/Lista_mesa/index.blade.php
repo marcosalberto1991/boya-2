@@ -4,43 +4,91 @@
 			</script>
 
 @section('content')
+
+<style type="text/css">
+	.mesa{
+	padding-left: 0px;
+    padding-right: 0px;
+    border-left: 5px solid #009efb!important;
+    border: 1px solid rgba(120, 130, 140, 0.13);
+	}
+	.card-body{
+	padding-left: 0px;
+    padding-right: 0px;	
+	}
+	.card-header{
+	background-color: #55ce63;
+	}
+	.boton_add{
+		margin-top: 7px;
+	}
+</style>
+<!--
 @foreach($listmysql as $lists)
 
-
-
-<div class="col-lg-3 card ">
- 	<div class="card-header">{{$lists->nombre}}</div>
-    <blockquote class="blockquote mb-0">
-  	<div class="card-body">
-    	<table class="table table-striped table-bordered table-hover compact nowrap">
+<div class='col-lg-4 card mesa'>
+    <blockquote class='mesa blockquote mb-0 mesa'>
+ 	<div class='card-header'>{{$lists->nombre}}</div>
+  	<div class='card-body'>
+    	<table class='table table-striped table-bordered table-hover compact nowrap'>
     		<tr>
     			<th>Productos</th>
     			<th>precios</th>
     			<th>Cantidad</th>
+    			<th>Operaciones</th>
     		</tr>
     		<tr>
     			<td>coca cola</td>
     			<td>$2300</td>
     			<td>3</td>
+    			<td>
+    				<button type='button' class='btn btn-outline-danger'>Eliminar</button>
+    			</td>
+    		</tr>
+    		<tr>
+    			<th>Total</th>
+    			<th>$2300</th>
+    			<td></td>
+    			<td></td>
     		</tr>
     	</table>
     	
       	
   	</div>
+    <div class='form-group row' id='nombre' >
+		<div class='col-lg-6'>
+			<label class='control-label' for='descripcion'>nombre:</label>
+			<input type='text' name='nombre' class='form-control'   required='required' autofocus>
+			<p class='errornombre text-center alert alert-danger d-none'></p>
+		</div>
+		<div class='col-lg-2'>
+			<label class='control-label' for='descripcion'>cantidad:</label>
+			<input type='number' name='cantida' class='form-control' value='1' required='required' autofocus>
+			<p class='errornombre text-center alert alert-danger d-none'></p>
+		</div>
+		<div class='col-lg-3'>
+			<label class='control-label' for='descripcion'> </label>
+			<input type='submit' value='Añadir' class='boton_add form-control btn btn-info ' name='como'>
+		</div>
+		</div>
     </blockquote>
-    <div class='form-group' id='nombre' >
-		<label class='control-label' for='descripcion'>nombre:</label>
-		<input type='text' name='nombre' class='form-control' id='nombre_mass' maxlength='45'   required='required' autofocus>
-		<p class='errornombre text-center alert alert-danger d-none'></p>
-	</div>
 
 </div>
-<div id="app">
-	<lista_mesa-component></lista_mesa-component>
-</div>
+
 @endforeach
+	-->
+		<!--
+-->
+		<mylistamesa-component></mylistamesa-component>
 
+<div class="container">
+    <my-thoughts-component></my-thoughts-component>
+</div>
 
+<div class='col-lg-12'>
+	<div class="row">
+	</div>
+</div>
 <section class="col-lg-12 ">
 
 </section>

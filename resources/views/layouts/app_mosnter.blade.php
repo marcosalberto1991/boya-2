@@ -40,6 +40,7 @@
     <![endif]-->
 
     <!--
+    <link href="{{ asset('css/app.css')}}" id="theme" rel="stylesheet">
     -->
     <link href="{{ asset('scss-mosnter/icons/font-awesome/css/font-awesome.min.css')}}" id="theme" rel="stylesheet">
     <link href="{{ asset('scss-mosnter/icons/simple-line-icons/css/simple-line-icons.css')}}" id="theme" rel="stylesheet">
@@ -51,7 +52,9 @@
     <link href="{{ asset('css-mosnter/spinners.css')}}" id="theme" rel="stylesheet">
     <link href="{{ asset('css-mosnter/animate.css')}}" id="theme" rel="stylesheet">
     <link href="{{ asset('css-mosnter/style.css" rel="stylesheet')}}">
-    <link href="{{ asset('css/app.css')}}" id="theme" rel="stylesheet">
+    <!--
+    -->
+    
     <style type="text/css">
     .edit-modal{
         padding-top: 2px;
@@ -80,6 +83,8 @@
 </head>
 
 <body class="fix-header card-no-border">
+    <div id="app">
+        
     <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -253,37 +258,28 @@
         <!-- ============================================================== -->
 
         <div class="page-wrapper">
-            <!-- ============================================================== -->
-            <!-- Container fluid  -->
+          
             <div class="container-fluid" >
+               
                 @yield('content')
-                <div id="appss">
-                </div>
-                    
-                
-                    
-            <!-- ============================================================== 
-                <div class="row">
-                    <div class="col-12">
-                        <div class="card">
-                            <div class="card-block">
-                                This is some text within a card block.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            -->
+              
             </div>
             <footer class="footer text-center">
                 © 2017 Monster Admin by wrappixel.com
             </footer>
         </div>
     </div>
-    <script src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
-    <script src="{{asset('js/app.js')}}"></script>
+    
+    <!--
+    -->
+    </div>
+    <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+    <script type="text/javascript" src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
+    <!--
     <script src="{{asset('assets-mosnter/plugins/jquery/jquery.min.js')}}"></script>
+    -->
     <script src="{{asset('assets-mosnter/plugins/bootstrap/js/tether.min.js')}}"></script>
     <script src="{{asset('assets-mosnter/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('js-mosnter/jquery.slimscroll.js')}}"></script>
@@ -292,6 +288,8 @@
     <script src="{{asset('assets-mosnter/plugins/sticky-kit-master/dist/sticky-kit.min.js')}}"></script>
     <script src="{{asset('js-mosnter/custom.min.js')}}"></script>
     <script src="{{asset('assets-mosnter/plugins/styleswitcher/jQuery.style.switcher.js')}}"></script>
+    <!--
+    -->
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"/></script>
 
     <script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -348,7 +346,7 @@
         //$('.form-control').select2();
         $('.busca_select').select2();
     });
-
+/*
     $('.datepicker').datepicker({
     format: 'yyyy-mm-dd',
     //startDate: '-3d',
