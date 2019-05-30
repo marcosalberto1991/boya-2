@@ -12,6 +12,7 @@ Vue.component('my-thoughts-component', require('./components/MyThoughtsComponent
 Vue.component('form-component', require('./components/FormComponent.vue'));
 Vue.component('thought-component', require('./components/ThoughtComponent.vue'));
 Vue.component('null-component', require('./components/nullComponent.vue'));
+Vue.component('punto-component', require('./components/puntoComponent.vue'));
 
 
 const app = new Vue({

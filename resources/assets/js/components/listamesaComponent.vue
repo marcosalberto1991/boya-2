@@ -31,12 +31,29 @@
             </div>
             <form action="" v-on:submit.prevent="newproducto()">
             <div class='form-group row'>
+              
                 <div class='col-lg-6'>
-                    <input type="hidden" name='ventas_id' v-model="thought.id">   
-                    <label class='control-label' for='descripcion'>Producto:</label>
-                    <input type='text' name='producto'  class='form-control'   required='required' autofocus v-model="thought.producto" />
-                    <p class='errornombre text-center alert alert-danger d-none'></p>
+                    <label class='control-label' for='descripcion'>cantidad:</label>
+                    <vue-single-select
+                        v-on:keyup="autoComplete_2"
+                        name="producto"
+                        placeholder="producto"
+                        you-want-to-select-a-post="ok"
+                        v-model="thought.producto"
+                        out-of-all-these-posts="makes sense"
+                        :options="productos_all"
+                        a-post-has-an-id="good for search and display"
+                        the-post-has-a-title="make sure to show these"
+                        option-label="nombre"
+                        :required="true"
+                    ></vue-single-select>
+                    <!--option-key="id"-->
                 </div>
+                <!--
+                <select v-model="selected_game">
+                    <option v-for="productos_all in games" :value="game.id">{{game.nombre}}</option>
+                </select>
+                -->
                 <div class='col-lg-2'>
                     <label class='control-label' for='descripcion'>cantidad:</label>
                     <input type='number' name='cantidad' class='form-control' value='1' required='required' autofocus v-model="thought.cantidad" />
@@ -54,21 +71,56 @@
         </div>
 
     </div>
+    
+   
 </template>
 
-<script>
+
+<script> 
+    import VueSingleSelect from "vue-single-select";
+
     export default {
-        props: ['thought'],
+        props: ['thought','productos_all'],
         data() {
 
             return {
-                editMode: false
+                
+                editMode: false,
+                query: '',
+                results: [],
+                productos_all:[]
+                //thought.ventas_has_producto_all
+
             };
         },
+        components: {
+            VueSingleSelect
+        },
         mounted() {
-            console.log('Component mounted.')
+            //console.log('Component mounted.')
+            axios.get('productos_all').then((response) => {
+                this.productos_all = response.data;
+            });
         },
         methods: {
+            autoComplete(){
+                this.results = [];
+                if(this.query.length > 2){
+                    axios.get('Lista_mesa/1',{params: {query: this.query}}).then(response => {
+                        this.results = response.data;
+                        //alert(this.results)
+                    });
+                };
+            },
+            autoComplete_2(){
+                this.results = [];
+                if(this.query.length > 2){
+                    axios.get('Lista_mesa/1',{params: {query: this.query}}).then(response => {
+                        this.results = response.data;
+                        //alert(this.results)
+                    });
+                };
+            },
             onClickDelete() {
                 axios.delete(`ventas_has_producto/${this.thought.id}`).then(() => {
                     this.$emit('delete');
@@ -77,21 +129,26 @@
             onClickEdit() {
                 this.editMode = true;
             },
-            
-            newproducto() {
+            newproducto() { //añadir un nuevo productos
                 const params = {
-                    producto_id: this.thought.producto,
+                    producto_id: this.thought.producto.id,
                     cantidad: this.thought.cantidad,
                     ventas_id: this.thought.id
                 };
-                this.producto_id = '';
-                this.cantidad = '';
-                this.ventas_id = '';
+                //this.producto_id = '';
+                //this.cantidad = '';
+                //this.ventas_id = '';
                 axios.post('ventas_has_producto', params)
                     .then((response) => {
                         const thought = response.data;
                         this.$emit('new', thought);
+                        alert(thought);
                     });
+                //this.thought.ventas_has_producto_all=[{this.thought.id,this.thought.producto.id,this.thought.cantidad}];
+                
+
+                
+
             },
             
             newproducto_no() {
@@ -124,6 +181,8 @@
                     this.$emit('update', thought);
                 });
             }
+           
         }
     }
+
 </script>

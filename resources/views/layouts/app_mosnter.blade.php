@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
+    <script>window.Laravel = {csrfToke: '{{ csrf_token() }}'}</script>    
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="{{asset('assets-mosnter/images/favicon.png')}}">
@@ -400,6 +400,13 @@ color: #007fbd;
 </style>
 
 <script>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
+
+$(document).ready(function() {
+    $('.select2').select2();
+});
   $(document).ready(function(){
     $("#myTable").DataTable({
      language: {

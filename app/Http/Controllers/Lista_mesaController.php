@@ -4,8 +4,11 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Validator;
 use Response;
-
+use App\ProductoModel;
 use App\Lista_mesaModel;
+use App\Ventas_has_productoModel;
+use App\VentasModel;
+
 use View;
 
 use App\HasRoles;
@@ -34,11 +37,20 @@ class Lista_mesaController extends Controller
 	public function index(){
 
 		//$id_tipo = Solicitude_tipo::select("solicitude_tipos.id","solicitude_tipos.descripcion as nombre")->get();
-
+		//$ventas=Ventas_has_productoModel::with('ventas_id_pk.mesa_id_pk')->get();
+		$ventas=VentasModel::with('ventas_has_producto_all.producto_id_pk','mesa_id_pk')->get();
+		
+		//print_r ($ventas);exit();
+		$producto = ProductoModel::all();
 		$Lista_mesa = Lista_mesaModel::all();
 
 		
-		return view('Lista_mesa.index', [  'listmysql' => $Lista_mesa] );
+		return view('Lista_mesa.index', [  
+			'listmysql' => $Lista_mesa,
+			'ventas' => $ventas,
+			'producto' => $producto
+			
+			] );
 
 	}
 
@@ -62,7 +74,10 @@ class Lista_mesaController extends Controller
 		}
 	}
 
-	public function show($id){}
+	public function show(Request $request){
+		$producto=ProductoModel::select('nombre','id')->get();
+		return response()->json($producto);
+	}
 
 	public function edit($id){}
 
@@ -90,6 +105,7 @@ class Lista_mesaController extends Controller
 		$Lista_mesa->delete();
 		return response()->json($Lista_mesa);
 	}
+	
 
 }
 

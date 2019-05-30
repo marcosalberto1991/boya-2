@@ -51,6 +51,11 @@ class ProductoController extends Controller
 		return view('Producto.index', [ "proveedor_id" => $proveedor_id, 'listmysql' => $Producto] );
 
 	}
+	public function productos_all(){
+		$Producto = ProductoModel::pluck('nombre','id');		
+		$Producto = ProductoModel::select('id','nombre')->get();		
+		return response()->json($Producto);
+	}
 
 	public function create(){}
 

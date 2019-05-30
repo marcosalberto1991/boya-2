@@ -29,6 +29,10 @@
             axios.get('ventas').then((response) => {
                 this.ventas_has_producto = response.data;
             });
+            axios.get('productos_all').then((response) => {
+                this.productos_all = response.data;
+            });
+           
         },
         methods: {
             addThought(thought) {

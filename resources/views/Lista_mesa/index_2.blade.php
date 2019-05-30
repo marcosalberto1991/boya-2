@@ -23,66 +23,85 @@
 		margin-top: 7px;
 	}
 </style>
-<!--
-@foreach($listmysql as $lists)
 
-<div class='col-lg-4 card mesa'>
-    <blockquote class='mesa blockquote mb-0 mesa'>
- 	<div class='card-header'>{{$lists->nombre}}</div>
-  	<div class='card-body'>
-    	<table class='table table-striped table-bordered table-hover compact nowrap'>
-    		<tr>
-    			<th>Productos</th>
-    			<th>precios</th>
-    			<th>Cantidad</th>
-    			<th>Operaciones</th>
-    		</tr>
-    		<tr>
-    			<td>coca cola</td>
-    			<td>$2300</td>
-    			<td>3</td>
-    			<td>
-    				<button type='button' class='btn btn-outline-danger'>Eliminar</button>
-    			</td>
-    		</tr>
-    		<tr>
-    			<th>Total</th>
-    			<th>$2300</th>
-    			<td></td>
-    			<td></td>
-    		</tr>
-    	</table>
-    	
-      	
-  	</div>
-    <div class='form-group row' id='nombre' >
-		<div class='col-lg-6'>
-			<label class='control-label' for='descripcion'>nombre:</label>
-			<input type='text' name='nombre' class='form-control'   required='required' autofocus>
+@foreach($ventas as $lists)
+
+<div class='col-lg-6 card mesa'>
+    <!--
+        -->
+    
+    <blockquote class='mesa blockquote mb-0'>
+    <div class='card-header'>{{ $lists->mesa_id_pk->nombre }}</div>
+    <div class='card-body'>
+        <table class='table table-striped table-bordered table-hover compact nowrap'>
+            <tr>
+                <th>Productos</th>
+                <th>precios</th>
+                <th>Cantidad</th>
+                <th>Total</th>
+                <th>Operaciones</th>
+			</tr>
+			<?php $total_mesa=0  ?>
+			@foreach ($lists->ventas_has_producto_all as $list )
+				
+			
+			<tr>
+                <td>{{ $list->producto_id_pk->nombre }}</td>
+				<td>{{ $list->producto_id_pk->precio_venta }}</td>
+				<td>{{ $list->cantidad }}</td> 
+				<td>{{ $list->producto_id_pk->precio_venta*$list->cantidad }}</td> 
+                
+                <td>
+                    <button type='button' class='btn btn-danger btn-sm'>Eliminar</button>
+                </td>
+			</tr>
+			<?php $total_mesa+=$list->producto_id_pk->precio_venta*$list->cantidad ?>
+			@endforeach
+			<tr>
+                <th>Total</th>
+                <td></td>
+				<td></td>
+				<th>{{ $total_mesa }}</th>
+            </tr>
+        </table>
+        
+    </div>
+	<form class="add_productos" id="add_productos">
+	<div class='form-group row'>
+        <div class='col-lg-6'>
+            <label class='control-label' for='descripcion'>nombre:</label>
+			<select class="select2 form-control" name='producto_id'>
+				<option value=""></option>
+				@foreach ($producto as $productos )
+				<option value="{{ $productos->id }}">{{ $productos->nombre }}</option>	
+				@endforeach
+				
+			</select>
 			<p class='errornombre text-center alert alert-danger d-none'></p>
-		</div>
-		<div class='col-lg-2'>
-			<label class='control-label' for='descripcion'>cantidad:</label>
-			<input type='number' name='cantida' class='form-control' value='1' required='required' autofocus>
-			<p class='errornombre text-center alert alert-danger d-none'></p>
-		</div>
-		<div class='col-lg-3'>
-			<label class='control-label' for='descripcion'> </label>
-			<input type='submit' value='Añadir' class='boton_add form-control btn btn-info ' name='como'>
-		</div>
-		</div>
+        </div>
+        <div class='col-lg-2'>
+            <label class='control-label' for='descripcion'>cantidad:</label>
+            <input type='number' name='cantida' class='form-control' value='1' required='required' autofocus/>
+            <p class='errornombre text-center alert alert-danger d-none'></p>
+        </div>
+        <div class='col-lg-3'>
+            <label class='control-label' for='descripcion'> </label>
+            <input type='submit' value='Añadir' class='add_productos form-control btn btn-info ' name='como'/>
+        </div>
+	</div>
+	</form>
+    <!--
+-->
     </blockquote>
 
 </div>
 
 @endforeach
-	-->
-		<!--
--->
-		<mylistamesa-component></mylistamesa-component>
+
+	
 
 <div class="container">
-    <my-thoughts-component></my-thoughts-component>
+   
 </div>
 
 <div class='col-lg-12'>
@@ -307,7 +326,6 @@
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	-->
 
-	
 
     <link href="{{ asset('jQuery-autoComplete-master/jquery.auto-complete.css')}}" rel="stylesheet" />
 	<script type="text/javascript" src="{{asset('jQuery-autoComplete-master/jquery.auto-complete.min.js')}}"></script>
@@ -318,6 +336,21 @@
 	
 			
 <script type='text/javascript'>
+
+function formatState (state) {
+  if (!state.id) {
+    return state.text;
+  }
+  var baseUrl = "/user/pages/images/flags";
+  var $state = $(
+    '<span><img src="' + baseUrl + '/' + state.element.value.toLowerCase() + '.png" class="img-flag" /> ' + state.text + '</span>'
+  );
+  return $state;
+};
+
+$(".js-example-templating").select2({
+  templateResult: formatState
+});
 
 $('input[name="producto"]').autoComplete({
     minChars: 1,
@@ -385,6 +418,8 @@ $(document).on('click', '.massshow-modal', function() {
 	$('#acciones').attr('disabled');
 });
 
+
+
 // Editar un registro
 $(document).on('click', '.edit-modal', function() {	
 	obtener_data($(this));
@@ -445,7 +480,66 @@ $('.modal-footer').on('click', '.add', function() {
 		},
 	});
 });
-						
+
+$(".add_productos").submit(function(){
+	event.preventDefault();
+	//var producto_id = this.find('input.producto_id').val();
+    //var cantida = this.find('input.cantida').val();
+	//alert(producto_id);
+	//alert(cantida);
+	console.info(this);
+	$.ajax({
+		type: 'POST',
+		url: 'ventas_has_producto',
+		data: $('#add_productos').serialize(),
+		//data: {
+
+		error: function(jqXHR, text, error){
+        	toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>', {timeOut: 5000});
+        },
+		success: function(data) { 
+			if ((data.errors)) {
+				verificar(data);
+				//$('#massModal').modal('show');
+            	toastr.error('Formato Inválido!', 'En la verificación de datos <br>', {timeOut: 5000});	
+			} else {
+
+				toastr.success('Operación Exitosa!', 'Datos Guardados', {timeOut: 5000});
+				operaciones(data,'add');
+			}
+		},
+	});
+	
+});
+
+$('.boton_add__').on('click', function() {
+	//alert("si funcio");
+	event.preventDefault();
+	//exit();
+	console.info(this);
+	$.ajax({
+		type: 'POST',
+		url: 'ventas_has_producto',
+		data: $('#formmass').serialize(),
+		//data: {
+
+		error: function(jqXHR, text, error){
+        	toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>', {timeOut: 5000});
+        },
+		success: function(data) { 
+			if ((data.errors)) {
+				verificar(data);
+				//$('#massModal').modal('show');
+            	toastr.error('Formato Inválido!', 'En la verificación de datos <br>', {timeOut: 5000});	
+			} else {
+
+				toastr.success('Operación Exitosa!', 'Datos Guardados', {timeOut: 5000});
+				operaciones(data,'add');
+			}
+		},
+	});
+});
+
 //add
 
 //enviar registro para editar

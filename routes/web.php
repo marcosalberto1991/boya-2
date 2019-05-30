@@ -16,6 +16,9 @@
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
 Route::Resource('ventas', 'VentasController');
+Route::get('productos_all', 'ProductoController@productos_all');
+Route::Resource('punto', 'puntoController');
+Route::get('punto_vista', 'puntoController@vista');
 
 
 Route::group(['middleware' => ['web']], function () {
