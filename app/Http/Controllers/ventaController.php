@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\punto;
 use App\VentasModel;
 use App\Http\Resources\punto as puntoResource;
-class puntoController extends Controller
+class ventaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,6 +18,10 @@ class puntoController extends Controller
 			
 			] );
 
+    }
+    public function obtener_data(){
+        $ventas=VentasModel::with('ventas_has_producto_all.producto_id_pk','mesa_id_pk')->paginate(3);
+        return response()->json($ventas);
     }
     public function index()
     {

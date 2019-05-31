@@ -19,6 +19,8 @@ Route::Resource('ventas', 'VentasController');
 Route::get('productos_all', 'ProductoController@productos_all');
 Route::Resource('punto', 'puntoController');
 Route::get('punto_vista', 'puntoController@vista');
+Route::get('venta/obtener_data', 'ventaController@obtener_data');
+
 
 
 Route::group(['middleware' => ['web']], function () {

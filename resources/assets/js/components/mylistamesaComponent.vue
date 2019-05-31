@@ -5,7 +5,7 @@
         <div class="col-md-8 col-md-offset-2">
 <!--
             <formmesa-component @new="addThought"></formmesa-component>
--->
+
             <listamesa-component
                 v-for="(ventas_has_producto, index) in ventas_has_producto"
                 :key="ventas_has_producto.id"
@@ -13,7 +13,10 @@
                 @update="update_ventas_has_producto(index, ...arguments)"
                 @delete="delete_ventas_has_producto(index)">
             </listamesa-component> 
- 
+--> 
+        
+        
+        
         </div>
     </div>
 </template>

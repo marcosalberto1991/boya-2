@@ -11,11 +11,11 @@ class punto extends Resource
      */
     public function toArray($request)
     {
-        // return parent::toArray($request);
+        return parent::toArray($request);
         return [
             'id' => $this->id,
-            'title' => $this->title,
-            'body' => $this->body
+            'precio' => $this->precio,
+            'mesa_id' => $this->mesa_id
         ];
     }
     public function with($request) {

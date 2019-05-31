@@ -5,7 +5,7 @@ use App\Http\Requests;
 use App\punto;
 use App\VentasModel;
 use App\Http\Resources\punto as puntoResource;
-class puntoController extends Controller
+class mesaController extends Controller
 {
     /**
      * Display a listing of the resource.
