@@ -12,7 +12,7 @@
                         <th>Cantidad</th>
                         <th>Total</th>
                     </tr>
-                   <tr v-for="data in thought.ventas_has_producto_all ">
+                   <tr v-for="data in thought.ventas_has_producto_all " v-bind:key="data.id">
 
                         <td>{{data.producto_id_pk.nombre}}</td>
                         <td>{{data.producto_id_pk.precio_venta}}</td>

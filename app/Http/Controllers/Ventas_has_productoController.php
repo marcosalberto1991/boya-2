@@ -32,13 +32,16 @@ class Ventas_has_productoController extends Controller
     public function update(Request $request, $id)
     {
         $thought = Ventas_has_productoModel::find($id);
-        $thought->description = $request->description;
+        $thought->producto_id = $request->producto_id;
+        $thought->ventas_id = $request->ventas_id;
+        $thought->cantidad = $request->cantidad;
         $thought->save();
         return $thought;
     }
-    public function destroy($id)
+    public function destroy(Request $request,$id)
     {
         $thought = Ventas_has_productoModel::find($id);
         $thought->delete();
+        return $thought;
     }
 }

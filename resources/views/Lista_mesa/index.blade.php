@@ -77,12 +77,14 @@
 
 @endforeach
 	-->
-		<!--
--->
+
+	<!--
 		<mylistamesa-component></mylistamesa-component>
 
+	-->
+		<my-thoughts-component></my-thoughts-component>
+
 <div class="container">
-    <my-thoughts-component></my-thoughts-component>
 </div>
 
 <div class='col-lg-12'>
