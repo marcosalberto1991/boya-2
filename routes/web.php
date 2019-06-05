@@ -42,7 +42,8 @@ Route::group(['middleware' => ['web']], function () {
 Route::resource('Lista_mesa','Lista_mesaController');
 Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');
-
+Route::post('Producto/update/{id}', 'ProductoController@update');
+Route::put( 'Producto/update/{id}', 'ProductoController@update');
 use App\municipiosModel;
 //URL::forceSchema('https');
 

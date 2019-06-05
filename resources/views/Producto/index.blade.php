@@ -182,7 +182,7 @@
 					
 					<div class='form-group' id='imagen' >
 						<label class='control-label ' for='descripcion'>imagen:</label>
-							<input type='text' name='imagen' class='form-control' id='imagen_mass' maxlength='45'   required='required' autofocus>
+							<input type='file' name='imagen' class='form-control' id='imagen_mass' maxlength='45'   required='required' autofocus>
 							<p class='errorimagen text-center alert alert-danger d-none'></p>
 					</div>
 					
@@ -295,7 +295,7 @@ function obtener_data(data) {
 	$('#id_mass').val(data.data('id'));
 	$('#nombre_proveedor_mass').val(data.data('nombre_proveedor'));
 	$('#nombre_mass').val(data.data('nombre'));
-	$('#imagen_mass').val(data.data('imagen'));
+	//////$('#imagen_mass').val(data.data('imagen'));
 	$('#precio_caja_mass').val(data.data('precio_caja'));
 	$('#cantidad_caja_mass').val(data.data('cantidad_caja'));
 	$('#precio_unidad_mass').val(data.data('precio_unidad'));
@@ -316,7 +316,6 @@ $(document).on('click', '.massadd', function() {
 	//$('#formmass').attr('id', 'form_add');
 	$('#massModal').modal('show');
 });
-
 // Vista de un registro
 $(document).on('click', '.massshow-modal', function() {
 	obtener_data($(this));					
@@ -327,8 +326,6 @@ $(document).on('click', '.massshow-modal', function() {
 	$('#acciones').text('Visible');
 	$('#acciones').attr('disabled');
 });
-
-
 // Editar un registro
 $(document).on('click', '.edit-modal', function() {	
 	obtener_data($(this));
@@ -339,15 +336,12 @@ $(document).on('click', '.edit-modal', function() {
 	$('#massModal').modal('show');
 	$('#msdelete').text(' ');
 });
-
 // Eliminar un registro
 $(document).on('click', '.massdelete-modal', function() {
 	$('#id_mass').val($(this).data('id'));
 	id = $('#id_mass').val();           
 	$('#DeleteModal').modal('show');
 });
-
-
 //enviar registro para eiminar
 $('.modal-footer').on('click', '.delete', function() {
 	$.ajax({
@@ -364,15 +358,18 @@ $('.modal-footer').on('click', '.delete', function() {
 	});
 });
 		
-
 //enviar registro para añadir
 $('.modal-footer').on('click', '.add', function() {
+	var formData = new FormData($('#formmass')[0]);
 	$.ajax({
 		type: 'POST',
 		url: 'Producto',
-		data: $('#formmass').serialize(),
+		//data: $('#formmass').serialize(),
+		data: formData,
+    	cache: false,
+    	contentType: false,
+    	processData: false,
 		//data: {
-
 		error: function(jqXHR, text, error){
         	toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>', {timeOut: 5000});
         },
@@ -390,13 +387,19 @@ $('.modal-footer').on('click', '.add', function() {
 });
 						
 //add
-
 //enviar registro para editar
 $('.modal-footer').on('click', '.edit', function() {
+	
+	var formData = new FormData($('#formmass')[0]);
 	$.ajax({
-		type: 'PUT',
-		url: 'Producto/' + id,
-		data: $('#formmass').serialize(), 
+		type: 'POST',
+		//type: 'PUT',
+		url: 'Producto/update/' + id,
+		//data: $('#formmass').serialize(), 
+		data: formData,
+    	cache: false,
+    	contentType: false,
+    	processData: false,
 		error: function(jqXHR, text, error){
             toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>'+error, {timeOut: 5000});	
         },
@@ -413,10 +416,7 @@ $('.modal-footer').on('click', '.edit', function() {
         }
     });
 });
-
-
 $(document).on('change', '.calculo', function() {
-
 	var precio_caja =$('#precio_caja_mass').val()
 	var cantidad_caja =$('#cantidad_caja_mass').val()
 	var  precio_unidad =precio_caja / cantidad_caja;
@@ -434,19 +434,15 @@ $(document).on('change', '.calculo', function() {
 	}else{
 		//porcentaje_ganacia=0
 	}
-
 	var precio_venta = (iva + porcentaje_ganacia+1)*precio_unidad 
-
 	$('#precio_venta_mass').val(precio_venta);
 	$('#ganacia_mass').val(precio_venta-precio_unidad);
-
 });
 </script>
 
 
 <script type="text/javascript">
 function verificar(data) {
-
 	$('.errorid').addClass('d-none');
 	$('.errornombre_proveedor').addClass('d-none');
 	$('.errornombre').addClass('d-none');
@@ -459,7 +455,6 @@ function verificar(data) {
 	$('.errorprecio_venta').addClass('d-none');
 	$('.errorganacia').addClass('d-none');
 	$('.errorproveedor_id').addClass('d-none');
-
 	if (data.errors.id) {
     	$(".errorid").removeClass("d-none");
     	$(".errorid").text(data.errors.id);
@@ -520,7 +515,6 @@ function verificar(data) {
     	$(".errorproveedor_id").text(data.errors.proveedor_id);
     }
     
-
 }
 </script>
 
@@ -531,7 +525,6 @@ function verificar(data) {
 	const resulproveedor_id=Foraproveedor_id.find( cas => cas.id == data.proveedor_id ); 
 		
 	
-
 	var tabla=
 		"<tr  id='item_"+data.id+"'  class='item"+data.id+"'>"+
 		"<td class='col1'>" + data.id + "</td>"+
@@ -583,7 +576,6 @@ function verificar(data) {
 		 
 		"'><span class='glyphicon glyphicon-edit'></span> Editar</button>  "+ 
 	@endcan
-
 	@can('Producto Eliminar') 
 		"<button class='massdelete-modal btn btn-danger'  " +
 		"data-id='"+ data.id+"'"+
@@ -602,7 +594,6 @@ function verificar(data) {
 		"'><span class='glyphicon glyphicon-trash'></span> Eliminar</button>  "+
 	@endcan
 	" </td></tr>";
-
 	if('edit'==operacion){		
 		$('#item_'+data.id).replaceWith(tabla);
 	}
@@ -614,5 +605,3 @@ function verificar(data) {
 @stop
 </body>
 </html>
-
-				
