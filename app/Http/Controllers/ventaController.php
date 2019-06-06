@@ -24,7 +24,7 @@ class ventaController extends Controller
         $ventas=VentasModel::with('ventas_has_producto_all.producto_id_pk','mesa_id_pk')->paginate(3);
         foreach ($ventas as $key => $value) {
             $suma=0;
-            $ventas_has_producto=Ventas_has_productoModel::with('producto_id_pk')->where('ventas_id',$value->id)->get()->toArray();
+            $ventas_has_producto=Ventas_has_productoModel::with('producto_id_pk')->where('ventas_id',$value->id)->get();
             foreach ($ventas_has_producto as $ventas_id => $venta) {
                 $suma+=$venta['cantidad']* $venta['producto_id_pk']['precio_venta']; 
             }

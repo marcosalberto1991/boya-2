@@ -213,7 +213,7 @@
                             <a href="{{ action('IndexController@index') }}" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Inicio version 1</a>
                         </li>
                         <li>
-                            <a href="{{ action('DispositivoController@index') }}" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Dispositivo</a>
+                            <a href="{{ action('ProductoController@index') }}" class="waves-effect"><i class="fa fa-clock-o m-r-10" aria-hidden="true"></i>Producto</a>
                         </li>
                         <li>
                             <a href="{{ action('DatosDispositivoController@index') }}" class="waves-effect"><i class="fa fa-user m-r-10" aria-hidden="true"></i>Datos</a>
@@ -399,11 +399,9 @@ color: #007fbd;
 }
 </style>
 
-<script>
-
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/css/select2.min.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.7/js/select2.min.js"></script>
-
+<script>
 $(document).ready(function() {
     $('.select2').select2();
 });
