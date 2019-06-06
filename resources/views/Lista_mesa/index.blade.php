@@ -23,184 +23,25 @@
 		margin-top: 7px;
 	}
 </style>
-<!--
-@foreach($listmysql as $lists)
 
-<div class='col-lg-4 card mesa'>
-    <blockquote class='mesa blockquote mb-0 mesa'>
- 	<div class='card-header'>{{$lists->nombre}}</div>
-  	<div class='card-body'>
-    	<table class='table table-striped table-bordered table-hover compact nowrap'>
-    		<tr>
-    			<th>Productos</th>
-    			<th>precios</th>
-    			<th>Cantidad</th>
-    			<th>Operaciones</th>
-    		</tr>
-    		<tr>
-    			<td>coca cola</td>
-    			<td>$2300</td>
-    			<td>3</td>
-    			<td>
-    				<button type='button' class='btn btn-outline-danger'>Eliminar</button>
-    			</td>
-    		</tr>
-    		<tr>
-    			<th>Total</th>
-    			<th>$2300</th>
-    			<td></td>
-    			<td></td>
-    		</tr>
-    	</table>
-    	
-      	
-  	</div>
-    <div class='form-group row' id='nombre' >
-		<div class='col-lg-6'>
-			<label class='control-label' for='descripcion'>nombre:</label>
-			<input type='text' name='nombre' class='form-control'   required='required' autofocus>
-			<p class='errornombre text-center alert alert-danger d-none'></p>
-		</div>
-		<div class='col-lg-2'>
-			<label class='control-label' for='descripcion'>cantidad:</label>
-			<input type='number' name='cantida' class='form-control' value='1' required='required' autofocus>
-			<p class='errornombre text-center alert alert-danger d-none'></p>
-		</div>
-		<div class='col-lg-3'>
-			<label class='control-label' for='descripcion'> </label>
-			<input type='submit' value='Añadir' class='boton_add form-control btn btn-info ' name='como'>
-		</div>
-		</div>
-    </blockquote>
 
-</div>
 
-@endforeach
-	-->
 
-	<!--
-		<mylistamesa-component></mylistamesa-component>
-
-	-->
-		<my-thoughts-component></my-thoughts-component>
+		
 
 <div class="container">
+
 </div>
 
 <div class='col-lg-12'>
 	<div class="row">
+		<my-thoughts-component></my-thoughts-component>	
 	</div>
 </div>
 <section class="col-lg-12 ">
 
 </section>
-<section class="col-lg-12 ">
-	<div class="box box-warning">
-		<div class="box-header with-border">
-			<h3 class="box-descripcion">Lista de Lista_mesa</h3>
-		</div>          
-		<div class="box-body">
-	   		<div class="">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<ul>
-						<li><i class="fa fa-file-text-o"></i> Acciones</li>
-						@can('Lista_mesa Add')
-							<button href="#" id="massadd-modal" class="btn btn-success  massmodal massadd">Añadir un Lista_mesa</button>
-						@endcan
-					</ul>
-				</div>
 
-				<div class="panel-body" style="overflow-x:auto;">
-					<table class="table table-striped table-bordered table-hover compact nowrap" id="myTable">
-					<thead>
-					   
-
-					<tr>
-						<th>id</th>
-						<th>nombre</th>
-						<th>posicion_x</th>
-						<th>posixion_y</th>
-						<th>created_at</th>
-						<th>updated_at</th>
-						<th>Ultima Modificacion</th><th>Accion</th>
-								
-					</tr>
-					
-					</thead>
-					<tbody>
-
-
-					@foreach($listmysql as $lists)
-						  
-					<tr id="item_{{$lists->id}}"" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
-						<td class="col1">{{ $lists->id }}</td>
-						<td class="col1">{{ $lists->nombre }}</td>
-						<td class="col1">{{ $lists->posicion_x }}</td>
-						<td class="col1">{{ $lists->posixion_y }}</td>
-						<td class="col1">{{ $lists->created_at }}</td>
-						<td class="col1">{{ $lists->updated_at }}</td>
-						
-						<td>
-						<?php if(!$lists->updated_at<0){ ?> 
-						{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}
-						<?php } ?>
-						</td>
-						<td>
-						@can('Lista_mesa Show')
-						<button class="massshow-modal btn btn-success" 
-						data-id="{{ $lists->id}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-posicion_x="{{ $lists->posicion_x}}"
-						data-posixion_y="{{ $lists->posixion_y}}"
-						data-created_at="{{ $lists->created_at}}"
-						data-updated_at="{{ $lists->updated_at}}"
-						
-						
-						>
-						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-						@endcan		
-						@can('Lista_mesa Editar')
-						<button class="edit-modal btn btn-info" 
-						data-id="{{ $lists->id}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-posicion_x="{{ $lists->posicion_x}}"
-						data-posixion_y="{{ $lists->posixion_y}}"
-						data-created_at="{{ $lists->created_at}}"
-						data-updated_at="{{ $lists->updated_at}}"
-						
-						
-						><span class="glyphicon glyphicon-edit"></span> Editar</button>
-						@endcan
-						@can('Lista_mesa Eliminar') 
-						
-						<button class="massdelete-modal btn btn-danger"
-						data-id="{{ $lists->id}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-posicion_x="{{ $lists->posicion_x}}"
-						data-posixion_y="{{ $lists->posixion_y}}"
-						data-created_at="{{ $lists->created_at}}"
-						data-updated_at="{{ $lists->updated_at}}"
-						
-						
-						><span class="glyphicon glyphicon-trash"></span>Eliminar</button>
-				
-						@endcan
-										
-
-
-						</td>
-					</tr>
-				@endforeach
-			</tbody>
-		</table>
-		</div><!-- /.panel-body -->
-		</div><!-- /.panel panel-default -->
-	   </div>
-	   </div>
-	   </div>
-	   </div>
-</section>
 @endsection
 
 <!-- Modal form to mass a form -->

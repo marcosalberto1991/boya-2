@@ -1,11 +1,10 @@
 <template>
-  <div class="row">
-    <div class="col-md-12 row">
-      <div class="col-lg-4 card mesa" v-for="venta in ventas" v-bind:key="venta.id">
-        <blockquote class="mesa blockquote mb-0">
+    <div class="row">
+      <div class="col-lg-6 col-md-6 col-sm-12  card mesa" style="margin-right: 5px;" v-for="venta in ventas" v-bind:key="venta.id">
+        
           <div class="card-header">{{ venta.mesa_id_pk.nombre }}</div>
-          <div class="card-body">
-            <table class="table table-striped table-bordered table-hover compact nowrap">
+          
+            <table class="table table-responsive table-sm">
               <tr>
                 <th>Productos</th>
                 <th>precios</th>
@@ -19,8 +18,8 @@
                 <td>{{ producto.cantidad }}</td>
                 <td>{{ producto.cantidad*producto.producto_id_pk.precio_venta }}</td>
                 <td>
-                  <button @click="Editar_producto(producto)" class="btn btn-info mb-2">Editar</button>
-                  <button @click="Eliminar_producto(producto.id)" class="btn btn-danger mb-2">Eliminar</button>
+                  <button @click="Editar_producto(producto)" class="btn btn-info btn-sm ">Editar</button>
+                  <button @click="Eliminar_producto(producto.id)" class="btn btn-danger btn-sm ">Eliminar</button>
                 </td>
               </tr>
 
@@ -28,10 +27,11 @@
                 <th>Total</th>
                 <th></th>
                 <td></td>
+                <td>{{ venta.total_ventas }}</td>
                 <td></td>
               </tr>
             </table>
-          </div>
+          
           <div>
             <!--inicio de form-->
             <form action v-on:submit.prevent="newproducto(venta.id)">
@@ -76,10 +76,10 @@
               </div>
             </form>
           </div>
-        </blockquote>
+      
       </div>
     </div>
-  </div>
+  
 </template>
 
 <script>
