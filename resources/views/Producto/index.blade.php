@@ -6,32 +6,32 @@
 
 <div class="row">
 	
- 	<div class="col-lg-6">
+ 	<div class="col-lg-12" style="overflow-x:auto;">
 		<div class="main-card mb-3 card">
 	        <div class="card-body"><h5 class="card-title">Table responsive</h5>
 	        	@can('Producto Add')
 					<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">Añadir un Producto</button>
 				@endcan
 	            <div class="table-responsive">
-	                <table class="mb-0 table">
+	                <table id="myTable" class="mb-0 table  table display table-striped table-bordered table-hover compact nowrap">
 	                    <thead>
-	                    <!--
 	                    	<tr>
                                 <th>#</th>
                                 <th>First Name</th>
                                 <th>Last Name</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
+                                <th>Last Name</th>
                                 <th>Username</th>
                             </tr>
+	                    <!--
 		                   <tr>
 								<th>id</th>
 								<th>nombre_proveedor</th>
@@ -76,7 +76,6 @@
 		                    	{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}
 		                    </td>
 							<td>
-						<!--
 						@can('Producto Show')
 						<button class="massshow-modal btn btn-success" 
 						data-id="{{ $lists->id}}"
@@ -130,6 +129,7 @@
 						><span class="glyphicon glyphicon-trash"></span>Eliminar</button>
 				
 						@endcan
+						<!--
 						-->
 						</td>
 	                    </tr>
