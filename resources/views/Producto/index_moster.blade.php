@@ -1,82 +1,115 @@
 @extends('layouts.app_admin_ui')
-@section("content")
 <script type='text/javascript'>
 <?php echo "const  Foraproveedor_id= $proveedor_id;"; ?>
 </script>
-
+@section("content")
 <div class="row">
+<div class="col-lg-10">
+	<div class="main-card mb-3 card">
+	    <div class="card-body"><h5 class="card-title">Simple table</h5>
+	        <table class="mb-0 table">
+	            <thead>
+	            <tr>
+	                <th>#</th>
+	                <th>First Name</th>
+	                <th>Last Name</th>
+	                <th>Username</th>
+	            </tr>
+	            </thead>
+	            <tbody>
+	            <tr>
+	                <th scope="row">1</th>
+	                <td>Mark</td>
+	                <td>Otto</td>
+	                <td>@mdo</td>
+	            </tr>
+	            <tr>
+	                <th scope="row">2</th>
+	                <td>Jacob</td>
+	                <td>Thornton</td>
+	                <td>@fat</td>
+	            </tr>
+	            <tr>
+	                <th scope="row">3</th>
+	                <td>Larry</td>
+	                <td>the Bird</td>
+	                <td>@twitter</td>
+	            </tr>
+	            </tbody>
+	        </table>
+	    </div>
+	</div>
+</div> 	
+</div>
+
+<section class="">
+	<div class="row">
+
 	
- 	<div class="col-lg-6">
-		<div class="main-card mb-3 card">
-	        <div class="card-body"><h5 class="card-title">Table responsive</h5>
-	        	@can('Producto Add')
+        <div class="col-lg-12">
+
+        <div class="main-card mb-3 card">
+            <div class="box-header">
+				<h3 class="box-title">Datos de los Dispositivos</h3>
+			
+				@can('Producto Add')
 					<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">Añadir un Producto</button>
 				@endcan
-	            <div class="table-responsive">
-	                <table class="mb-0 table">
-	                    <thead>
-	                    <!--
-	                    	<tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                                <th>Username</th>
-                            </tr>
-		                   <tr>
-								<th>id</th>
-								<th>nombre_proveedor</th>
-								<th>nombre</th>
-								<th>imagen</th>
-								<th>precio_caja</th>
-								<th>cantidad_caja</th>
-								<th>precio_unidad</th>
-								<th>iva</th>
-								<th>porcentaje_ganacia</th>
-								<th>precio_venta</th>
-								<th>ganacia</th>
-								<th>proveedor_id</th>
-								<th>Ultima Modificacion</th>
-								<th>Accion</th>
-									
-							</tr>
-	                    --> 
-	                    </thead>
-	                    <tbody>
-	                    @foreach($listmysql as $lists)
-	                    
-	                    <tr id="item_{{$lists->id}}" class="item{{$lists->id}}">
-	                        <th scope="row">{{ $lists->id }}</th>
-	                        <td>{{ $lists->nombre_proveedor }}</td>
-	                        <td>{{ $lists->nombre }}</td>
-	                        <td>{{ $lists->imagen }}</td>
-	                        <td>{{ $lists->precio_caja }}</td>
-	                        <td>{{ $lists->cantidad_caja }}</td>
-	                        <td>{{ $lists->precio_unidad }}</td>
-	                        <td>{{ $lists->iva }}</td>
-	                        <td>{{ $lists->porcentaje_ganacia }}</td>
-	                        <td>{{ $lists->precio_venta }}</td>
-	                        <td>{{ $lists->ganacia }}</td>
-	                        <td>
-	                        	<script type="text/javascript">
-									resulmunicipios_id=Foraproveedor_id.find( cas => cas.id == {{ $lists->proveedor_id }} );
-									document.write(resulmunicipios_id.nombre); 
-								</script>
-	                        </td>
-		                    <td>
-		                    	{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}
-		                    </td>
-							<td>
-						<!--
+            </div>
+
+             
+
+            <div class="box-body">
+
+				<div class="panel-body" style="overflow-x:auto;">
+					<table class="table table-striped table-bordered table-hover compact nowrap" id="myTable" >
+					<thead>
+					   
+
+					<tr>
+						<th>id</th>
+						<th>nombre_proveedor</th>
+						<th>nombre</th>
+						<th>imagen</th>
+						<th>precio_caja</th>
+						<th>cantidad_caja</th>
+						<th>precio_unidad</th>
+						<th>iva</th>
+						<th>porcentaje_ganacia</th>
+						<th>precio_venta</th>
+						<th>ganacia</th>
+						<th>proveedor_id</th>
+						<th>Ultima Modificacion</th><th>Accion</th>
+								
+					</tr>
+					
+					</thead>
+					<tbody>
+
+
+					@foreach($listmysql as $lists)
+						  
+					<tr id="item_{{$lists->id}}" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
+						<td class="col1">{{ $lists->id }}</td>
+						<td class="col1">{{ $lists->nombre_proveedor }}</td>
+						<td class="col1">{{ $lists->nombre }}</td>
+						<td class="col1">{{ $lists->imagen }}</td>
+						<td class="col1">{{ $lists->precio_caja }}</td>
+						<td class="col1">{{ $lists->cantidad_caja }}</td>
+						<td class="col1">{{ $lists->precio_unidad }}</td>
+						<td class="col1">{{ $lists->iva }}</td>
+						<td class="col1">{{ $lists->porcentaje_ganacia }}</td>
+						<td class="col1">{{ $lists->precio_venta }}</td>
+						<td class="col1">{{ $lists->ganacia }}</td>
+						<td class="col1">
+						<script type="text/javascript">
+							resulmunicipios_id=Foraproveedor_id.find( cas => cas.id == {{ $lists->proveedor_id }} );
+							document.write(resulmunicipios_id.nombre); 
+						</script>
+						</td>
+							
+						<td>{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}</td>
+						<td>
 						@can('Producto Show')
 						<button class="massshow-modal btn btn-success" 
 						data-id="{{ $lists->id}}"
@@ -91,6 +124,8 @@
 						data-precio_venta="{{ $lists->precio_venta}}"
 						data-ganacia="{{ $lists->ganacia}}"
 						data-proveedor_id="{{ $lists->proveedor_id}}"
+						
+						
 						>
 						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
 						@endcan		
@@ -130,30 +165,21 @@
 						><span class="glyphicon glyphicon-trash"></span>Eliminar</button>
 				
 						@endcan
-						-->
+
 						</td>
-	                    </tr>
-	                   @endforeach
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </div>
-	</div>
-</div>
-
-
-
-
-
-
-
-
-
-
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+		</div><!-- /.panel-body -->
+		</div><!-- /.panel panel-default -->
+	   </div>
+	   </div>
+	   </div>
+</section>
 @endsection
 
-<!-- 
+<!-- Modal form to mass a form -->
 <div id="massModal" class="modal fade bd-example-modal-lg" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -245,7 +271,9 @@
 							@endforeach
 							
 							</select>
-							
+							<!--
+							<input type="select" class="form-control" id=proveedor_id_mass" required="required" autofocus>
+							-->
 							<p class="errorproveedor_id text-center alert alert-danger d-none"> llenar los datos</p>
 						</div>
 					</div>
@@ -269,8 +297,8 @@
 	</div>
 
 
--->
-<!--
+
+
 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
     	<div class="modal-content">
@@ -287,7 +315,7 @@
     	</div>
   	</div>
 </div>	
--->	
+	
 @section("page-js-files")	
 
 @stop	

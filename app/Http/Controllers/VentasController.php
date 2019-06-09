@@ -15,8 +15,6 @@ class VentasController extends Controller
         $ventas=VentasModel::with('mesa_id_pk','ventas_has_producto_all.producto_id_pk')->get();
 
         foreach ($ventas as $key => $value) {
-            
-
             $ventas[$key]['total_mesa']=Ventas_has_productoModel::where('ventas_id',$value->ventas_id)->get();
         }
         return $ventas; 
