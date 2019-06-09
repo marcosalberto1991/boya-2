@@ -1,6 +1,6 @@
 <template>
     <div class="row">
-      <div class="col-lg-6 col-md-6 col-sm-12  card mesa" style="margin-right: 5px;" v-for="venta in ventas" v-bind:key="venta.id">
+      <div class="col-lg-6 col-md-6 col-sm-12 card mesa" style="margin-right: 5px;" v-for="venta in ventas" v-bind:key="venta.id">
         
           <div class="card-header">{{ venta.mesa_id_pk.nombre }}</div>
           

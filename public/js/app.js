@@ -50925,7 +50925,7 @@ var render = function() {
         "div",
         {
           key: venta.id,
-          staticClass: "col-lg-6 col-md-6 col-sm-12  card mesa",
+          staticClass: "col-lg-6 col-md-6 col-sm-12 card mesa",
           staticStyle: { "margin-right": "5px" }
         },
         [

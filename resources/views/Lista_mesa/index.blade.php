@@ -30,12 +30,12 @@
 		
 
 <div class="container">
-
+	<my-thoughts-component></my-thoughts-component>
 </div>
 
 <div class='col-lg-12'>
 	<div class="row">
-		<my-thoughts-component></my-thoughts-component>	
+			
 	</div>
 </div>
 <section class="col-lg-12 ">
