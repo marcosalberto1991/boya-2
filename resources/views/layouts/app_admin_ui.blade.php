@@ -1088,6 +1088,10 @@
 -->
 <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
 <script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+
+<link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js" type="text/javascript"/></script>
+
 </body>
 </html>
 
@@ -1112,12 +1116,13 @@
   $(function () {
     $("#example1").DataTable();
     $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false
+        "paging": true,
+        "lengthChange": false,
+        "searching": false,
+        "ordering": true,
+        "info": true,
+        "autoWidth": false
+        
     });
   });
 </script>
@@ -1204,6 +1209,7 @@
 <script>
   $(document).ready(function(){
     $("#myTable").DataTable({
+     "scrollX": true,
      language: {
         "decimal": "",
         "emptyTable": "No hay información",

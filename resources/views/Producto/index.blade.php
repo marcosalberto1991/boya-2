@@ -12,9 +12,10 @@
 	        	@can('Producto Add')
 					<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">Añadir un Producto</button>
 				@endcan
-	            <div class="table-responsive">
-	                <table id="myTable" class="mb-0 table  table display table-striped  table-hover compact nowrap">
+	            <div class="table-responsive" style="overflow-x:auto;">
+	                <table id="myTable" class=" table table-hover compact nowrap" style="overflow-x:auto;">
 	                    <thead>
+	                    <!--
 	                    	<tr>
                                 <th>#</th>
                                 <th>First Name</th>
@@ -31,8 +32,9 @@
                                 <th>Last Name</th>
                                 <th>Username</th>
                             </tr>
-	                    <!--
+	                    --> 
 		                   <tr>
+
 								<th>id</th>
 								<th>nombre_proveedor</th>
 								<th>nombre</th>
@@ -49,7 +51,6 @@
 								<th>Accion</th>
 									
 							</tr>
-	                    --> 
 	                    </thead>
 	                    <tbody>
 	                    @foreach($listmysql as $lists)
@@ -225,12 +226,12 @@
 					</div>
 					<div class='form-group' id='precio_venta' >
 						<label class='control-label ' for='descripcion'>precio_venta:</label>
-							<input type='text' name='precio_venta' class='form-control calculo' id='precio_venta_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='precio_venta' class='form-control ' id='precio_venta_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorprecio_venta text-center alert alert-danger d-none'></p>
 					</div>
 					<div class='form-group' id='ganacia' >
 						<label class='control-label ' for='descripcion'>ganacia:</label>
-							<input type='text' name='ganacia' class='form-control calculo' id='ganacia_mass' maxlength='11'   required='required' autofocus>
+							<input type='text' name='ganacia' class='form-control ' id='ganacia_mass' maxlength='11'   required='required' autofocus>
 							<p class='errorganacia text-center alert alert-danger d-none'></p>
 					</div>
 					<div class="form-group">
