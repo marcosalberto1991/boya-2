@@ -67,6 +67,11 @@
                     @click="Eliminar_producto(producto.id)"
                     class="btn btn-danger btn-sm"
                   >Eliminar</button>
+                  <!--
+                  <button type="button" class="btn btn-primary" data-toggle="tooltip" data-placement="left" title="" data-original-title="Tooltip on left" aria-describedby="tooltip961262">
+                      Tooltip on left
+                  </button>
+                  -->
                 </td>
               </tr>
               <tr>
