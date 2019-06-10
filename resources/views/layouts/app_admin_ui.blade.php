@@ -21,6 +21,15 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
 <link href="Architectui/assets/css/main.css" rel="stylesheet"></head>
+
+<style>
+    .btn-group-xs > .btn, .btn-xs {
+      padding: .25rem .4rem;
+      font-size: .875rem;
+      line-height: .5;
+      border-radius: .2rem;
+    }
+</style>
 <body>
     <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
         <div class="app-header header-shadow">
@@ -433,9 +442,15 @@
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">Dashboards</li>
                                 <li>
-                                    <a href="index.html">
+                                    <a href="{{ action('Lista_mesaController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
-                                        Dashboard Example 1
+                                        Lista de mesa
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('ProductoController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Productos
                                     </a>
                                 </li>
                                 <li class="app-sidebar__heading">UI Components</li>
@@ -648,7 +663,7 @@
                 </div>    
 
                 <div class="app-main__outer">
-                    <div class="app-main__inner">
+                    <div class="app-main__inner" id="app">
                         <div class="app-page-title">
                             <div class="page-title-wrapper">
                                 <div class="page-title-heading">
@@ -717,9 +732,10 @@
                                     </div>
                                 </div>    
                             </div>
-                        </div>            
+                        </div>
+
                         @yield('content')
-                        
+                        <!--
                         <div class="row">
                             <div class="col-lg-6">
                                 <div class="main-card mb-3 card">
@@ -1024,6 +1040,7 @@
                                 </div>
                             </div>
                         </div>
+                    -->
                     </div>
                     <div class="app-wrapper-footer">
                         <div class="app-footer">
@@ -1064,7 +1081,14 @@
                     </div>    </div>
         </div>
     </div>
-<script type="text/javascript" src="Architectui/assets/scripts/main.js"></script></body>
+<script type="text/javascript" src="Architectui/assets/scripts/main.js"></script>
+<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<!--
+<script type="text/javascript" src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
+-->
+<link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
+<script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
+</body>
 </html>
 
 

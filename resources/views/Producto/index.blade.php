@@ -13,7 +13,7 @@
 					<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">Añadir un Producto</button>
 				@endcan
 	            <div class="table-responsive">
-	                <table id="myTable" class="mb-0 table  table display table-striped table-bordered table-hover compact nowrap">
+	                <table id="myTable" class="mb-0 table  table display table-striped  table-hover compact nowrap">
 	                    <thead>
 	                    	<tr>
                                 <th>#</th>
@@ -77,7 +77,7 @@
 		                    </td>
 							<td>
 						@can('Producto Show')
-						<button class="massshow-modal btn btn-success" 
+						<button class="massshow-modal btn btn-success btn-xs" 
 						data-id="{{ $lists->id}}"
 						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
 						data-nombre="{{ $lists->nombre}}"
@@ -94,7 +94,7 @@
 						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
 						@endcan		
 						@can('Producto Editar')
-						<button class="edit-modal btn btn-info" 
+						<button class="edit-modal btn btn-info btn-xs" 
 						data-id="{{ $lists->id}}"
 						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
 						data-nombre="{{ $lists->nombre}}"
@@ -113,7 +113,7 @@
 						@endcan
 						@can('Producto Eliminar') 
 						
-						<button class="massdelete-modal btn btn-danger"
+						<button class="massdelete-modal btn btn-danger btn-xs"
 						data-id="{{ $lists->id}}"
 						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
 						data-nombre="{{ $lists->nombre}}"
@@ -153,7 +153,7 @@
 
 @endsection
 
-<!-- 
+
 <div id="massModal" class="modal fade bd-example-modal-lg" role="dialog">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
@@ -269,8 +269,7 @@
 	</div>
 
 
--->
-<!--
+
 <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 	<div class="modal-dialog" role="document">
     	<div class="modal-content">
@@ -287,7 +286,7 @@
     	</div>
   	</div>
 </div>	
--->	
+	
 @section("page-js-files")	
 
 @stop	

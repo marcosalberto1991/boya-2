@@ -1,8 +1,4 @@
-@extends('layouts.app_mosnter')
-
-<script type='text/javascript'>
-			</script>
-
+@extends('layouts.app_admin_ui')
 @section('content')
 
 <style type="text/css">
@@ -29,7 +25,7 @@
 
 		
 
-<div class="container">
+<div class="app">
 	<my-thoughts-component></my-thoughts-component>
 </div>
 
@@ -142,47 +138,17 @@
     	</div>
   	</div>
 </div>	
-
-	
 @section("page-js-files")	
 	<!--
 	<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
 	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	-->
-
-	
-
     <link href="{{ asset('jQuery-autoComplete-master/jquery.auto-complete.css')}}" rel="stylesheet" />
 	<script type="text/javascript" src="{{asset('jQuery-autoComplete-master/jquery.auto-complete.min.js')}}"></script>
-
-
 @stop	
 @section("page-js-script")
-	
-			
 <script type='text/javascript'>
 
-$('input[name="producto"]').autoComplete({
-    minChars: 1,
-    source: function(term, suggest){
-        term = term.toLowerCase();
-
-
-        var choices = [['Australia', 'au'], ['Austria', 'at'], ['Brasil', 'br']];
-        var suggestions = [];
-        for (i=0;i<choices.length;i++)
-            if (~(choices[i][0]+' '+choices[i][1]).toLowerCase().indexOf(term)) suggestions.push(choices[i]);
-        suggest(suggestions);
-    },
-    renderItem: function (item, search){
-        search = search.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
-        var re = new RegExp("(" + search.split(' ').join('|') + ")", "gi");
-        return '<div class="autocomplete-suggestion" data-langname="'+item[0]+'" data-lang="'+item[1]+'" data-val="'+search+'"><img src="img/'+item[1]+'.png"> '+item[0].replace(re, "<b>$1</b>")+'</div>';
-    },
-    onSelect: function(e, term, item){
-        alert('Item "'+item.data('langname')+' ('+item.data('lang')+')" selected by '+(e.type == 'keydown' ? 'pressing enter' : 'mouse click')+'.');
-    }
-});
 </script>
 
 <script type='text/javascript'>
