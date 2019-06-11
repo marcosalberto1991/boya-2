@@ -18,6 +18,20 @@ class Ventas_has_productoController extends Controller
         }
         return $ventas;
     }
+    public function cobra_todo(Request $request,$ventas_id)
+    {
+        $ventas=VentasModel::where('id',$ventas_id)->first();
+        $ventas->estado_id=2;
+        $ventas->mesa_id;
+        $ventas->save();
+
+        $new_mesa= new VentasModel();
+        $new_mesa->mesa_id=$ventas->mesa_id;
+        $new_mesa->estado_id=1;
+        $new_mesa->save();
+
+        return $ventas;
+    }
     public function store(Request $request)
     {
         $thought = new Ventas_has_productoModel();
@@ -33,7 +47,7 @@ class Ventas_has_productoController extends Controller
     {
         $thought = Ventas_has_productoModel::find($id);
         $thought->producto_id = $request->producto_id;
-        $thought->ventas_id = $request->ventas_id;
+        //$thought->ventas_id = $request->ventas_id;
         $thought->cantidad = $request->cantidad;
         $thought->save();
         return $thought;

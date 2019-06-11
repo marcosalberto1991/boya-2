@@ -15,6 +15,9 @@
 //Route::apiResource('thoughts', 'ThoughtController');
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
+Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoController@cobra_todo');
+
+
 Route::Resource('ventas', 'VentasController');
 Route::get('productos_all', 'ProductoController@productos_all');
 Route::Resource('punto', 'puntoController');
