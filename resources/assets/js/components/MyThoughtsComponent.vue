@@ -214,7 +214,7 @@ export default {
       
       //alert(producto.producto_id_pk.nombre);
       this.actualiza_id = producto.id;
-      this.actualiza_producto_id = producto.producto_id_pk.id;
+      this.actualiza_producto_id = producto.producto_id_pk;
       this.actualiza_cantidad = producto.cantidad;
 
     },
