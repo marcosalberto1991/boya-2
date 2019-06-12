@@ -1,7 +1,13 @@
 <template>
   <div class="row">
-<input type="text" class="form-control" value="1" required="required" autofocus
-                v-model="actualiza_id" >
+    <input
+      type="hidden"
+      class="form-control"
+      value="1"
+      required="required"
+      autofocus
+      v-model="actualiza_id"
+    >
 
     <div v-for="venta in ventas" v-bind:key="venta.id" class="col-md-6">
       <div class="main-card mb-3 card">
@@ -23,7 +29,7 @@
                 -->
                 <th>Productos</th>
                 <th class="text-center">Cantidad</th>
-                <th class="text-center">total </th>
+                <th class="text-center">total</th>
                 <th class="text-center">Acciones</th>
               </tr>
             </thead>
@@ -44,7 +50,8 @@
                           >
                         </div>
                       </div>
-                       <vue-single-select v-if="editar_producto && producto.id == actualiza_id"
+                      <vue-single-select
+                        v-if="editar_producto && producto.id == actualiza_id"
                         v-model="actualiza_producto_id"
                         name="producto"
                         placeholder="producto"
@@ -63,16 +70,20 @@
                           class="widget-subheading opacity-7"
                         >{{ formatPrice(producto.producto_id_pk.precio_venta) }}</div>
                       </div>
-
                     </div>
                   </div>
                 </td>
 
-                <td v-if="editar_producto && producto.id == actualiza_id" class="text-center"> 
-                  <input type="number" name="cantidad" class="form-control" value="1" required="required" autofocus
-                v-model="actualiza_cantidad" >
-                
-                
+                <td v-if="editar_producto && producto.id == actualiza_id" class="text-center">
+                  <input
+                    type="number"
+                    name="cantidad"
+                    class="form-control"
+                    value="1"
+                    required="required"
+                    autofocus
+                    v-model="actualiza_cantidad"
+                  >
                 </td>
                 <td v-else class="text-center">{{ producto.cantidad }}</td>
                 <td class="text-center">
@@ -85,13 +96,16 @@
                   </div>
                 </td>
 
-                <td class="text-center" v-if="editar_producto && producto.id == actualiza_id" >
+                <td class="text-center" v-if="editar_producto && producto.id == actualiza_id">
                   <button @click="post_editar_producto()" class="btn btn-info btn-sm">Modificar</button>
                   <button @click="cancelar_editar_producto()" class="btn btn-danger btn-sm">Cancelar</button>
                 </td>
                 <td class="text-center" v-else>
-                  <button  @click="Editar_producto(producto)" class="btn btn-info btn-sm">Editar</button>
-                  <button @click="Eliminar_producto(producto.id)" class="btn btn-danger btn-sm">Eliminar</button>
+                  <button @click="Editar_producto(producto)" class="btn btn-info btn-sm">Editar</button>
+                  <button
+                    @click="Eliminar_producto(producto.id)"
+                    class="btn btn-danger btn-sm"
+                  >Eliminar</button>
                 </td>
               </tr>
               <tr>
@@ -131,8 +145,15 @@
             </div>
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
               <label for="examplePassword22" class="mr-sm-2">Cantidad</label>
-              <input type="number" name="cantidad" class="form-control" value="1" required="required" autofocus
-                v-model="cantidad" >
+              <input
+                type="number"
+                name="cantidad"
+                class="form-control"
+                value="1"
+                required="required"
+                autofocus
+                v-model="cantidad"
+              >
             </div>
             <button class="btn-wide btn btn-success">Guarda</button>
           </form>
@@ -149,10 +170,10 @@ export default {
     venta_id: "";
     operacion: "";
     //form para actualizar
-    actualiza_id:"";
-    actualiza_producto_id:"";
-    actualiza_cantidad:"";
-    
+    actualiza_id: "";
+    actualiza_producto_id: "";
+    actualiza_cantidad: "";
+
     return {
       editar_producto: false,
       ventas: [],
@@ -190,7 +211,7 @@ export default {
         .catch(err => console.log(err));
     },
     Eliminar_producto(id) {
-      if (confirm("Are You Sure?")) {
+      if (confirm("Esta seguro que desea eliminar?")) {
         const params = {
           _token: "sweedee"
         };
@@ -201,39 +222,42 @@ export default {
         });
       }
     },
-    cobra_todo(venta_id){
-      axios.post(`ventas_has_producto/cobra_todo/${venta_id}`).then(response => {
+    cobra_todo(venta_id) {
+      axios
+        .post(`ventas_has_producto/cobra_todo/${venta_id}`)
+        .then(response => {
           const venta = response.data;
           console.info(response.data);
           this.fetchArticles();
         });
     },
     Editar_producto(producto) {
-      this.editar_producto=true;
+      this.editar_producto = true;
       console.info(producto);
-      
+
       //alert(producto.producto_id_pk.nombre);
       this.actualiza_id = producto.id;
       this.actualiza_producto_id = producto.producto_id_pk;
       this.actualiza_cantidad = producto.cantidad;
-
     },
-    post_editar_producto(){
-      this.editar_producto=false
+    post_editar_producto() {
+      this.editar_producto = false;
 
       const params = {
         id: this.actualiza_id,
         producto_id: this.actualiza_producto_id.id,
         cantidad: this.actualiza_cantidad
       };
-      axios.put(`ventas_has_producto/${this.actualiza_id}`, params).then(response => {
-        const venta = response.data;
-        
-        this.fetchArticles();
+      axios
+        .put(`ventas_has_producto/${this.actualiza_id}`, params)
+        .then(response => {
+          const venta = response.data;
+
+          this.fetchArticles();
         });
     },
-    cancelar_editar_producto(){
-      this.editar_producto=false
+    cancelar_editar_producto() {
+      this.editar_producto = false;
     },
     newproducto(venta_id) {
       //añadir un nuevo productos
@@ -245,15 +269,14 @@ export default {
         cantidad: this.cantidad,
         ventas_id: venta_id
       };
-      this.producto_id = '';
-      this.cantidad = '';
+      this.producto_id = "";
+      this.cantidad = "";
       //this.ventas_id = '';
       axios.post("ventas_has_producto", params).then(response => {
         const venta = response.data;
-        
+
         this.fetchArticles();
       });
-      
     },
     clearForm() {
       //this.edit = false;

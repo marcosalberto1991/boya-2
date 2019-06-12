@@ -1,11 +1,12 @@
 <?php
 namespace App\Http\Controllers;
-use Illuminate\Http\Request;
-use App\Http\Requests;
+
+use App\Http\Resources\punto as puntoResource;
 use App\punto;
 use App\VentasModel;
 use App\Ventas_has_productoModel;
-use App\Http\Resources\punto as puntoResource;
+use Illuminate\Http\Request;
+
 class ventaController extends Controller
 {
     /**
@@ -15,20 +16,19 @@ class ventaController extends Controller
      */
     public function vista()
     {
-        return view('punto.vista', [  
-			
-			] );
+        return view('punto.vista', []);
 
     }
-    public function obtener_data(){
-        $ventas=VentasModel::with('ventas_has_producto_all.producto_id_pk','mesa_id_pk')->where('estado_id',1)->paginate(20);
+    public function obtener_data()
+    {
+        $ventas = VentasModel::with('ventas_has_producto_all.producto_id_pk', 'mesa_id_pk')->where('estado_id', 1)->paginate(20);
         foreach ($ventas as $key => $value) {
-            $suma=0;
-            $ventas_has_producto=Ventas_has_productoModel::with('producto_id_pk')->where('ventas_id',$value->id)->get();
+            $suma = 0;
+            $ventas_has_producto = Ventas_has_productoModel::with('producto_id_pk')->where('ventas_id', $value->id)->get();
             foreach ($ventas_has_producto as $ventas_id => $venta) {
-                $suma+=$venta['cantidad']* $venta['producto_id_pk']['precio_venta']; 
+                $suma += $venta['cantidad'] * $venta['producto_id_pk']['precio_venta'];
             }
-            $ventas[$key]['total_ventas']=$suma;
+            $ventas[$key]['total_ventas'] = $suma;
         }
         return response()->json($ventas);
     }
@@ -37,7 +37,7 @@ class ventaController extends Controller
         // Get puntos
         $puntos = punto::orderBy('created_at', 'desc')->paginate(3);
         //$puntos = punto::orderBy('created_at', 'desc')->paginate(3);
-        $ventas=VentasModel::with('ventas_has_producto_all.producto_id_pk','mesa_id_pk')->paginate(3);
+        $ventas = VentasModel::with('ventas_has_producto_all.producto_id_pk', 'mesa_id_pk')->paginate(3);
         // Return collection of puntos as a resource
         return puntoResource::collection($puntos);
     }
@@ -53,10 +53,10 @@ class ventaController extends Controller
         $punto->id = $request->input('punto_id');
         $punto->title = $request->input('title');
         $punto->body = $request->input('body');
-        if($punto->save()) {
+        if ($punto->save()) {
             return new puntoResource($punto);
         }
-        
+
     }
     /**
      * Display the specified resource.
@@ -81,8 +81,8 @@ class ventaController extends Controller
     {
         // Get punto
         $punto = punto::findOrFail($id);
-        if($punto->delete()) {
+        if ($punto->delete()) {
             return new puntoResource($punto);
-        }    
+        }
     }
 }

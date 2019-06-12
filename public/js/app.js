@@ -50865,6 +50865,27 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -50921,7 +50942,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     Eliminar_producto: function Eliminar_producto(id) {
       var _this3 = this;
 
-      if (confirm("Are You Sure?")) {
+      if (confirm("Esta seguro que desea eliminar?")) {
         var params = {
           _token: "sweedee"
         };
@@ -50981,8 +51002,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         cantidad: this.cantidad,
         ventas_id: venta_id
       };
-      this.producto_id = '';
-      this.cantidad = '';
+      this.producto_id = "";
+      this.cantidad = "";
       //this.ventas_id = '';
       axios.post("ventas_has_producto", params).then(function (response) {
         var venta = response.data;
@@ -51022,7 +51043,7 @@ var render = function() {
         ],
         staticClass: "form-control",
         attrs: {
-          type: "text",
+          type: "hidden",
           value: "1",
           required: "required",
           autofocus: ""
@@ -51043,9 +51064,7 @@ var render = function() {
           _c("div", { staticClass: "main-card mb-3 card" }, [
             _c("div", { staticClass: "card-header" }, [
               _vm._v(
-                "\n          " +
-                  _vm._s(venta.mesa_id_pk.nombre) +
-                  "\n          "
+                "\n        " + _vm._s(venta.mesa_id_pk.nombre) + "\n        "
               ),
               _c("div", { staticClass: "btn-actions-pane-right" }, [
                 _c(
@@ -51466,7 +51485,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Cantidad")]),
         _vm._v(" "),
-        _c("th", { staticClass: "text-center" }, [_vm._v("total ")]),
+        _c("th", { staticClass: "text-center" }, [_vm._v("total")]),
         _vm._v(" "),
         _c("th", { staticClass: "text-center" }, [_vm._v("Acciones")])
       ])
