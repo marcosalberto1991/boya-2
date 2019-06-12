@@ -1,6 +1,5 @@
 <?php
 namespace App\Http\Controllers;
-
 use App\Http\Resources\punto as puntoResource;
 use App\punto;
 use App\VentasModel;
