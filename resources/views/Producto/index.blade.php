@@ -159,8 +159,8 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
 					<h4 class="modal-descripcion"></h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 				<div class="modal-body">
 					<h3 class="text-center" id="msdelete">¿Seguro que quieres borrar los  datos?</h3>

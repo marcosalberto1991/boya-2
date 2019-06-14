@@ -18,6 +18,15 @@
 	.boton_add{
 		margin-top: 7px;
 	}
+	.card-header{
+		background-color: #16aaff !important;
+	}
+	.card-footer{
+	background-color: #1783e0 !important;
+	}
+	.table-borderless{
+	background-color: #1783e0 !important;
+	}
 </style>
 
 
@@ -29,6 +38,7 @@
 	<my-thoughts-component></my-thoughts-component>
 </div>
 
+
 <div class='col-lg-12'>
 	<div class="row">
 			
@@ -39,6 +49,21 @@
 </section>
 
 @endsection
+<style type="text/css">
+	.card-header{
+		background-color: #16aaff
+	}
+	.card-footer{
+	background-color: #1783e0
+	}
+	.d-block.text-center.card-footer{
+	background-color: #1783e0
+		
+	}
+	.table-borderless{
+	background-color: #1783e0
+	}
+</style>
 
 <!-- Modal form to mass a form -->
 <div id="massModal" class="modal fade" role="dialog">

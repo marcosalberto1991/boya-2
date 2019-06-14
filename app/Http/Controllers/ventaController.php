@@ -20,7 +20,7 @@ class ventaController extends Controller
     }
     public function obtener_data()
     {
-        $ventas = VentasModel::with('ventas_has_producto_all.producto_id_pk', 'mesa_id_pk')->where('estado_id', 1)->paginate(20);
+        $ventas = VentasModel::with('ventas_has_producto_all.producto_id_pk', 'mesa_id_pk')->orderBy('mesa_id','asc')->where('estado_id', 1)->paginate(20);
         foreach ($ventas as $key => $value) {
             $suma = 0;
             $ventas_has_producto = Ventas_has_productoModel::with('producto_id_pk')->where('ventas_id', $value->id)->get();
