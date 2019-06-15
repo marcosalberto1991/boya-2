@@ -8,7 +8,7 @@
       autofocus
       v-model="actualiza_id"
     >
-
+ 
     <div v-for="venta in ventas" v-bind:key="venta.id" class="col-md-6">
       <div class="main-card mb-3 card">
         <div class="card-header">
@@ -24,9 +24,6 @@
           <table class="align-middle mb-0 table table-borderless table-striped table-hover">
             <thead>
               <tr>
-                <!--
-                <th class="text-center">#</th>
-                -->
                 <th>Productos</th>
                 <th class="text-center">Cantidad</th>
                 <th class="text-center">total</th>
@@ -35,9 +32,6 @@
             </thead>
             <tbody>
               <tr v-for="producto in venta.ventas_has_producto_all" v-bind:key="producto.id">
-                <!--
-                <td class="text-center text-muted">#345</td>
-                -->
                 <td>
                   <div class="widget-content p-0">
                     <div class="widget-content-wrapper">
