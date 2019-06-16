@@ -1,40 +1,48 @@
 @extends('layouts.app_admin_ui')
 @section("content")
 <script type='text/javascript'>
-<?php echo "const  Foraproveedor_id= $proveedor_id;"; ?>
+	<?php echo "const  Foraproveedor_id= $proveedor_id;"; ?>
 </script>
+<style>
+	.table.dataTable {
+		clear: both;
+		margin-top: .75rem !important;
+		margin-bottom: .75rem !important;
+		max-width: none !important;
+		border-collapse: separate !important;
+		border-spacing: 0;
+	}
 
-<div class="row">
-	
- 	<div class="col-lg-12" style="overflow-x:auto;">
+	div.container {
+		max-width: 1200px
+	}
+
+	.table.dataTable.dataTable_width_auto {
+		width: auto;
+	}
+
+	.table {
+		width: 100%;
+		margin-bottom: 1rem;
+		background-color: rgba(0, 0, 0, 0);
+	}
+</style>
+
+
+<div class=" row ">
+	<div class="col-lg-12  ">
 		<div class="main-card mb-3 card">
-	        <div class="card-body"><h5 class="card-title">Table responsive</h5>
-	        	@can('Producto Add')
-					<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">Añadir un Producto</button>
+			<div class="card-body">
+				<h5 class="card-title">Table responsive</h5>
+				@can('Producto Add')
+				<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal"
+					data-target=".bd-example-modal-lg">Añadir un Producto</button>
 				@endcan
-	            <div class="table-responsive" style="overflow-x:auto;">
-	                <table id="myTable" class=" table table-hover compact nowrap" style="overflow-x:auto;">
-	                    <thead>
-	                    <!--
-	                    	<tr>
-                                <th>#</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Last Name</th>
-                                <th>Username</th>
-                            </tr>
-	                    --> 
-		                   <tr>
+				<div class=""> // add this div
 
+					<table id="myTable" class="table table-hover display" cellspacing="0" width="100%">
+						<thead>
+							<tr>
 								<th>id</th>
 								<th>nombre_proveedor</th>
 								<th>nombre</th>
@@ -49,99 +57,103 @@
 								<th>proveedor_id</th>
 								<th>Ultima Modificacion</th>
 								<th>Accion</th>
-									
 							</tr>
-	                    </thead>
-	                    <tbody>
-	                    @foreach($listmysql as $lists)
-	                    
-	                    <tr id="item_{{$lists->id}}" class="item{{$lists->id}}">
-	                        <th scope="row">{{ $lists->id }}</th>
-	                        <td>{{ $lists->nombre_proveedor }}</td>
-	                        <td>{{ $lists->nombre }}</td>
-	                        <td>{{ $lists->imagen }}</td>
-	                        <td>{{ $lists->precio_caja }}</td>
-	                        <td>{{ $lists->cantidad_caja }}</td>
-	                        <td>{{ $lists->precio_unidad }}</td>
-	                        <td>{{ $lists->iva }}</td>
-	                        <td>{{ $lists->porcentaje_ganacia }}</td>
-	                        <td>{{ $lists->precio_venta }}</td>
-	                        <td>{{ $lists->ganacia }}</td>
-	                        <td>
-	                        	<script type="text/javascript">
-									resulmunicipios_id=Foraproveedor_id.find( cas => cas.id == {{ $lists->proveedor_id }} );
+						</thead>
+						<tbody>
+							@foreach($listmysql as $lists)
+
+							<tr id="item_{{$lists->id}}">
+								<th scope="row">{{ $lists->id }}</th>
+								<td>{{ $lists->nombre_proveedor }}</td>
+								<td>{{ $lists->nombre }}</td>
+								<td>
+									<a href="{{ asset('perfil_usuario/'.$lists->imagen) }}" target="_blank">
+										<img height="40px" src="{{ asset('perfil_usuario/'.$lists->imagen) }}"
+											width="40px">
+										</img>
+									</a>
+								</td>
+								<td>{{ $lists->precio_caja }}</td>
+								<td>{{ $lists->cantidad_caja }}</td>
+								<td>{{ $lists->precio_unidad }}</td>
+								<td>{{ $lists->iva }}</td>
+								<td>{{ $lists->porcentaje_ganacia }}</td>
+								<td>{{ $lists->precio_venta }}</td>
+								<td>{{ $lists->ganacia }}</td>
+								<td>
+									<script type="text/javascript">
+										resulmunicipios_id=Foraproveedor_id.find( cas => cas.id == {{ $lists->proveedor_id }} );
 									document.write(resulmunicipios_id.nombre); 
-								</script>
-	                        </td>
-		                    <td>
-		                    	{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}
-		                    </td>
-							<td>
-						@can('Producto Show')
-						<button class="massshow-modal btn btn-success btn-xs" 
-						data-id="{{ $lists->id}}"
-						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-imagen="{{ $lists->imagen}}"
-						data-precio_caja="{{ $lists->precio_caja}}"
-						data-cantidad_caja="{{ $lists->cantidad_caja}}"
-						data-precio_unidad="{{ $lists->precio_unidad}}"
-						data-iva="{{ $lists->iva}}"
-						data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
-						data-precio_venta="{{ $lists->precio_venta}}"
-						data-ganacia="{{ $lists->ganacia}}"
-						data-proveedor_id="{{ $lists->proveedor_id}}"
-						>
-						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
-						@endcan		
-						@can('Producto Editar')
-						<button class="edit-modal btn btn-info btn-xs" 
-						data-id="{{ $lists->id}}"
-						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-imagen="{{ $lists->imagen}}"
-						data-precio_caja="{{ $lists->precio_caja}}"
-						data-cantidad_caja="{{ $lists->cantidad_caja}}"
-						data-precio_unidad="{{ $lists->precio_unidad}}"
-						data-iva="{{ $lists->iva}}"
-						data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
-						data-precio_venta="{{ $lists->precio_venta}}"
-						data-ganacia="{{ $lists->ganacia}}"
-						data-proveedor_id="{{ $lists->proveedor_id}}"
-						
-						
-						><span class="glyphicon glyphicon-edit"></span> Editar</button>
-						@endcan
-						@can('Producto Eliminar') 
-						
-						<button class="massdelete-modal btn btn-danger btn-xs"
-						data-id="{{ $lists->id}}"
-						data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
-						data-nombre="{{ $lists->nombre}}"
-						data-imagen="{{ $lists->imagen}}"
-						data-precio_caja="{{ $lists->precio_caja}}"
-						data-cantidad_caja="{{ $lists->cantidad_caja}}"
-						data-precio_unidad="{{ $lists->precio_unidad}}"
-						data-iva="{{ $lists->iva}}"
-						data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
-						data-precio_venta="{{ $lists->precio_venta}}"
-						data-ganacia="{{ $lists->ganacia}}"
-						data-proveedor_id="{{ $lists->proveedor_id}}"
-						><span class="glyphicon glyphicon-trash"></span>Eliminar</button>
-				
-						@endcan
-						<!--
-						-->
-						</td>
-	                    </tr>
-	                   @endforeach
-	                    </tbody>
-	                </table>
-	            </div>
-	        </div>
-	    </div>
+									</script>
+								</td>
+								<td>
+									{{ \Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $lists->updated_at)->diffForHumans() }}
+								</td>
+								<td>
+									@can('Producto Show')
+									<button class="massshow-modal btn btn-success btn-xs" data-id="{{ $lists->id}}"
+										data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
+										data-nombre="{{ $lists->nombre}}" data-imagen="{{ $lists->imagen}}"
+										data-precio_caja="{{ $lists->precio_caja}}"
+										data-cantidad_caja="{{ $lists->cantidad_caja}}"
+										data-precio_unidad="{{ $lists->precio_unidad}}" data-iva="{{ $lists->iva}}"
+										data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
+										data-precio_venta="{{ $lists->precio_venta}}"
+										data-ganacia="{{ $lists->ganacia}}"
+										data-proveedor_id="{{ $lists->proveedor_id}}">
+										<span class="glyphicon glyphicon-eye-open"></span> Ver</button>
+									@endcan
+									@can('Producto Editar')
+									<button class="edit-modal btn btn-info btn-xs" data-id="{{ $lists->id}}"
+										data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
+										data-nombre="{{ $lists->nombre}}" data-imagen="{{ $lists->imagen}}"
+										data-precio_caja="{{ $lists->precio_caja}}"
+										data-cantidad_caja="{{ $lists->cantidad_caja}}"
+										data-precio_unidad="{{ $lists->precio_unidad}}" data-iva="{{ $lists->iva}}"
+										data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
+										data-precio_venta="{{ $lists->precio_venta}}"
+										data-ganacia="{{ $lists->ganacia}}"
+										data-proveedor_id="{{ $lists->proveedor_id}}"><span
+											class="glyphicon glyphicon-edit"></span>
+										Editar</button>
+									@endcan
+									@can('Producto Eliminar')
+
+									<button class="massdelete-modal btn btn-danger btn-xs" data-id="{{ $lists->id}}"
+										data-nombre_proveedor="{{ $lists->nombre_proveedor}}"
+										data-nombre="{{ $lists->nombre}}" data-imagen="{{ $lists->imagen}}"
+										data-precio_caja="{{ $lists->precio_caja}}"
+										data-cantidad_caja="{{ $lists->cantidad_caja}}"
+										data-precio_unidad="{{ $lists->precio_unidad}}" data-iva="{{ $lists->iva}}"
+										data-porcentaje_ganacia="{{ $lists->porcentaje_ganacia}}"
+										data-precio_venta="{{ $lists->precio_venta}}"
+										data-ganacia="{{ $lists->ganacia}}"
+										data-proveedor_id="{{ $lists->proveedor_id}}"><span
+											class="glyphicon glyphicon-trash"></span>Eliminar</button>
+
+									@endcan
+
+								</td>
+							</tr>
+							@endforeach
+						</tbody>
+
+					</table>
+
+					<!--
+					compact nowrap table-bordered table-hover mb-0 dt-responsive nowrap  compact nowrap
+				-->
+
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
+
+
+
+
+
 
 
 
@@ -156,149 +168,171 @@
 
 
 <div id="massModal" class="modal fade bd-example-modal-lg" role="dialog">
-		<div class="modal-dialog modal-lg">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h4 class="modal-descripcion"></h4>
-					<button type="button" class="close" data-dismiss="modal">&times;</button>
-				</div>
-				<div class="modal-body">
-					<h3 class="text-center" id="msdelete">¿Seguro que quieres borrar los  datos?</h3>
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h4 class="modal-descripcion"></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body">
+				<h3 class="text-center" id="msdelete">¿Seguro que quieres borrar los datos?</h3>
 				<form class="form-horizontal" id="formmass" role="form">
 					{{ csrf_field() }}
-				<div class="row">
-					<div class="col-md-6">
-						
-					<div class="form-group">
-						<label class="control-label " for="id">ID:</label>
-							<input type="text" class="form-control" id="id_mass" name="id"  disabled>
-						
-					</div>
-							
+					<div class="row">
+						<div class="col-md-6">
 
-						
-					<div class='form-group' id='nombre_proveedor' >
-						<label class='control-label ' for='descripcion'>nombre de producto del proveedor:</label>
-							<input type='text' name='nombre_proveedor' class='form-control' id='nombre_proveedor_mass' maxlength='45'   required='required' autofocus>
-							<p class='errornombre_proveedor text-center alert alert-danger d-none'>
-							favor llena</p>
-					</div>
-					
-					<div class='form-group' id='nombre' >
-						<label class='control-label ' for='descripcion'>nombre:</label>
-							<input type='text' name='nombre' class='form-control' id='nombre_mass' maxlength='45'   required='required' autofocus>
-							<p class='errornombre text-center alert alert-danger d-none'></p>
-					</div>
-					
-					<div class='form-group' id='imagen' >
-						<label class='control-label ' for='descripcion'>imagen:</label>
-							<input type='file' name='imagen' class='form-control' id='imagen_mass' maxlength='45'   required='required' autofocus>
-							<p class='errorimagen text-center alert alert-danger d-none'></p>
-					</div>
-					
-					<div class='form-group' id='precio_caja' >
-						<label class='control-label ' for='descripcion'>precio_caja:</label>
-							<input type='text' name='precio_caja' class='form-control calculo' id='precio_caja_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorprecio_caja text-center alert alert-danger d-none'></p>
-					</div>
-					<div class='form-group' id='cantidad_caja' >
-						<label class='control-label ' for='descripcion'>cantidad_caja:</label>
-							<input type='text' name='cantidad_caja' class='form-control calculo' id='cantidad_caja_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorcantidad_caja text-center alert alert-danger d-none'></p>
-					</div>
-				</div>
-				<div class="col-md-6">
+							<div class="form-group">
+								<label class="control-label " for="id">ID:</label>
+								<input type="text" class="form-control" id="id_mass" name="id" disabled>
 
-					<div class='form-group' id='precio_unidad' >
-						<label class='control-label ' for='descripcion'>precio_unidad:</label>
-							<input type='text' name='precio_unidad' class='form-control calculo' id='precio_unidad_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorprecio_unidad text-center alert alert-danger d-none'></p>
-					</div>
-					<div class='form-group' id='iva' >
-						<label class='control-label ' for='descripcion'>iva:</label>
-							<input type='text' name='iva' class='form-control calculo' id='iva_mass' maxlength='11'   required='required' autofocus>
-							<p class='erroriva text-center alert alert-danger d-none'></p>
-					</div>
-					<div class='form-group' id='porcentaje_ganacia' >
-						<label class='control-label ' for='descripcion'>porcentaje_ganacia:</label>
-							<input type='text' name='porcentaje_ganacia' class='form-control calculo' id='porcentaje_ganacia_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorporcentaje_ganacia text-center alert alert-danger d-none'></p>
-					</div>
-					<div class='form-group' id='precio_venta' >
-						<label class='control-label ' for='descripcion'>precio_venta:</label>
-							<input type='text' name='precio_venta' class='form-control ' id='precio_venta_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorprecio_venta text-center alert alert-danger d-none'></p>
-					</div>
-					<div class='form-group' id='ganacia' >
-						<label class='control-label ' for='descripcion'>ganacia:</label>
-							<input type='text' name='ganacia' class='form-control ' id='ganacia_mass' maxlength='11'   required='required' autofocus>
-							<p class='errorganacia text-center alert alert-danger d-none'></p>
-					</div>
-					<div class="form-group">
-						<label class="control-label " for="descripcion">proveedor_id:</label>
-							
-							<select name="proveedor_id"  class="form-control" id="proveedor_id_mass" required="required" autofocus >
-						<div class="">
-									<option value=""></option>
+							</div>
 
-								@foreach($proveedor_id as $lists)
-									<option value="{{$lists->id}}">{{$lists->nombre}}</option>
-							@endforeach
-							
-							</select>
-							
-							<p class="errorproveedor_id text-center alert alert-danger d-none"> llenar los datos</p>
+
+
+							<div class='form-group' id='nombre_proveedor'>
+								<label class='control-label ' for='descripcion'>nombre de producto del
+									proveedor:</label>
+								<input type='text' name='nombre_proveedor' class='form-control'
+									id='nombre_proveedor_mass' maxlength='45' required='required' autofocus>
+								<p class='errornombre_proveedor text-center alert alert-danger d-none'>
+									favor llena</p>
+							</div>
+
+							<div class='form-group' id='nombre'>
+								<label class='control-label ' for='descripcion'>nombre:</label>
+								<input type='text' name='nombre' class='form-control' id='nombre_mass' maxlength='45'
+									required='required' autofocus>
+								<p class='errornombre text-center alert alert-danger d-none'></p>
+							</div>
+							<div class='form-group' id='archivo'>
+								<label class='control-label col-sm-2' for='descripcion'>Vista previa:</label>
+								<img height="150px" width="150px" id="Imagene_modal" src=""
+									style="margin-left: 15px;" />
+							</div>
+							<div class='form-group' id='imagen'>
+								<label class='control-label ' for='descripcion'>imagen:</label>
+								<input type='file' name='imagen' class='form-control' id='imagen_mass' maxlength='45'
+									required='required' autofocus>
+								<p class='errorimagen text-center alert alert-danger d-none'></p>
+							</div>
+
+							<div class='form-group' id='precio_caja'>
+								<label class='control-label ' for='descripcion'>precio_caja:</label>
+								<input type='text' name='precio_caja' class='form-control calculo' id='precio_caja_mass'
+									maxlength='11' required='required' autofocus>
+								<p class='errorprecio_caja text-center alert alert-danger d-none'></p>
+							</div>
+							<div class='form-group' id='cantidad_caja'>
+								<label class='control-label ' for='descripcion'>cantidad_caja:</label>
+								<input type='text' name='cantidad_caja' class='form-control calculo'
+									id='cantidad_caja_mass' maxlength='11' required='required' autofocus>
+								<p class='errorcantidad_caja text-center alert alert-danger d-none'></p>
+							</div>
 						</div>
-					</div>
-					                        
-					</div>
-				</div>
-					
-					</form>
-					<div class="modal-footer">
+						<div class="col-md-6">
 
-						<button type="button" id="acciones" class="btn btn-primary mass">
-							<span class="glyphicon glyphicon-check"></span> massar
-						</button>
-						<button type="button" class="btn btn-warning" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> Cerra
-						</button>
+							<div class='form-group' id='precio_unidad'>
+								<label class='control-label ' for='descripcion'>precio_unidad:</label>
+								<input type='text' name='precio_unidad' class='form-control calculo'
+									id='precio_unidad_mass' maxlength='11' required='required' autofocus>
+								<p class='errorprecio_unidad text-center alert alert-danger d-none'></p>
+							</div>
+							<div class='form-group' id='iva'>
+								<label class='control-label ' for='descripcion'>iva:</label>
+								<input type='text' name='iva' class='form-control calculo' id='iva_mass' maxlength='11'
+									required='required' autofocus>
+								<p class='erroriva text-center alert alert-danger d-none'></p>
+							</div>
+							<div class='form-group' id='porcentaje_ganacia'>
+								<label class='control-label ' for='descripcion'>porcentaje_ganacia:</label>
+								<input type='text' name='porcentaje_ganacia' class='form-control calculo'
+									id='porcentaje_ganacia_mass' maxlength='11' required='required' autofocus>
+								<p class='errorporcentaje_ganacia text-center alert alert-danger d-none'>
+								</p>
+							</div>
+							<div class='form-group' id='precio_venta'>
+								<label class='control-label ' for='descripcion'>precio_venta:</label>
+								<input type='text' name='precio_venta' class='form-control ' id='precio_venta_mass'
+									maxlength='11' required='required' autofocus>
+								<p class='errorprecio_venta text-center alert alert-danger d-none'></p>
+							</div>
+							<div class='form-group' id='ganacia'>
+								<label class='control-label ' for='descripcion'>ganacia:</label>
+								<input type='text' name='ganacia' class='form-control ' id='ganacia_mass' maxlength='11'
+									required='required' autofocus>
+								<p class='errorganacia text-center alert alert-danger d-none'></p>
+							</div>
+							<div class="form-group">
+								<label class="control-label " for="descripcion">proveedor_id:</label>
+
+								<select name="proveedor_id" class="form-control" id="proveedor_id_mass"
+									required="required" autofocus>
+									<div class="">
+										<option value=""></option>
+
+										@foreach($proveedor_id as $lists)
+										<option value="{{$lists->id}}">{{$lists->nombre}}</option>
+										@endforeach
+
+								</select>
+
+								<p class="errorproveedor_id text-center alert alert-danger d-none">
+									llenar los
+									datos
+								</p>
+							</div>
+						</div>
+
 					</div>
-				</div>
+			</div>
+
+			</form>
+			<div class="modal-footer">
+
+				<button type="button" id="acciones" class="btn btn-primary mass">
+					<span class="glyphicon glyphicon-check"></span> massar
+				</button>
+				<button type="button" class="btn btn-warning" data-dismiss="modal">
+					<span class="glyphicon glyphicon-remove"></span> Cerra
+				</button>
 			</div>
 		</div>
 	</div>
+</div>
+</div>
 
 
 
-<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+	aria-hidden="true">
 	<div class="modal-dialog" role="document">
-    	<div class="modal-content">
-      		<div class="modal-header">
-        		<h5 class="modal-title" id="exampleModalLabel">Eliminar el registro</h5>
-        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-      		</div>
-      		<div class="modal-body">Se eliminar el registro de forma permanete 
-      		</div>
-      		<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerra</button>
-        		<button type="button" class="btn btn-danger delete"  data-dismiss="modal">Eliminar</button>
-      		</div>
-    	</div>
-  	</div>
-</div>	
-	
-@section("page-js-files")	
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="exampleModalLabel">Eliminar el registro</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+						aria-hidden="true">&times;</span></button>
+			</div>
+			<div class="modal-body">Se eliminar el registro de forma permanete
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerra</button>
+				<button type="button" class="btn btn-danger delete" data-dismiss="modal">Eliminar</button>
+			</div>
+		</div>
+	</div>
+</div>
 
-@stop	
+@section("page-js-files")
+
+@stop
 @section("page-js-script")
-	
-			
-<script type='text/javascript'>
-	</script>
+
 
 <script type='text/javascript'>
-function obtener_data(data) {
+</script>
+
+<script type='text/javascript'>
+	function obtener_data(data) {
 	$('#id_mass').val(data.data('id'));
 	$('#nombre_proveedor_mass').val(data.data('nombre_proveedor'));
 	$('#nombre_mass').val(data.data('nombre'));
@@ -311,10 +345,14 @@ function obtener_data(data) {
 	$('#precio_venta_mass').val(data.data('precio_venta'));
 	$('#ganacia_mass').val(data.data('ganacia'));
 	$('#proveedor_id_mass').val(data.data('proveedor_id'));
+
+	var url='{{ asset("perfil_usuario/") }}';
+	$("#Imagene_modal").attr("src", url+'/'+data.data('imagen'));
 	
 }
 //Añadir un registro
 $(document).on('click', '.massadd', function() {
+	$("#formmass")[0].reset();
 	$('.modal-descripcion').text('Añadir un nuevo registro');
 	$('#msdelete').text(' ');
 	//alert('lcomoesta ');
@@ -380,7 +418,8 @@ $('.modal-footer').on('click', '.add', function() {
 		error: function(jqXHR, text, error){
         	toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>', {timeOut: 5000});
         },
-		success: function(data) { 
+		success: function(data) {
+			 
 			if ((data.errors)) {
 				verificar(data);
 				//$('#massModal').modal('show');
@@ -388,6 +427,7 @@ $('.modal-footer').on('click', '.add', function() {
 			} else {
 				toastr.success('Operación Exitosa!', 'Datos Guardados', {timeOut: 5000});
 				operaciones(data,'add');
+				$("#formmass")[0].reset();
 			}
 		},
 	});
@@ -449,7 +489,7 @@ $(document).on('change', '.calculo', function() {
 
 
 <script type="text/javascript">
-function verificar(data) {
+	function verificar(data) {
 	$('.errorid').addClass('d-none');
 	$('.errornombre_proveedor').addClass('d-none');
 	$('.errornombre').addClass('d-none');
@@ -531,13 +571,18 @@ function verificar(data) {
 	function operaciones(data,operacion) {
 	const resulproveedor_id=Foraproveedor_id.find( cas => cas.id == data.proveedor_id ); 
 		
-	
+	var url='{{ asset("perfil_usuario/") }}';
 	var tabla=
 		"<tr  id='item_"+data.id+"'  class='item"+data.id+"'>"+
 		"<td class='col1'>" + data.id + "</td>"+
 		"<td>"+ data.nombre_proveedor+"</td>"+
 		"<td>"+ data.nombre+"</td>"+
-		"<td>"+ data.imagen+"</td>"+
+		"<td>"+
+			'<a href="'+url+'/'+data.imagen+'" target="_blank">'+
+        		'<img height="40px" src="'+url+'/'+data.imagen+'" width="40px">'+
+            	'</img>'+
+        	'</a>'+
+		"</td>"+
 		"<td>"+ data.precio_caja+"</td>"+
 		"<td>"+ data.cantidad_caja+"</td>"+
 		"<td>"+ data.precio_unidad+"</td>"+
@@ -611,4 +656,5 @@ function verificar(data) {
 </script>
 @stop
 </body>
+
 </html>
