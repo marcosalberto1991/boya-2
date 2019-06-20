@@ -42,6 +42,9 @@ Route::group(['middleware' => ['web']], function () {
 
 });
 
+Route::get('ventas_has_producto/lista_mesa_add/{mesa_id}', 'ventas_has_productoController@lista_mesa_add');
+Route::get('mesa/lista_mesa', 'mesaController@lista_mesa');
+
 Route::resource('Lista_mesa','Lista_mesaController');
 Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');

@@ -8,7 +8,20 @@
       autofocus
       v-model="actualiza_id"
     >
- 
+
+    <div class="col-md-12">
+      <div v-for="lista_mesas in lista_mesa" v-bind:key="lista_mesas.id" class="col-md-12">
+        <button
+          @click="lista_mesa_add(lista_mesas.id)"
+          type="button"
+          class="btn btn-success btn-lg"
+          data-toggle="button"
+          aria-pressed="false"
+          style="margin-bottom: 5px;"
+        >{{ lista_mesas.nombre }}</button>
+      </div>
+      <br>
+    </div>
     <div v-for="venta in ventas" v-bind:key="venta.id" class="col-md-6">
       <div class="main-card mb-3 card">
         <div class="card-header">
@@ -155,16 +168,31 @@
       </div>
     </div>
   </div>
+  <!--
+  <script src="https://unpkg.com/vue/dist/vue.js"></script>
+  <script src="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.min.css">
+  -->
 </template>
-
 <script>
+import Vue from "vue";
 import VueSingleSelect from "vue-single-select";
+
+//import VueToast from "vue-toast-notification";
+//import "vue-toast-notification/dist/index.css";
+
+//https://www.npmjs.com/package/vue-toastr-2
+import VueToastr2 from "vue-toastr-2";
+import "vue-toastr-2/dist/vue-toastr-2.min.css";
+window.toastr = require("toastr");
+Vue.use(VueToastr2);
+
 export default {
   data() {
     venta_id: "";
     operacion: "";
     //form para actualizar
-    actualiza_id: "";
+
     actualiza_producto_id: "";
     actualiza_cantidad: "";
 
@@ -174,9 +202,11 @@ export default {
       thoughts: [],
       thought: [],
       venta: [],
+      actualiza_id: "",
       producto_id: "",
       cantidad: "1",
-      productos_all: []
+      productos_all: [],
+      lista_mesa: []
     };
   },
   mounted() {
@@ -184,9 +214,13 @@ export default {
     axios.get("productos_all").then(response => {
       this.productos_all = response.data;
     });
+    axios.get("mesa/lista_mesa").then(response => {
+      this.lista_mesa = response.data;
+    });
   },
   components: {
-    VueSingleSelect
+    VueSingleSelect,
+    VueToastr2
   },
   methods: {
     formatPrice(value) {
@@ -234,6 +268,29 @@ export default {
       this.actualiza_producto_id = producto.producto_id_pk;
       this.actualiza_cantidad = producto.cantidad;
     },
+    lista_mesa_add(mesa_id) {
+      axios
+        .get(`ventas_has_producto/lista_mesa_add/${mesa_id}`)
+        .then(response => {
+          const venta = response.data;
+
+          if (venta.nombre == false) {
+            this.$toastr.info("mesa ocupada", "mesa creada");
+          } else {
+            this.$toastr.success("mesa creada con exito", "mesa creada");
+          }
+          this.fetchArticles();
+          //Vue.use(VueToast);
+          /*
+          newFunction().success("mesa creado con exito", {
+            // override the global option
+            position: "top-right",
+            duration: 10000,
+            queue: true
+          });
+          */
+        });
+    },
     post_editar_producto() {
       this.editar_producto = false;
 
@@ -280,4 +337,8 @@ export default {
     }
   }
 };
+
+function newFunction() {
+  return Vue.$toast;
+}
 </script>

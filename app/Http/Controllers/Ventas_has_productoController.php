@@ -24,12 +24,12 @@ class Ventas_has_productoController extends Controller
         $ventas->estado_id=2;
         $ventas->mesa_id;
         $ventas->save();
-
+        /*
         $new_mesa= new VentasModel();
         $new_mesa->mesa_id=$ventas->mesa_id;
         $new_mesa->estado_id=1;
         $new_mesa->save();
-
+        */
         return $ventas;
     }
     public function store(Request $request)
@@ -42,6 +42,20 @@ class Ventas_has_productoController extends Controller
         $thought->save();
         $thought=VentasModel::with('mesa_id_pk','ventas_has_producto_all.producto_id_pk')->get();
         return $thought;
+    }
+    public function lista_mesa_add($mesa_id){
+        
+        $venta_f=VentasModel::where('mesa_id',$mesa_id)->where('estado_id',1)->first();
+        if (!$venta_f) {
+            
+            $venta= new VentasModel();
+            $venta->mesa_id=$mesa_id;
+            $venta->estado_id=1;
+            $venta->save();
+            return $venta;
+        }else{
+            return json_encode(["nombre"=>"false"]);
+        }
     }
     public function update(Request $request, $id)
     {

@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\punto;
 use App\VentasModel;
+use App\MesaModel;
+
 use App\Http\Resources\punto as puntoResource;
 class mesaController extends Controller
 {
@@ -51,12 +53,14 @@ class mesaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // Get punto
-        $punto = punto::findOrFail($id);
-        // Return single punto as a resource
-        return new puntoResource($punto);
+    public function show($id){
+        
+        $mesa = MesaModel::all();
+        return $mesa; 
+    }
+    public function lista_mesa(){
+        $mesa = MesaModel::all();
+        return $mesa;
     }
     /**
      * Remove the specified resource from storage.
