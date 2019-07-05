@@ -1,6 +1,6 @@
 @extends('layouts.app_admin_ui')
 @section('content')
-
+<title>Lista de mesa</title>
 <style type="text/css">
 	.mesa{
 	padding-left: 0px;

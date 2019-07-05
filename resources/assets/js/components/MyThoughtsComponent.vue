@@ -1,4 +1,6 @@
 <template>
+
+  <div>
   <div class="row">
     <input
       type="hidden"
@@ -10,26 +12,28 @@
     >
 
     <div class="col-md-12">
-      <div v-for="lista_mesas in lista_mesa" v-bind:key="lista_mesas.id" class="col-md-12">
-        <button
+      <div  class="col-md-12">
+        <button v-for="lista_mesas in lista_mesa" v-bind:key="lista_mesas.id"
           @click="lista_mesa_add(lista_mesas.id)"
           type="button"
           class="btn btn-success btn-lg"
           data-toggle="button"
           aria-pressed="false"
-          style="margin-bottom: 5px;"
-        >{{ lista_mesas.nombre }}</button>
+          style="margin-bottom: 5px; margin: 5px;" 
+          
+        >{{ lista_mesas.nombre }}
+        </button>
       </div>
       <br>
     </div>
     <div v-for="venta in ventas" v-bind:key="venta.id" class="col-md-6">
       <div class="main-card mb-3 card">
         <div class="card-header">
-          {{ venta.mesa_id_pk.nombre }}
+          <h3><b>{{ venta.mesa_id_pk.nombre }}</b></h3>
           <div class="btn-actions-pane-right">
             <div role="group" class="btn-group-sm btn-group">
-              <button class="active btn btn-focus">Last Week</button>
-              <button @click="cobra_todo(venta.id)" class="btn btn-focus">Cobra todo</button>
+             
+              <button @click="cobra_todo(venta.id)" class="btn btn-focus">Cerrar</button>
             </div>
           </div>
         </div>
@@ -39,7 +43,7 @@
               <tr>
                 <th>Productos</th>
                 <th class="text-center">Cantidad</th>
-                <th class="text-center">total</th>
+                <th class="text-center">Total</th>
                 <th class="text-center">Acciones</th>
               </tr>
             </thead>
@@ -109,10 +113,8 @@
                 </td>
                 <td class="text-center" v-else>
                   <button @click="Editar_producto(producto)" class="btn btn-info btn-sm">Editar</button>
-                  <button
-                    @click="Eliminar_producto(producto.id)"
-                    class="btn btn-danger btn-sm"
-                  >Eliminar</button>
+                  <button @click="duplicar_producto(producto.producto_id_pk.id,venta.id,producto.cantidad)" class="btn btn-success btn-sm">Duplicar Productos</button>
+                  <button @click="Eliminar_producto(producto.id)" class="btn btn-danger btn-sm" >Eliminar</button>
                 </td>
               </tr>
               <tr>
@@ -157,24 +159,28 @@
                 name="cantidad"
                 class="form-control"
                 value="1"
+                min="1" 
                 required="required"
                 autofocus
                 v-model="cantidad"
               >
             </div>
-            <button class="btn-wide btn btn-success">Guarda</button>
+            <button type=button class="btn-wide btn btn-info" @click="cantidad_max_min(1)">+</button>
+            <button type=button class="btn-wide btn btn-info" @click="cantidad_max_min(0)">-</button>
+            <button class="btn-wide btn btn-success" style="margin-left: 10px;" >Añadir</button>
           </form>
         </div>
       </div>
     </div>
+  </div>
   </div>
   <!--
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.min.css">
   -->
-</template>
-<script>
+</template> 
+<script type="application/javascript">
 import Vue from "vue";
 import VueSingleSelect from "vue-single-select";
 
@@ -227,6 +233,14 @@ export default {
       let val = (value / 1).toFixed(0).replace(".", ",");
       return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ".");
     },
+    cantidad_max_min(valor_unidad){
+      if(valor_unidad==1){
+        this.cantidad++;
+      }else{
+        this.cantidad--;
+      }
+      
+    },
     fetchArticles(page_url) {
       let vm = this;
       page_url = page_url || "venta/obtener_data";
@@ -256,6 +270,21 @@ export default {
         .then(response => {
           const venta = response.data;
           console.info(response.data);
+          this.fetchArticles();
+        });
+    },
+    duplicar_producto(producto_id,venta_id,cantidad){
+      //axios
+        //.post(`ventas_has_producto/duplicar_productos`)
+      const params = {
+        producto_id: producto_id,
+        ventas_id: venta_id,
+        cantidad: cantidad
+      };
+      axios
+        .post(`ventas_has_producto/duplicar_productos`, params)
+        .then(response => {
+          const venta = response.data;
           this.fetchArticles();
         });
     },
@@ -321,7 +350,7 @@ export default {
         ventas_id: venta_id
       };
       this.producto_id = "";
-      this.cantidad = "";
+      this.cantidad = 1;
       //this.ventas_id = '';
       axios.post("ventas_has_producto", params).then(response => {
         const venta = response.data;

@@ -32,6 +32,15 @@ class Ventas_has_productoController extends Controller
         */
         return $ventas;
     }
+    public function duplicar_productos(Request $request){
+
+        $thought = new Ventas_has_productoModel();
+        $thought->producto_id = $request->producto_id;
+        $thought->ventas_id = $request->ventas_id;
+        $thought->cantidad = $request->cantidad;
+        //$thought->user_id = auth()->id();
+        $thought->save();
+    }
     public function store(Request $request)
     {
         $thought = new Ventas_has_productoModel();

@@ -1,9 +1,7 @@
-@extends('layouts.app_mosnter')
-
-<script type='text/javascript'>
-			</script>
-
+@extends('layouts.app_admin_ui')
 @section('content')
+<title>Lista de Proveedor</title>
+
 <section class="col-lg-12 connectedSortable">
 	<div class="box box-warning">
 		<div class="box-header with-border">
@@ -22,7 +20,7 @@
 				</div>
 
 				<div class="panel-body" style="overflow-x:auto;">
-					<table class="table table-striped table-bordered table-hover" id="myTable">
+					<table class="table table-striped table-bordered table-hover compact nowrap" id="myTable">
 					<thead>
 					   
 
@@ -42,7 +40,7 @@
 
 					@foreach($listmysql as $lists)
 						  
-					<tr id="item_{{$lists->id}}"" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
+					<tr id="item_{{$lists->id}}" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
 						<td class="col1">{{ $lists->id }}</td>
 						<td class="col1">{{ $lists->nombre }}</td>
 						<td class="col1">{{ $lists->descricion }}</td>
@@ -62,7 +60,6 @@
 						data-descricion="{{ $lists->descricion}}"
 						data-created_at="{{ $lists->created_at}}"
 						data-updated_at="{{ $lists->updated_at}}"
-						
 						
 						>
 						<span class="glyphicon glyphicon-eye-open"></span> Ver</button>

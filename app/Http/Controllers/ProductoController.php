@@ -29,13 +29,15 @@ class ProductoController extends Controller
 	   			'nombre_proveedor' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'nombre' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'imagen' => 'min:2|max:2025',
-	   			'precio_caja' => 'required|min:1|max:99999999',
+				   
+				/*'precio_caja' => 'required|min:1|max:99999999',
 	   			'cantidad_caja' => 'required|min:1|max:99999999',
 	   			'precio_unidad' => 'required|min:1|max:99999999',
 	   			'iva' => 'required|min:1|max:99999999',
-	   			'porcentaje_ganacia' => 'required|min:1|max:99999999',
+				'porcentaje_ganacia' => 'required|min:1|max:99999999',
+				  */ 
 	   			'precio_venta' => 'required|min:1|max:99999999',
-	   			'ganacia' => 'required|min:1|max:99999999',
+	   			//'ganacia' => 'required|min:1|max:99999999',
 	   			'proveedor_id' => 'required|min:1|max:99999999',
 	   			
 	];
@@ -74,13 +76,16 @@ class ProductoController extends Controller
 			$Producto->nombre_proveedor=$request->nombre_proveedor;
 			$Producto->nombre=$request->nombre;
 			//$Producto->imagen=$request->imagen;
+			$Producto->precio_venta=$request->precio_venta;
+			/*
 			$Producto->precio_caja=$request->precio_caja;
 			$Producto->cantidad_caja=$request->cantidad_caja;
 			$Producto->precio_unidad=$request->precio_unidad;
 			$Producto->iva=$request->iva;
 			$Producto->porcentaje_ganacia=$request->porcentaje_ganacia;
-			$Producto->precio_venta=$request->precio_venta;
+			
 			$Producto->ganacia=$request->ganacia;
+			*/
 			$Producto->proveedor_id=$request->proveedor_id;
 				
 			$Producto->save();
@@ -107,13 +112,16 @@ class ProductoController extends Controller
 			$Producto->nombre_proveedor=$request->nombre_proveedor;
 			$Producto->nombre=$request->nombre;
 			//$Producto->imagen=$request->imagen;
+			$Producto->precio_venta=$request->precio_venta;
+			/*
 			$Producto->precio_caja=$request->precio_caja;
 			$Producto->cantidad_caja=$request->cantidad_caja;
 			$Producto->precio_unidad=$request->precio_unidad;
 			$Producto->iva=$request->iva;
 			$Producto->porcentaje_ganacia=$request->porcentaje_ganacia;
-			$Producto->precio_venta=$request->precio_venta;
+			
 			$Producto->ganacia=$request->ganacia;
+			*/
 			$Producto->proveedor_id=$request->proveedor_id;
 				
 		  

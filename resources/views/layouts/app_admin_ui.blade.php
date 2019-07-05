@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta http-equiv="Content-Language" content="en">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>Regular Tables - Tables are the backbone of almost all web applications.</title>
+    
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no" />
     <meta name="description" content="Tables are the backbone of almost all web applications.">
     <meta name="msapplication-tap-highlight" content="no">
@@ -22,7 +22,7 @@
     -->
 <link href="Architectui/assets/css/main.css" rel="stylesheet"></head>
 
-<style>
+<style type="text/css">
     .btn-group-xs > .btn, .btn-xs {
       padding: .25rem .4rem;
       font-size: .875rem;
@@ -31,13 +31,13 @@
     }
 </style>
 <body>
-    <div class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header">
-        <div class="app-header header-shadow">
+    <div id="app"  class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header ">
+        <div class="app-header header-shadow bg-info header-text-dark">
             <div class="app-header__logo">
                 <div class="logo-src"></div>
                 <div class="header__pane ml-auto">
                     <div>
-                        <button type="button" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
+                        <button type="button" id="hamburger-close" class="hamburger close-sidebar-btn hamburger--elastic" data-class="closed-sidebar">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
                             </span>
@@ -75,19 +75,19 @@
                         <li class="nav-item">
                             <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-database"> </i>
-                                Statistics
+                                Estadisticas
                             </a>
                         </li>
                         <li class="btn-group nav-item">
                             <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-edit"></i>
-                                Projects
+                                Proyecto 
                             </a>
                         </li>
                         <li class="dropdown nav-item">
                             <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-cog"></i>
-                                Settings
+                                configuracion 
                             </a>
                         </li>
                     </ul>        </div>
@@ -96,10 +96,16 @@
                         <div class="widget-content p-0">
                             <div class="widget-content-wrapper">
                                 <div class="widget-content-left">
+                                @if (Route::has('login'))
+                                        @if (Auth::check())
                                     <div class="btn-group">
                                         <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="p-0 btn">
-                                            <img width="42" class="rounded-circle" src="Architectui/assets/images/avatars/1.jpg" alt="">
+                                       
+                                        <?php $foto=auth()->user()->avatar;?>
+
+                                            <img width="42" class="rounded-circle" src='{{ asset("perfil_usuario/$foto")}}' alt="">
                                             <i class="fa fa-angle-down ml-2 opacity-8"></i>
+                                       
                                         </a>
                                         <div tabindex="-1" role="menu" aria-hidden="true" class="dropdown-menu dropdown-menu-right">
                                             <button type="button" tabindex="0" class="dropdown-item">User Account</button>
@@ -110,14 +116,21 @@
                                             <button type="button" tabindex="0" class="dropdown-item">Dividers</button>
                                         </div>
                                     </div>
+                                    @endif
+                                    @endif
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
                                     <div class="widget-heading">
-                                        Alina Mclourd
+                                    @if (Route::has('login'))
+                                        @if (Auth::check())
+                                    {{auth()->user()->name}}
                                     </div>
                                     <div class="widget-subheading">
-                                        VP People Manager
+                                    {{auth()->user()->name}}
                                     </div>
+                                    @endif
+                                    @endif
+
                                 </div>
                                 <div class="widget-content-right header-user-info ml-3">
                                     <button type="button" class="btn-shadow p-1 btn btn-primary btn-sm show-toastr-example">
@@ -301,7 +314,7 @@
                                 <li class="list-group-item">
                                     <h5 class="pb-2">Choose Color Scheme
                                     </h5>
-                                    <div class="theme-settings-swatches">
+                                    <div class="theme-settings-swatches" id='color_menu_vertical' >
                                         <div class="swatch-holder bg-primary switch-sidebar-cs-class" data-class="bg-primary sidebar-text-light">
                                         </div>
                                         <div class="swatch-holder bg-secondary switch-sidebar-cs-class" data-class="bg-secondary sidebar-text-light">
@@ -406,8 +419,9 @@
                     </div>
                 </div>
             </div>
-        </div>        <div class="app-main">
-                <div class="app-sidebar sidebar-shadow">
+        </div>        
+        <div class="app-main">
+                <div class="app-sidebar sidebar-shadow sidebar-shadow bg-info sidebar-text-dark">
                     <div class="app-header__logo">
                         <div class="logo-src"></div>
                         <div class="header__pane ml-auto">
@@ -440,7 +454,7 @@
                     </div>    <div class="scrollbar-sidebar">
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
-                                <li class="app-sidebar__heading">Dashboards</li>
+                                <li class="app-sidebar__heading">Lista de menu</li>
                                 <li>
                                     <a href="{{ action('Lista_mesaController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
@@ -453,6 +467,12 @@
                                         Productos
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ action('ProveedorController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Proveedor
+                                    </a>
+                                </li>
                                
                             </ul>
                         </div>
@@ -460,7 +480,7 @@
                 </div>    
 
                 <div class="app-main__outer">
-                    <div class="app-main__inner" id="app">
+                    <div class="app-main__inner">
 
 
 
@@ -509,10 +529,12 @@
                     </div>    </div>
         </div>
     </div>
+    <script type="text/javascript" src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
 <script type="text/javascript" src="Architectui/assets/scripts/main.js"></script>
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <!--
-<script type="text/javascript" src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
+
+
 -->
 <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
 <script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
@@ -571,7 +593,34 @@
   
 <script type="text/javascript">
 
-  
+
+//color_menu_vertical
+$('.switch-sidebar-cs-class').on('click', function() {
+    
+    //$(this).data('estado_id')
+    alert($(this).data('class'));
+    var classes = $(this).data('class');
+    sessionStorage.setItem('switch_sidebar',classes);
+    //console.info($(this));
+    //console.info(this.data('class'));
+});
+
+$('#hamburger-close').on('click', function() {
+//alert("de");
+
+
+});
+
+ 
+$('.switch-header-cs-class').on('click', function() {
+
+    var classes_header = $(this).data('class');
+    sessionStorage.setItem('switch_header',classes_header);
+
+});
+
+
+
     $('.input-number-line').on('input', function () { 
       this.value = this.value.replace(/[^0-9-]/g,'');
     });
@@ -654,13 +703,13 @@
         //"scrollX": true,
         //scrollY:        true,
         scrollY:        '100%',
-        scrollX:        true,
-        scrollCollapse: true,
+        //scrollX:        true,
+        //scrollCollapse: true,
         //responsive: true,
         //paging:         false,
-        fixedColumns:   {
-            leftColumns: 2//Le indico que deje fijas solo las 2 primeras columnas
-        },
+        //fixedColumns:   {
+        //    leftColumns: 2//Le indico que deje fijas solo las 2 primeras columnas
+        //},
 
 
         language: {

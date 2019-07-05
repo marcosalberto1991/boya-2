@@ -16,6 +16,7 @@
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
 Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoController@cobra_todo');
+Route::post('ventas_has_producto/duplicar_productos', 'Ventas_has_productoController@duplicar_productos');
 
 
 Route::Resource('ventas', 'VentasController');
@@ -24,7 +25,9 @@ Route::Resource('punto', 'puntoController');
 Route::get('punto_vista', 'puntoController@vista');
 Route::get('venta/obtener_data', 'ventaController@obtener_data');
 
-
+Route::get('Proveedor/pdf', 'ProveedorController@pdf');
+Route::resource('Proveedor','ProveedorController');
+Route::post('Proveedor/changeStatus', array('as' => 'changeStatus', 'uses' => 'ProveedorController@changeStatus'));
 
 Route::group(['middleware' => ['web']], function () {
 
@@ -244,8 +247,6 @@ Route::get('Procedimiento_arbole/index', [
 ]);
 
 
-Route::get('Usuario_perfil/perfil', 'Usuario_perfilController@perfil');
-Route::resource('Usuario_perfil', 'Usuario_perfilController');
 Route::get('Usuario_perfil/pdf', 'Usuario_perfilController@pdf');
 Route::post('Perfil/Usuario_perfil/Edit/{id}', 'PerfilUsuarioController@update');
 Route::post('Usuario_perfil/changeStatus', array('as' => 'changeStatus', 'uses' => 'Usuario_perfilController@changeStatus'));
@@ -255,6 +256,9 @@ Route::post('Usuario_perfil/changeStatus', array('as' => 'changeStatus', 'uses' 
 //Route::post('Reportes/changeStatus', array('as' => 'changeStatus', 'uses' => 'TerritorioController@changeStatus'));
 
 */
+
+Route::get('Usuario_perfil/perfil', 'Usuario_perfilController@perfil');
+Route::resource('Usuario_perfil', 'Usuario_perfilController');
 
 Route::get('Auditoria/pdf', 'AuditoriaController@pdf');
 Route::resource('Auditoria', 'AuditoriaController');

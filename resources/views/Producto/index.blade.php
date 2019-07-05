@@ -1,5 +1,6 @@
 @extends('layouts.app_admin_ui')
 @section("content")
+<title>Lista de Producto</title>
 <script type='text/javascript'>
 	<?php echo "const  Foraproveedor_id= $proveedor_id;"; ?>
 </script>
@@ -178,16 +179,16 @@
 	<div class="col-lg-12  ">
 		<div class="main-card mb-3 card">
 			<div class="card-body">
-				<h5 class="card-title">Table responsive</h5>
+				<h5 class="card-title">Lista de producto
 				@can('Producto Add')
-				<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal"
-					data-target=".bd-example-modal-lg">Añadir un Producto</button>
+				<button id="massadd-modal" class="btn btn-success mass-add-modal massmodal massadd " data-toggle="modal" data-target=".bd-example-modal-lg">
+					Añadir un Producto </button>
 				@endcan
-				<div class=""> // add this div
-
-					<table id="myTable" style="width: 100%;"  class="table table-hover table-striped table-bordered dataTable dtr-inline" role="grid" aria-describedby="example_info">
-						<thead>
-							<tr>
+				</h5>
+				<div class=""> 
+					<table id="myTable" style="swidth: s100%;"  class="table table-hover table-striped table-bordered dataTable dtr-inline compact nowrap" role="grid" aria-describedby="example_info">
+						<thead style="width: 100%;">
+							<tr style="width: 100%;">
 								<th>id</th>
 								<th>nombre_proveedor</th>
 								<th>nombre</th>
@@ -200,8 +201,9 @@
 								<th>porcentaje_ganacia</th>
 							-->
 								<th>precio_venta</th>
-								<
+								<!--
 								<th>ganacia</th>
+								-->
 								<th>proveedor_id</th>
 								<th>Ultima Modificacion</th>
 								<th>Accion</th>
@@ -217,8 +219,8 @@
 								<td>
 									<a href="{{ asset('perfil_usuario/'.$lists->imagen) }}" target="_blank">
 										<img height="40px" src="{{ asset('perfil_usuario/'.$lists->imagen) }}"
-											width="40px">
-										</img>
+											width="40px"/>
+										
 									</a>
 								</td>
 								<!--
@@ -229,7 +231,9 @@
 								<td>{{ $lists->porcentaje_ganacia }}</td>
 								-->
 								<td>{{ $lists->precio_venta }}</td>
+								<!--
 								<td>{{ $lists->ganacia }}</td>
+								<-->
 								<td>
 									<script type="text/javascript">
 										resulmunicipios_id=Foraproveedor_id.find( cas => cas.id == {{ $lists->proveedor_id }} );
@@ -365,7 +369,7 @@
 									required='required' autofocus>
 								<p class='errorimagen text-center alert alert-danger d-none'></p>
 							</div>
-
+							<!--
 							<div class='form-group' id='precio_caja'>
 								<label class='control-label ' for='descripcion'>precio_caja:</label>
 								<input type='text' name='precio_caja' class='form-control calculo' id='precio_caja_mass'
@@ -378,9 +382,10 @@
 									id='cantidad_caja_mass' maxlength='11' required='required' autofocus>
 								<p class='errorcantidad_caja text-center alert alert-danger d-none'></p>
 							</div>
+							-->
 						</div>
 						<div class="col-md-6">
-
+						<!--
 							<div class='form-group' id='precio_unidad'>
 								<label class='control-label ' for='descripcion'>precio_unidad:</label>
 								<input type='text' name='precio_unidad' class='form-control calculo'
@@ -400,18 +405,21 @@
 								<p class='errorporcentaje_ganacia text-center alert alert-danger d-none'>
 								</p>
 							</div>
+							-->
 							<div class='form-group' id='precio_venta'>
 								<label class='control-label ' for='descripcion'>precio_venta:</label>
 								<input type='text' name='precio_venta' class='form-control ' id='precio_venta_mass'
 									maxlength='11' required='required' autofocus>
 								<p class='errorprecio_venta text-center alert alert-danger d-none'></p>
 							</div>
+							<!--	
 							<div class='form-group' id='ganacia'>
 								<label class='control-label ' for='descripcion'>ganacia:</label>
 								<input type='text' name='ganacia' class='form-control ' id='ganacia_mass' maxlength='11'
 									required='required' autofocus>
 								<p class='errorganacia text-center alert alert-danger d-none'></p>
 							</div>
+							-->
 							<div class="form-group">
 								<label class="control-label " for="descripcion">proveedor_id:</label>
 
@@ -733,16 +741,17 @@ $(document).on('change', '.calculo', function() {
             	'</img>'+
         	'</a>'+
 		"</td>"+
-		"<td>"+ data.precio_caja+"</td>"+
-		"<td>"+ data.cantidad_caja+"</td>"+
-		"<td>"+ data.precio_unidad+"</td>"+
-		"<td>"+ data.iva+"</td>"+
-		"<td>"+ data.porcentaje_ganacia+"</td>"+
+		//"<td>"+ data.precio_caja+"</td>"+
+		//"<td>"+ data.cantidad_caja+"</td>"+
+		//"<td>"+ data.precio_unidad+"</td>"+
+		//"<td>"+ data.iva+"</td>"+
+		//"<td>"+ data.porcentaje_ganacia+"</td>"+
 		"<td>"+ data.precio_venta+"</td>"+
-		"<td>"+ data.ganacia+"</td>"+
+		
+		//"<td>"+ data.ganacia+"</td>"+
 		"<td>"+ resulproveedor_id["nombre"]  +"</td>"+
 		
-		'<td>Ahorra</td><td>'+					
+		'<td>Ahora</td><td>'+					
 	@can('Producto Show') 
 		' <button class="massshow-modal btn btn-success"  ' + 
 		"data-id='"+ data.id+"'"+
@@ -800,7 +809,7 @@ $(document).on('change', '.calculo', function() {
 		$('#item_'+data.id).replaceWith(tabla);
 	}
 	if('add'==operacion){
-		$('#postTable').append(tabla);
+		$('#myTable').append(tabla);
 	}
 } 
 </script>
