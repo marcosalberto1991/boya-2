@@ -1,9 +1,10 @@
-@extends('layouts.app_mosnter')
+@extends('layouts.app_admin_ui')
 
 @section('title', '| Add User')
 
 @section('content')
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
 
 <div class='col-lg-4 col-lg-offset-4'>
 
@@ -13,7 +14,7 @@
     <div class="alert alert-danger">
         <ul>
             @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
+            <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>
@@ -35,8 +36,8 @@
 
     <div class='form-group'>
         @foreach ($roles as $role)
-            {{ Form::checkbox('roles[]',  $role->id ) }}
-            {{ Form::label($role->name, ucfirst($role->name)) }}<br>
+        {{ Form::checkbox('roles[]',  $role->id ) }}
+        {{ Form::label($role->name, ucfirst($role->name)) }}<br>
 
         @endforeach
     </div>

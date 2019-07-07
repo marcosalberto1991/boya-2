@@ -20,7 +20,10 @@
     =========================================================
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
-<link href="Architectui/assets/css/main.css" rel="stylesheet"></head>
+    <link href="{{ asset('Architectui/assets/css/main.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
+</head>
 
 <style type="text/css">
     .btn-group-xs > .btn, .btn-xs {
@@ -73,23 +76,40 @@
                     </div>
                     <ul class="header-menu nav">
                         <li class="nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
+                            <a href="{{ action('IndexController@index') }}" class="nav-link">
                                 <i class="nav-link-icon fa fa-database"> </i>
-                                Estadisticas
+                                Inicio
                             </a>
                         </li>
+                        <li class="nav-item">
+                                <a href="{{ action('IndexController@micarrito') }}" class="nav-link">
+                                    <i class="nav-link-icon fa fa-database"> </i>
+                                    Mi Carrito
+                                </a>
+                            </li>
+                       
                         <li class="btn-group nav-item">
                             <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-edit"></i>
                                 Proyecto 
                             </a>
                         </li>
+                        @if (Route::has('login'))
+                        @if (Auth::check())
                         <li class="dropdown nav-item">
-                            <a href="javascript:void(0);" class="nav-link">
-                                <i class="nav-link-icon fa fa-cog"></i>
-                                configuracion 
-                            </a>
+                        
+                            <a href="{{ route('logout') }}" class="nav-link " 
+                            onclick="event.preventDefault();
+                            document.getElementById('logout-form').submit();">
+                            <i class="nav-link-icon fa fa-cog"></i>
+                            <b >{{ trans('welcome.salir') }}</b></a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                              {{ csrf_field() }}
+                            </form>
                         </li>
+                        @endif
+                        @endif
+                       
                     </ul>        </div>
                 <div class="app-header-right">
                     <div class="header-btn-lg pr-0">
@@ -120,15 +140,16 @@
                                     @endif
                                 </div>
                                 <div class="widget-content-left  ml-3 header-user-info">
-                                    <div class="widget-heading">
                                     @if (Route::has('login'))
                                         @if (Auth::check())
-                                    {{auth()->user()->name}}
-                                    </div>
-                                    <div class="widget-subheading">
-                                    {{auth()->user()->name}}
-                                    </div>
-                                    @endif
+                                            <div class="widget-heading">
+                                            
+                                            {{auth()->user()->name}}
+                                            </div>
+                                            <div class="widget-subheading">
+                                            {{ auth()->user()->name}}
+                                            </div>
+                                        @endif
                                     @endif
 
                                 </div>
@@ -455,25 +476,86 @@
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">Lista de menu</li>
+                                <!--
                                 <li>
                                     <a href="{{ action('Lista_mesaController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
                                         Lista de mesa
                                     </a>
                                 </li>
+                            
                                 <li>
                                     <a href="{{ action('ProductoController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Productos 2
+                                    </a>
+                                </li>
+                                -->
+                                <li>
+                                    <a href="{{ action('ProductosController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
                                         Productos
                                     </a>
                                 </li>
+                                <li>
+                                        <a href="{{ action('VentaController@index') }}">
+                                            <i class="metismenu-icon pe-7s-rocket"></i>
+                                            Venta
+                                        </a>
+                                    </li>
+                                
+                                
+                                <li>
+                                    <a href="{{ action('FacturaController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Factura y entrada
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('IndexController@Inventario') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Inventario
+                                    </a>
+                                </li>
+                                <!--
                                 <li>
                                     <a href="{{ action('ProveedorController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
                                         Proveedor
                                     </a>
                                 </li>
-                               
+                            -->
+                                @hasrole('Super Administrador')
+                                <li>
+                                    <a href="log-viewer">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        LOG
+                                    </a>
+                                </li>
+                                <!--
+                                <li>
+                                    <a href="{{ action('AuditoriaController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Auditoria
+                                    </a>
+                                </li>
+                            -->
+                                <li>
+                                    <a href="{{ action('BackupController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Backup
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="{{ action('PermissionController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Permisos y roles
+                                    </a>
+                                </li>
+
+                                
+                                
+                                @endhasrole
                             </ul>
                         </div>
                     </div>
@@ -490,11 +572,13 @@
 
 
                     </div>
+                    
                     <div class="app-wrapper-footer">
                         <div class="app-footer">
                             <div class="app-footer__inner">
                                 <div class="app-footer-left">
                                     <ul class="nav">
+                                        <!--
                                         <li class="nav-item">
                                             <a href="javascript:void(0);" class="nav-link">
                                                 Footer Link 1
@@ -505,10 +589,12 @@
                                                 Footer Link 2
                                             </a>
                                         </li>
+                                    -->
                                     </ul>
                                 </div>
                                 <div class="app-footer-right">
                                     <ul class="nav">
+                                        <!--
                                         <li class="nav-item">
                                             <a href="javascript:void(0);" class="nav-link">
                                                 Footer Link 3
@@ -522,6 +608,7 @@
                                                 Footer Link 4
                                             </a>
                                         </li>
+                                    -->
                                     </ul>
                                 </div>
                             </div>
@@ -530,7 +617,7 @@
         </div>
     </div>
     <script type="text/javascript" src="{{ asset('jsi/jquery-3.3.1.js') }}"></script>
-<script type="text/javascript" src="Architectui/assets/scripts/main.js"></script>
+<script type="text/javascript" src="{{ asset('Architectui/assets/scripts/main.js') }}"></script>
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <!--
 
@@ -539,7 +626,7 @@
 <link rel="stylesheet" href="{{asset('css/jquery.dataTables.min.css')}}">
 <script type="text/javascript" src="{{ asset('plugins/datatables/jquery.dataTables.min.js') }}"></script>
 
-<script src="https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js"></script>
+<script src="{{ asset('https://cdn.datatables.net/fixedcolumns/3.2.2/js/dataTables.fixedColumns.min.js') }}"></script>
 <link href="https://cdn.datatables.net/fixedcolumns/3.2.2/css/fixedColumns.dataTables.min.css" rel="stylesheet"/>
 
 <link rel="stylesheet" href="{{ asset('css/toastr.min.css')}}">
@@ -547,7 +634,13 @@
 
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/responsive.bootstrap.min.js" type="text/javascript"/></script>
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"/></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
+<link rel="stylesheet" href="{{asset('plugins/datepicker/datepicker3.css')}}">
+<link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
+<link rel="stylesheet" href="{{ asset('plugins/datepicker/datepicker3.css') }}">
+<script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
+<script type="text/javascript" src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 <!--
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
@@ -697,7 +790,8 @@ $('.switch-header-cs-class').on('click', function() {
 .datepicker{z-index:1151 !important;}
 </style>
 
-<script>
+
+<script> 
   $(document).ready(function(){
     $("#myTable").DataTable({
         //"scrollX": true,
@@ -710,8 +804,6 @@ $('.switch-header-cs-class').on('click', function() {
         //fixedColumns:   {
         //    leftColumns: 2//Le indico que deje fijas solo las 2 primeras columnas
         //},
-
-
         language: {
             "decimal": "",
             "emptyTable": "No hay información",

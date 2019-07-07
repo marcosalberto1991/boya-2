@@ -9,11 +9,11 @@
   }
 </style>
 
-<div class="tab-content">
+<div class="tab-content col-md-6 offset-md-3">
   <div class="tab-pane tabs-animation fade show active" id="tab-content-0" role="tabpanel">
     <div class="main-card mb-3 card">
       <div class="card-body">
-        <h5 class="card-title">Grid Rows</h5>
+        <h5 class="card-title">Inicia Sesión</h5>
         <form method="POST" action="{{ route('login') }}">
           {{ csrf_field() }}
           <div class="form-group has-feedback">
@@ -41,7 +41,8 @@
             <div class="col-md-8">
               <div class="checkbox icheck">
                 <label>
-                  <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Recuérdame
+                  <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                  Mantener la sesión iniciada
                 </label>
               </div>
             </div>
@@ -54,7 +55,7 @@
           </div>
         </form>
         <a href="{{ route('password.request') }}">
-          ¿Olvidaste la contraseña de tu cuenta?
+          ¿Recupera la contraseña?
         </a><br>
         <a href="register" class="text-center">Regístrate</a>
       </div>
@@ -62,7 +63,7 @@
   </div>
   <div class="login-box">
     <div class="login-box-body">
-      <p class="login-box-msg">Iniciar Sesión</p>
+      <p class="login-box-msg"></p>
     </div>
   </div>
   @endsection

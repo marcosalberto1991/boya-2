@@ -322,11 +322,11 @@ $viewmarcos=$viewmarcos.'
 
 					@foreach($listmysql as $lists)
 						  
-					<tr id="item_{{$lists->id}}"" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
+					<tr id="item_{{$lists->id}}" class="item{{$lists->id}} @if($lists->is_published) warning @endif">
 						'.$table2.'
 						<td>
-						<?php if(!$lists->updated_at<0){ ?> 
-						{{ \Carbon\Carbon::createFromFormat('.$p.'Y-m-d H:i:s'.$p.', $lists->updated_at)->diffForHumans() }}
+						<?php if(!$lists->updated_at<"0000-00-00"){ ?> 
+							{{ \Carbon\Carbon::createFromFormat('.$p.'Y-m-d H:i:s'.$p.', $lists->updated_at)->diffForHumans() }}
 						<?php } ?>
 						</td>
 						<td>
@@ -373,8 +373,8 @@ $viewmarcos=$viewmarcos.'
 	<div class="modal-dialog">
 		<div class="modal-content">
 			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
 				<h4 class="modal-descripcion"></h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
 			</div>
 			<div class="modal-body">
 				<h3 class="text-center" id="msdelete">¿Seguro que quieres borrar los  datos?</h3>
@@ -469,11 +469,11 @@ $enve='
 					</form>
 					<div class="modal-footer">
 
-						<button type="button" id="acciones" class="btn btn-primary mass" data-dismiss="modal">
+						<button type="button" id="acciones" class="btn btn-primary mass">
 							<span class="glyphicon glyphicon-check"></span> massar
 						</button>
 						<button type="button" class="btn btn-warning" data-dismiss="modal">
-							<span class="glyphicon glyphicon-remove"></span> Cerra
+							<span class="glyphicon glyphicon-remove"></span> Cerrar
 						</button>
 					</div>
 				</div>
@@ -492,7 +492,7 @@ $enve='
       		<div class="modal-body">Se eliminar el registro de forma permanete 
       		</div>
       		<div class="modal-footer">
-        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerra</button>
+        		<button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
         		<button type="button" class="btn btn-danger delete"  data-dismiss="modal">Eliminar</button>
       		</div>
     	</div>
@@ -536,7 +536,7 @@ function obtener_data(data) {
 $(document).on('click', '.massadd', function() {
 	$('.modal-descripcion').text('Añadir un nuevo registro');
 	$('#msdelete').text(' ');
-
+	$('#formmass')[0].reset();
 	$('#massModal').modal('show');
 	$('#acciones').attr('class', 'btn btn-success add');
 	//$('#formmass').attr('id', 'form_add');
@@ -729,14 +729,14 @@ function verificar(data) {
 
 ';
 foreach ($tables as $value) {
-	$envd=$envd."	$('.error".$value->Field."').addClass('hidden');
+	$envd=$envd."	$('.error".$value->Field."').addClass('d-none');
 ";	
 	}
 
 foreach ($tables as $value) {
 $envd=$envd.'
 	if (data.errors.'.$value->Field.') {
-    	$(".error'.$value->Field.'").removeClass("hidden");
+    	$(".error'.$value->Field.'").removeClass("d-none");
     	$(".error'.$value->Field.'").text(data.errors.'.$value->Field.');
     }
     ';
@@ -803,7 +803,7 @@ $envd=$envd."
 		$($p"."#item_$p+data.id).replaceWith(tabla);
 	}
 	if($p"."add$p==operacion){
-		$($p#postTable$p).append(tabla);
+		$($p#myTable$p).append(tabla);
 	}
 } 
 </script>

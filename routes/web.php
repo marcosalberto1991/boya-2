@@ -13,10 +13,21 @@
 
 
 //Route::apiResource('thoughts', 'ThoughtController');
+
+Route::resource('Venta','VentaController');
+Route::resource('Productos_has_venta','Productos_has_ventaController');
+Route::get('Productos/pdf', 'ProductosController@pdf');
+Route::resource('Productos','ProductosController');
+Route::resource('Entrada','EntradaController');
+Route::get('{id}/Entrada', 'EntradaController@entrada');
+
+
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
 Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoController@cobra_todo');
 Route::post('ventas_has_producto/duplicar_productos', 'Ventas_has_productoController@duplicar_productos');
+
+Route::resource('Factura','FacturaController');
 
 
 Route::Resource('ventas', 'VentasController');
@@ -24,6 +35,13 @@ Route::get('productos_all', 'ProductoController@productos_all');
 Route::Resource('punto', 'puntoController');
 Route::get('punto_vista', 'puntoController@vista');
 Route::get('venta/obtener_data', 'ventaController@obtener_data');
+
+Route::get('venta/{id}/PDF', 'VentaController@PDF');
+Route::get('index/procesar_compra', 'IndexController@procesar_compra');
+Route::get('index/micarrito', 'IndexController@micarrito');
+Route::get('index/Inventario', 'IndexController@Inventario');
+
+Route::Resource('index','IndexController');
 
 Route::get('Proveedor/pdf', 'ProveedorController@pdf');
 Route::resource('Proveedor','ProveedorController');
@@ -34,7 +52,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         return view('layout');
     });
-
     Route::get('lang/{lang}', function ($lang) {
         session(['lang' => $lang]);
         return \Redirect::back();
@@ -54,10 +71,9 @@ Route::resource('Producto','ProductoController');
 Route::post('Producto/update/{id}', 'ProductoController@update');
 Route::put( 'Producto/update/{id}', 'ProductoController@update');
 use App\municipiosModel;
-//URL::forceSchema('https');
-
-//\URL::forceScheme('https');
 Route::resource('frutas', 'FrutasController');
+
+
 
 Route::get('perfil/{file}', function ($file) {
     return Storage::response("perfil/$file");
