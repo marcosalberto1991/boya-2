@@ -281,3 +281,15 @@ Route::resource('Auditoria', 'AuditoriaController');
 Route::post('Auditoria/changeStatus', array('as' => 'changeStatus', 'uses' => 'AuditoriaController@changeStatus'));
 Route::post('Reportes/auditoria_pdf', array('as' => 'Reportes', 'uses' => 'ReportesController@auditoria_pdf'));
 Route::post('Auditoria', array('as' => 'index', 'uses' => 'AuditoriaController@index'));
+
+
+Route::get('/clear', function() {
+
+   Artisan::call('cache:clear');
+   Artisan::call('config:clear');
+   Artisan::call('config:cache');
+   Artisan::call('view:clear');
+
+   return "configuracion actualizado en ENV!";
+
+});
