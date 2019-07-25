@@ -80,5 +80,8 @@ class Ventas_has_productoController extends Controller
         $thought = Ventas_has_productoModel::find($id);
         $thought->delete();
         return $thought;
+        foreach ($variable as $key => $value) {
+            # code...
+        }
     }
 }

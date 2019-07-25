@@ -19,6 +19,8 @@ Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoControlle
 Route::post('ventas_has_producto/duplicar_productos', 'Ventas_has_productoController@duplicar_productos');
 
 
+Route::get('Producto/consulta', 'ProductoController@consulta');
+
 Route::Resource('ventas', 'VentasController');
 Route::get('productos_all', 'ProductoController@productos_all');
 Route::Resource('punto', 'puntoController');

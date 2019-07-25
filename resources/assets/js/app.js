@@ -38,6 +38,9 @@ Vue.component('null-component', require('./components/nullComponent.vue'));
 Vue.component('punto-component', require('./components/puntoComponent.vue'));
 Vue.component('mesa-component', require('./components/mesaComponent.vue'));
 
+import Select2 from 'v-select2-component';
+Vue.component('Select2', Select2);
+
 const app = new Vue({
     el: '#app',
 });

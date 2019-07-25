@@ -21,7 +21,7 @@ class ProductoController extends Controller
 	public function __construct(){
 		$this->middleware('auth');
 	}
-	   
+	    
 	protected $rules =
 	[
 		
@@ -55,7 +55,11 @@ class ProductoController extends Controller
 	}
 	public function productos_all(){
 		$Producto = ProductoModel::pluck('nombre','id');		
-		$Producto = ProductoModel::select('id','nombre')->get();		
+		$Producto = ProductoModel::select('id','nombre','nombre as text')->get();		
+		return response()->json($Producto);
+	}
+	public function consulta(){
+		$Producto = User::select('id','name','email')->get();
 		return response()->json($Producto);
 	}
 
