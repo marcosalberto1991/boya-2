@@ -14,6 +14,8 @@
 
 //Route::apiResource('thoughts', 'ThoughtController');
 
+Route::get('Factura/consulta', 'FacturaController@consulta');
+
 Route::resource('Venta','VentaController');
 Route::resource('Productos_has_venta','Productos_has_ventaController');
 Route::get('Productos/pdf', 'ProductosController@pdf');
@@ -70,6 +72,9 @@ Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');
 Route::post('Producto/update/{id}', 'ProductoController@update');
 Route::put( 'Producto/update/{id}', 'ProductoController@update');
+
+Route::post('Productos/update/{id}', 'ProductosController@update');
+Route::put( 'Productos/update/{id}', 'ProductosController@update');
 use App\municipiosModel;
 Route::resource('frutas', 'FrutasController');
 

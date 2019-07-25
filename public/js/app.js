@@ -12392,7 +12392,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(19);
-module.exports = __webpack_require__(89);
+module.exports = __webpack_require__(92);
 
 
 /***/ }),
@@ -12411,10 +12411,14 @@ __webpack_require__(20);
 
 window.Vue = __webpack_require__(4);
 
-/*
- */
 
 
+
+
+//import BootstrapVue from 'bootstrap-vue'
+//Vue.use(BootstrapVue);
+//import 'bootstrap/dist/css/bootstrap.css'
+//import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 
 window.toastr = __webpack_require__(16);
@@ -12431,6 +12435,9 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('thought-component', __web
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('null-component', __webpack_require__(80));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('punto-component', __webpack_require__(83));
 __WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('mesa-component', __webpack_require__(86));
+
+//Vue.component('vue-factura', require('./components/vue-factura.vue'));
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.component('vue-factura', __webpack_require__(94));
 
 var app = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a({
     el: '#app'
@@ -54154,10 +54161,1104 @@ if (false) {
 }
 
 /***/ }),
-/* 89 */
+/* 89 */,
+/* 90 */,
+/* 91 */,
+/* 92 */
 /***/ (function(module, exports) {
 
-// removed by extract-text-webpack-plugin
+throw new Error("Module build failed: ModuleBuildError: Module build failed: \r\nundefined\r\n^\r\n      File to import not found or unreadable: C:\\xampp\\htdocs\\boya\\node_modules\\bootstrap\\scss\\bootstrap.scss.\r\n      in C:\\xampp\\htdocs\\boya\\resources\\assets\\sass\\app.scss (line 9, column 1)\n    at runLoaders (C:\\xampp\\htdocs\\boya\\node_modules\\webpack\\lib\\NormalModule.js:195:19)\n    at C:\\xampp\\htdocs\\boya\\node_modules\\loader-runner\\lib\\LoaderRunner.js:367:11\n    at C:\\xampp\\htdocs\\boya\\node_modules\\loader-runner\\lib\\LoaderRunner.js:233:18\n    at context.callback (C:\\xampp\\htdocs\\boya\\node_modules\\loader-runner\\lib\\LoaderRunner.js:111:13)\n    at Object.asyncSassJobQueue.push [as callback] (C:\\xampp\\htdocs\\boya\\node_modules\\sass-loader\\lib\\loader.js:55:13)\n    at Object.done [as callback] (C:\\xampp\\htdocs\\boya\\node_modules\\neo-async\\async.js:8077:18)\n    at options.error (C:\\xampp\\htdocs\\boya\\node_modules\\node-sass\\lib\\index.js:294:32)");
+
+/***/ }),
+/* 93 */,
+/* 94 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(95)
+/* template */
+var __vue_template__ = __webpack_require__(96)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/components/vue-Factura.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-f50e1d6c", Component.options)
+  } else {
+    hotAPI.reload("data-v-f50e1d6c", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 95 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue__ = __webpack_require__(4);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_vue_single_select__ = __webpack_require__(17);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toastr_2__ = __webpack_require__(12);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_vue_toastr_2___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_2_vue_toastr_2__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_toastr_2_dist_vue_toastr_2_min_css__ = __webpack_require__(14);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_vue_toastr_2_dist_vue_toastr_2_min_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_vue_toastr_2_dist_vue_toastr_2_min_css__);
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+//import VueToast from "vue-toast-notification";
+//import "vue-toast-notification/dist/index.css";
+
+//https://www.npmjs.com/package/vue-toastr-2
+
+
+window.toastr = __webpack_require__(16);
+__WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_2_vue_toastr_2___default.a);
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      validacion: [],
+      editar_dato: false,
+      data: [],
+      datas: [],
+      input_Factura_id: [],
+
+      input_id: [],
+      input_numero_factura: [],
+      input_fecha: [],
+      input_proveedor_id: [],
+      input_estados_id: [],
+      input_users_id: [],
+      input_updated_at: [],
+      input_created_at: [],
+
+      errors: {},
+      mensaje_formulario: ""
+    };
+  },
+  mounted: function mounted() {
+    //this.fetchArticles();
+    this.consulta();
+    /*
+    axios.get("productos_all").then(response => {
+      this.productos_all = response.data;
+    });
+    axios.get("mesa/lista_mesa").then(response => {
+      this.lista_mesa = response.data;
+    });
+    */
+  },
+
+  components: {
+    VueSingleSelect: __WEBPACK_IMPORTED_MODULE_1_vue_single_select__["a" /* default */],
+    VueToastr2: __WEBPACK_IMPORTED_MODULE_2_vue_toastr_2___default.a
+  },
+  methods: {
+    consulta: function consulta() {
+      var _this = this;
+
+      axios.get("Factura/consulta").then(function (response) {
+        _this.datas = response.data.data;
+      });
+    },
+    eliminar_registro: function eliminar_registro(data_id) {
+      this.input_Factura_id = data_id;
+    },
+    eliminar_registro_delete: function eliminar_registro_delete() {
+      var _this2 = this;
+
+      var data_id = this.input_Factura_id;
+      axios.delete("users/" + this.input_Factura_id).then(function (response) {
+        var data = response.data;
+        if (response.data.id) {
+          _this2.validacion = "";
+          _this2.$toastr.info("Operacio exitosa", "Datos Eliminados");
+          _this2.consulta();
+        }
+      });
+    },
+    anadir_registro: function anadir_registro() {
+      this.editar_dato = false;
+      this.mensaje_formulario = "Añadir un nuevo registro";
+    },
+    formulario: function formulario() {
+      var _data,
+          _this3 = this;
+
+      var data = (_data = {
+        id: this.input_Factura_id
+      }, _defineProperty(_data, "id", this.input_id), _defineProperty(_data, "numero_factura", this.input_numero_factura), _defineProperty(_data, "fecha", this.input_fecha), _defineProperty(_data, "proveedor_id", this.input_proveedor_id), _defineProperty(_data, "estados_id", this.input_estados_id), _defineProperty(_data, "users_id", this.input_users_id), _defineProperty(_data, "updated_at", this.input_updated_at), _defineProperty(_data, "created_at", this.input_created_at), _data);
+
+      if (this.editar_dato == true) {
+        axios.put("users/" + this.input_Factura_id, data).then(function (response) {
+          var datos = response.data;
+          if (response.data.errors) {
+            _this3.$toastr.warning("Verifique los datos", "Verifique los datos");
+            _this3.validacion = response.data.errors;
+          }
+          if (response.data.id) {
+            _this3.validacion = "";
+            _this3.$toastr.success("Operacio exitosa", "Datos modificados");
+            _this3.consulta();
+          }
+        }, function (err) {
+          console.log("Err", err);
+          _this3.$toastr.warning(err, "Error en el servidor");
+          _this3.$toastr.warning(err.message, "Error en el servidor");
+        });
+      } else {
+        axios.post("users", data).then(function (response) {
+          var datos = response.data;
+          if (response.data.errors) {
+            _this3.$toastr.warning("Verifique los datos", "Verifique los datos");
+            _this3.validacion = response.data.errors;
+          }
+          if (response.data.id) {
+            _this3.validacion = "";
+            _this3.$toastr.success("Operacio exitosa", "Datos modificados");
+            _this3.consulta();
+          }
+        });
+      }
+    },
+    editar_registro: function editar_registro(data_id) {
+      var _this4 = this;
+
+      //show
+      this.mensaje_formulario = "Editar un registro";
+      axios.get("users/" + data_id).then(function (response) {
+        var data = response.data;
+        if (!response.data) {
+          _this4.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
+        } else {
+          _this4.$toastr.success("Operacio exitosa", "Regitro obtenido");
+          _this4.editar_dato = true;
+
+          _this4.input_id = data.id;
+          _this4.input_numero_factura = data.numero_factura;
+          _this4.input_fecha = data.fecha;
+          _this4.input_proveedor_id = data.proveedor_id;
+          _this4.input_estados_id = data.estados_id;
+          _this4.input_users_id = data.users_id;
+          _this4.input_updated_at = data.updated_at;
+          _this4.input_created_at = data.created_at;
+
+          //this.input_user_id = data.id;
+          //this.input_name = data.name;
+          //this.input_email = data.email;
+        }
+      });
+    }
+  }
+});
+
+/***/ }),
+/* 96 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "div",
+        { staticClass: "col-lg-12" },
+        [
+          _c(
+            "b-button",
+            {
+              directives: [
+                {
+                  name: "b-modal",
+                  rawName: "v-b-modal.moda-registro",
+                  modifiers: { "moda-registro": true }
+                }
+              ],
+              staticClass: "btn btn-wangir btn-lg",
+              staticStyle: { "margin-bottom": "5px", margin: "5px" },
+              attrs: {
+                type: "button",
+                "data-toggle": "button",
+                "aria-pressed": "false"
+              },
+              on: {
+                click: function($event) {
+                  return _vm.anadir_registro()
+                }
+              }
+            },
+            [_vm._v("Añadir registro")]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "panel-body",
+              staticStyle: { "overflow-x": "auto" }
+            },
+            [
+              _c(
+                "table",
+                {
+                  staticClass:
+                    "table table-striped table-bordered table-hover compact nowrap",
+                  attrs: { id: "myTable_" }
+                },
+                [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c(
+                    "tbody",
+                    _vm._l(_vm.datas, function(data) {
+                      return _c("tr", { key: data.id }, [
+                        _c("td", [_vm._v(_vm._s(data.id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.numero_factura))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.fecha))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.proveedor_id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.estados_id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.users_id))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.updated_at))]),
+                        _vm._v(" "),
+                        _c("td", [_vm._v(_vm._s(data.created_at))]),
+                        _vm._v(" "),
+                        _c(
+                          "td",
+                          [
+                            _c(
+                              "b-button",
+                              {
+                                directives: [
+                                  {
+                                    name: "b-modal",
+                                    rawName: "v-b-modal.moda-registro",
+                                    modifiers: { "moda-registro": true }
+                                  }
+                                ],
+                                staticClass: "btn btn-wangir btn-lg",
+                                staticStyle: {
+                                  "margin-bottom": "5px",
+                                  margin: "5px"
+                                },
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "button",
+                                  "aria-pressed": "false"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editar_registro(data.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Editar")]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "b-button",
+                              {
+                                directives: [
+                                  {
+                                    name: "b-modal",
+                                    rawName: "v-b-modal.moda-eliminar",
+                                    modifiers: { "moda-eliminar": true }
+                                  }
+                                ],
+                                staticClass: "btn btn-danger btn-lg",
+                                staticStyle: {
+                                  "margin-bottom": "5px",
+                                  margin: "5px"
+                                },
+                                attrs: {
+                                  type: "button",
+                                  "data-toggle": "button",
+                                  "aria-pressed": "false"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.eliminar_registro(data.id)
+                                  }
+                                }
+                              },
+                              [_vm._v("Eliminar")]
+                            )
+                          ],
+                          1
+                        )
+                      ])
+                    }),
+                    0
+                  )
+                ]
+              )
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        { attrs: { id: "moda-registro", size: "xl" } },
+        [
+          _c("template", { slot: "modal-title" }, [
+            _vm._v(_vm._s(_vm.mensaje_formulario))
+          ]),
+          _vm._v(" "),
+          _c("div"),
+          _vm._v(" "),
+          _c(
+            "form",
+            {
+              ref: "form",
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.formulario()
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.input_FacturaController_id,
+                        expression: "input_FacturaController_id"
+                      }
+                    ],
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.input_FacturaController_id },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.input_FacturaController_id = $event.target.value
+                      }
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("id")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_id,
+                          expression: "input_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_id = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.id
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.id[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("numero_factura")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_numero_factura,
+                          expression: "input_numero_factura"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_numero_factura },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_numero_factura = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.numero_factura
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.numero_factura[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("fecha")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_fecha,
+                          expression: "input_fecha"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_fecha },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_fecha = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.fecha
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.fecha[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("proveedor_id")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_proveedor_id,
+                          expression: "input_proveedor_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_proveedor_id },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_proveedor_id = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.proveedor_id
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.proveedor_id[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("Nombre")
+                    ]),
+                    _vm._v(" "),
+                    _c("select", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_estados_id,
+                          expression: "input_estados_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Seleccionar una opcion"
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.input_estados_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "emailHelp" }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.estados_id
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.estados_id[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("Nombre")
+                    ]),
+                    _vm._v(" "),
+                    _c("select", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_users_id,
+                          expression: "input_users_id"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Seleccionar una opcion"
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$selectedVal = Array.prototype.filter
+                            .call($event.target.options, function(o) {
+                              return o.selected
+                            })
+                            .map(function(o) {
+                              var val = "_value" in o ? o._value : o.value
+                              return val
+                            })
+                          _vm.input_users_id = $event.target.multiple
+                            ? $$selectedVal
+                            : $$selectedVal[0]
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("small", {
+                      staticClass: "form-text text-muted",
+                      attrs: { id: "emailHelp" }
+                    }),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.users_id
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.users_id[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("updated_at")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_updated_at,
+                          expression: "input_updated_at"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_updated_at },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_updated_at = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.updated_at
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.updated_at[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "exampleInputEmail1" } }, [
+                      _vm._v("created_at")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.input_created_at,
+                          expression: "input_created_at"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        type: "text",
+                        id: "exampleInputEmail1",
+                        "aria-describedby": "emailHelp",
+                        placeholder: "Enter email"
+                      },
+                      domProps: { value: _vm.input_created_at },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.input_created_at = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c(
+                      "small",
+                      {
+                        staticClass: "form-text text-muted",
+                        attrs: { id: "emailHelp" }
+                      },
+                      [_vm._v("Informacion de los datos")]
+                    ),
+                    _vm._v(" "),
+                    _vm.errors && _vm.errors.created_at
+                      ? _c("div", { staticClass: "text-danger" }, [
+                          _vm._v(_vm._s(_vm.errors.created_at[0]))
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Enviar")]
+                  )
+                ])
+              ])
+            ]
+          )
+        ],
+        2
+      ),
+      _vm._v(" "),
+      _c(
+        "b-modal",
+        { attrs: { id: "moda-eliminar", size: "xl" } },
+        [
+          _c("div", { staticClass: "d-block text-center" }, [
+            _c("h3", [_vm._v("¿Desea eliminar el registro permanente?")])
+          ]),
+          _vm._v(" "),
+          _c(
+            "b-button",
+            {
+              staticClass: "mt-3 btn btn-danger",
+              on: {
+                click: function($event) {
+                  return _vm.eliminar_registro_delete()
+                }
+              }
+            },
+            [_vm._v("Eliminar")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("numero_factura")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("fecha")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("proveedor_id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("estados_id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("users_id")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("updated_at")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("created_at")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("Acciones")])
+      ])
+    ])
+  }
+]
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-f50e1d6c", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

@@ -31,6 +31,7 @@
 									<th>Código de producto</th>
 									<th>Nombre</th>
 									<th>Descricion</th>
+									<th>Imagen</th>
 									<th>Creado en</th>
 									<th>Modificador en</th>
 									<th>Estados</th>
@@ -52,6 +53,13 @@
 									<td class="col1">{{ $lists->codigo_producto }}</td>
 									<td class="col1">{{ $lists->nombre }}</td>
 									<td class="col1">{{ $lists->descricion }}</td>
+									<td>
+										<a href="{{ asset('perfil_usuario/'.$lists->imagen) }}" target="_blank">
+											<img height="40px" src="{{ asset('perfil_usuario/'.$lists->imagen) }}"
+												width="40px" />
+
+										</a>
+									</td>
 									<td class="col1">{{ $lists->created_at }}</td>
 									<td class="col1">{{ $lists->updated_at }}</td>
 									<td class="col1">
@@ -72,7 +80,7 @@
 										<button class="massshow-modal btn btn-success" data-id="{{ $lists->id}}"
 											data-codigo_producto="{{ $lists->codigo_producto}}"
 											data-nombre="{{ $lists->nombre}}" data-descricion="{{ $lists->descricion}}"
-											data-created_at="{{ $lists->created_at}}"
+											data-imagen="{{ $lists->imagen}}" data-created_at="{{ $lists->created_at}}"
 											data-updated_at="{{ $lists->updated_at}}"
 											data-estados_id="{{ $lists->estados_id}}"
 											data-precio_venta="{{ $lists->precio_venta}}">
@@ -82,7 +90,7 @@
 										<button class="edit-modal btn btn-info" data-id="{{ $lists->id}}"
 											data-codigo_producto="{{ $lists->codigo_producto}}"
 											data-nombre="{{ $lists->nombre}}" data-descricion="{{ $lists->descricion}}"
-											data-created_at="{{ $lists->created_at}}"
+											data-imagen="{{ $lists->imagen}}" data-created_at="{{ $lists->created_at}}"
 											data-updated_at="{{ $lists->updated_at}}"
 											data-estados_id="{{ $lists->estados_id}}"
 											data-precio_venta="{{ $lists->precio_venta}}"><span
@@ -93,7 +101,7 @@
 										<button class="massdelete-modal btn btn-danger" data-id="{{ $lists->id}}"
 											data-codigo_producto="{{ $lists->codigo_producto}}"
 											data-nombre="{{ $lists->nombre}}" data-descricion="{{ $lists->descricion}}"
-											data-created_at="{{ $lists->created_at}}"
+											data-imagen="{{ $lists->imagen}}" data-created_at="{{ $lists->created_at}}"
 											data-updated_at="{{ $lists->updated_at}}"
 											data-estados_id="{{ $lists->estados_id}}"
 											data-precio_venta="{{ $lists->precio_venta}}"><span
@@ -140,7 +148,7 @@
 
 					</div>
 
-					<!-- 
+					<!--  
 					<div class='form-group'>
 						<label class='control-label' for='descripcion'>ID:</label>
 						<div class='col-sm-10'>
@@ -171,6 +179,16 @@
 						<input type='text' name='descricion' class='form-control' id='descricion_mass'
 							required='required' autofocus>
 						<p class='errordescricion text-center alert alert-danger d-none'></p>
+					</div>
+					<div class='form-group' id='archivo'>
+						<label class='control-label col-sm-2' for='descripcion'>Vista previa:</label>
+						<img height="150px" width="150px" id="Imagene_modal" src="" style="margin-left: 15px;" />
+					</div>
+					<div class='form-group' id='imagen'>
+						<label class='control-label ' for='descripcion'>imagen:</label>
+						<input type='file' name='imagen' class='form-control' id='imagen_mass' maxlength='45'
+							required='required' autofocus>
+						<p class='errorimagen text-center alert alert-danger d-none'></p>
 					</div>
 
 					<div class='form-group' id='created_at'>
@@ -272,6 +290,9 @@
 	$('#updated_at_mass').val(data.data('updated_at'));
 	$('#estados_id_mass').val(data.data('estados_id'));
 	$('#precio_venta_mass').val(data.data('precio_venta'));
+
+	var url='{{ asset("perfil_usuario/") }}';
+	$("#Imagene_modal").attr("src", url+'/'+data.data('imagen'));
 	
 }
 //Añadir un registro
@@ -329,6 +350,7 @@ $(document).on('click', '.massdelete-modal', function() {
 
 //enviar registro para eiminar
 $('.modal-footer').on('click', '.delete', function() {
+	var formData = new FormData($('#formmass')[0]);
 	$.ajax({
 		type: 'DELETE',
 		url: 'Productos/'+id,
@@ -346,10 +368,18 @@ $('.modal-footer').on('click', '.delete', function() {
 
 //enviar registro para añadir
 $('.modal-footer').on('click', '.add', function() {
+	var formData = new FormData($('#formmass')[0]);
 	$.ajax({
 		type: 'POST',
 		url: 'Productos',
-		data: $('#formmass').serialize(),
+		//data: $('#formmass').serialize(),
+		data: formData,
+    	cache: false,
+    	contentType: false,
+    	processData: false,
+		//type: 'POST',
+		//url: 'Productos',
+		//data: $('#formmass').serialize(),
 		//data: {
 
 		error: function(jqXHR, text, error){
@@ -372,10 +402,19 @@ $('.modal-footer').on('click', '.add', function() {
 
 //enviar registro para editar
 $('.modal-footer').on('click', '.edit', function() {
+	var formData = new FormData($('#formmass')[0]);
 	$.ajax({
-		type: 'PUT',
-		url: 'Productos/' + id,
-		data: $('#formmass').serialize(), 
+		type: 'POST',
+		//type: 'PUT',
+		url: 'Productos/update/' + id,
+		//data: $('#formmass').serialize(), 
+		data: formData,
+    	cache: false,
+    	contentType: false,
+    	processData: false,
+		//type: 'PUT',
+		//url: 'Productos/' + id,
+		//data: $('#formmass').serialize(), 
 		error: function(jqXHR, text, error){
             toastr.error('Error de operación!', 'No se pudo Añadir los datos<br>'+error, {timeOut: 5000});	
         },
@@ -398,52 +437,57 @@ $('.modal-footer').on('click', '.edit', function() {
 <script type="text/javascript">
 	function verificar(data) {
 
-	$('.errorid').addClass('hidden');
-	$('.errorcodigo_producto').addClass('hidden');
-	$('.errornombre').addClass('hidden');
-	$('.errordescricion').addClass('hidden');
-	$('.errorcreated_at').addClass('hidden');
-	$('.errorupdated_at').addClass('hidden');
-	$('.errorestados_id').addClass('hidden');
-	$('.errorprecio_venta').addClass('hidden');
+	$('.errorid').addClass('d-none');
+	$('.errorcodigo_producto').addClass('d-none');
+	$('.errornombre').addClass('d-none');
+	$('.errordescricion').addClass('d-none');
+	$('.errorcreated_at').addClass('d-none');
+	$('.errorimagen').addClass('d-none');
+	$('.errorupdated_at').addClass('d-none');
+	$('.errorestados_id').addClass('d-none');
+	$('.errorprecio_venta').addClass('d-none');
 
 	if (data.errors.id) {
-    	$(".errorid").removeClass("hidden");
+    	$(".errorid").removeClass("d-none");
     	$(".errorid").text(data.errors.id);
     }
     
 	if (data.errors.codigo_producto) {
-    	$(".errorcodigo_producto").removeClass("hidden");
+    	$(".errorcodigo_producto").removeClass("d-none");
     	$(".errorcodigo_producto").text(data.errors.codigo_producto);
     }
     
 	if (data.errors.nombre) {
-    	$(".errornombre").removeClass("hidden");
+    	$(".errornombre").removeClass("d-none");
     	$(".errornombre").text(data.errors.nombre);
+	}
+	if (data.errors.imagen) {
+    	$(".errorimagen").removeClass("d-none");
+    	$(".errorimagen").text(data.errors.imagen);
     }
     
 	if (data.errors.descricion) {
-    	$(".errordescricion").removeClass("hidden");
+    	$(".errordescricion").removeClass("d-none");
     	$(".errordescricion").text(data.errors.descricion);
     }
     
 	if (data.errors.created_at) {
-    	$(".errorcreated_at").removeClass("hidden");
+    	$(".errorcreated_at").removeClass("d-none");
     	$(".errorcreated_at").text(data.errors.created_at);
     }
     
 	if (data.errors.updated_at) {
-    	$(".errorupdated_at").removeClass("hidden");
+    	$(".errorupdated_at").removeClass("d-none");
     	$(".errorupdated_at").text(data.errors.updated_at);
     }
     
 	if (data.errors.estados_id) {
-    	$(".errorestados_id").removeClass("hidden");
+    	$(".errorestados_id").removeClass("d-none");
     	$(".errorestados_id").text(data.errors.estados_id);
     }
     
 	if (data.errors.precio_venta) {
-    	$(".errorprecio_venta").removeClass("hidden");
+    	$(".errorprecio_venta").removeClass("d-none");
     	$(".errorprecio_venta").text(data.errors.precio_venta);
     }
     
@@ -458,13 +502,20 @@ $('.modal-footer').on('click', '.edit', function() {
 	const resulestados_id=Foraestados_id.find( cas => cas.id == data.estados_id ); 
 		
 	
-
+	var url='{{ asset("perfil_usuario/") }}';
 	var tabla=
 		"<tr  id='item_"+data.id+"'  class='item"+data.id+"'>"+
 		"<td class='col1'>" + data.id + "</td>"+
 		"<td>"+ data.codigo_producto+"</td>"+
 		"<td>"+ data.nombre+"</td>"+
 		"<td>"+ data.descricion+"</td>"+
+		"<td>"+
+			'<a href="'+url+'/'+data.imagen+'" target="_blank">'+
+        		'<img height="40px" src="'+url+'/'+data.imagen+'" width="40px">'+
+            	'</img>'+
+        	'</a>'+
+		"</td>"+
+		
 		"<td>"+ data.created_at+"</td>"+
 		"<td>"+ data.updated_at+"</td>"+
 		"<td>"+ resulestados_id["nombre"]  +"</td>"+
@@ -478,6 +529,7 @@ $('.modal-footer').on('click', '.edit', function() {
 		"data-nombre='"+ data.nombre+"'"+
 		"data-descricion='"+ data.descricion+"'"+
 		"data-created_at='"+ data.created_at+"'"+
+		"data-imagen='"+ data.imagen+"'"+
 		"data-updated_at='"+ data.updated_at+"'"+
 		"data-estados_id='"+ data.estados_id+"'"+
 		"data-precio_venta='"+ data.precio_venta+"'"+
@@ -491,6 +543,7 @@ $('.modal-footer').on('click', '.edit', function() {
 		"data-codigo_producto='"+ data.codigo_producto+"'"+
 		"data-nombre='"+ data.nombre+"'"+
 		"data-descricion='"+ data.descricion+"'"+
+		"data-imagen='"+ data.imagen+"'"+
 		"data-created_at='"+ data.created_at+"'"+
 		"data-updated_at='"+ data.updated_at+"'"+
 		"data-estados_id='"+ data.estados_id+"'"+
@@ -505,6 +558,7 @@ $('.modal-footer').on('click', '.edit', function() {
 		"data-codigo_producto='"+ data.codigo_producto+"'"+
 		"data-nombre='"+ data.nombre+"'"+
 		"data-descricion='"+ data.descricion+"'"+
+		"data-imagen='"+ data.imagen+"'"+
 		"data-created_at='"+ data.created_at+"'"+
 		"data-updated_at='"+ data.updated_at+"'"+
 		"data-estados_id='"+ data.estados_id+"'"+

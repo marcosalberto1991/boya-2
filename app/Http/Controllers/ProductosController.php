@@ -31,6 +31,7 @@ class ProductosController extends Controller
 	   			'nombre' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			'estados_id' => 'required|min:1|max:99999999',
 	   			'precio_venta' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
+	   			'descricion' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
 	   			
 	];
 
@@ -48,7 +49,7 @@ class ProductosController extends Controller
 
 	public function create(){}
 
-	public function store(Request $request){
+	public function store(Request $request){  
 		$validator = Validator::make(Input::all(), $this->rules);
 		if ($validator->fails()) {
 			return Response::json(array('errors' => $validator->getMessageBag()->toArray()));
@@ -58,6 +59,12 @@ class ProductosController extends Controller
 			 $Productos->codigo_producto=$request->codigo_producto;
 				 $Productos->nombre=$request->nombre;
 				 $Productos->descricion=$request->descricion;
+				 $file2 = Input::file('imagen');
+				if(isset($file2)) {
+					$nombres = time() . str_random(5) . '.' . $file2->getClientOriginalExtension();
+					\Storage::disk('perfil')->put($nombres, \File::get($file2));
+					$Productos->imagen = $nombres;
+				}
 				 $Productos->estados_id=$request->estados_id;
 				 $Productos->precio_venta=$request->precio_venta;
 				
@@ -80,6 +87,12 @@ class ProductosController extends Controller
 			 $Productos->codigo_producto=$request->codigo_producto;
 				 $Productos->nombre=$request->nombre;
 				 $Productos->descricion=$request->descricion;
+				 $file2 = Input::file('imagen');
+				if(isset($file2)) {
+					$nombres = time() . str_random(5) . '.' . $file2->getClientOriginalExtension();
+					\Storage::disk('perfil')->put($nombres, \File::get($file2));
+					$Productos->imagen = $nombres;
+				}
 				 $Productos->estados_id=$request->estados_id;
 				 $Productos->precio_venta=$request->precio_venta;
 				

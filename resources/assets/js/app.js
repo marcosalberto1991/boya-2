@@ -2,11 +2,15 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
-/*
- */
 import Vue from 'vue';
 import VueToastr2 from 'vue-toastr-2';
 import 'vue-toastr-2/dist/vue-toastr-2.min.css';
+
+//import BootstrapVue from 'bootstrap-vue'
+//Vue.use(BootstrapVue);
+//import 'bootstrap/dist/css/bootstrap.css'
+//import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 
 window.toastr = require('toastr');
 Vue.use(VueToastr2);
@@ -37,6 +41,9 @@ Vue.component(
 Vue.component('null-component', require('./components/nullComponent.vue'));
 Vue.component('punto-component', require('./components/puntoComponent.vue'));
 Vue.component('mesa-component', require('./components/mesaComponent.vue'));
+
+//Vue.component('vue-factura', require('./components/vue-factura.vue'));
+Vue.component('vue-factura', require('./components/vue-Factura.vue'));
 
 const app = new Vue({
     el: '#app',
