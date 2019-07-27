@@ -97,13 +97,14 @@
                         @if (Route::has('login'))
                         @if (Auth::check())
                         <li class="dropdown nav-item">
-<<<<<<< HEAD
                             <a href="javascript:void(0);" class="nav-link">
                                 <i class="nav-link-icon fa fa-cog"></i>
                                 configuración 
                             </a>
-=======
-                        
+                        </li>
+
+                            <li class="dropdown nav-item">
+
                             <a href="{{ route('logout') }}" class="nav-link " 
                             onclick="event.preventDefault();
                             document.getElementById('logout-form').submit();">
@@ -112,7 +113,6 @@
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                               {{ csrf_field() }}
                             </form>
->>>>>>> dc5e38cfe8ae0637b64c04e4edd8f9ceb6dc1ee6
                         </li>
                         @endif
                         @endif
@@ -643,21 +643,17 @@
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"/></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-<<<<<<< HEAD
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/select2/4.0.0/css/select2.css">
 <!--
 
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
 -->
 <link rel="stylesheet" type="text/css" href="https://select2.github.io/select2-bootstrap-theme/css/select2-bootstrap.css">
-
-=======
 <link rel="stylesheet" href="{{asset('plugins/datepicker/datepicker3.css')}}">
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <link rel="stylesheet" href="{{ asset('plugins/datepicker/datepicker3.css') }}">
 <script src="{{ asset('plugins/daterangepicker/daterangepicker.js') }}"></script>
 <script type="text/javascript" src="{{ asset('plugins/datepicker/bootstrap-datepicker.js') }}"></script>
->>>>>>> dc5e38cfe8ae0637b64c04e4edd8f9ceb6dc1ee6
 <!--
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
 <link href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css" rel="stylesheet"/>
