@@ -483,7 +483,7 @@
                         <div class="app-sidebar__inner">
                             <ul class="vertical-nav-menu">
                                 <li class="app-sidebar__heading">Lista de menu</li>
-                                <!--
+                                
                                 <li>
                                     <a href="{{ action('Lista_mesaController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
@@ -494,10 +494,10 @@
                                 <li>
                                     <a href="{{ action('ProductoController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
-                                        Productos 2
+                                        Productos
                                     </a>
                                 </li>
-                                -->
+                                <!--
                                 <li>
                                     <a href="{{ action('ProductosController@index') }}">
                                         <i class="metismenu-icon pe-7s-rocket"></i>
@@ -524,6 +524,7 @@
                                         Inventario
                                     </a>
                                 </li>
+                                -->
                                 <!--
                                 <li>
                                     <a href="{{ action('ProveedorController@index') }}">
@@ -643,7 +644,8 @@
 <script src="https://cdn.datatables.net/responsive/2.2.3/js/dataTables.responsive.min.js" type="text/javascript"/></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 
-<link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/select2/4.0.0/css/select2.css">
+<link rel="stylesheet" type="text/css" href="{{asset('css/select2.css')}}">
+
 <!--
 
 <link rel="stylesheet" type="text/css" href="http://cdn.bootcss.com/bootstrap/3.3.5/css/bootstrap.css">
