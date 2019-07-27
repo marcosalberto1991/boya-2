@@ -13,10 +13,23 @@
 
 
 //Route::apiResource('thoughts', 'ThoughtController');
+
+Route::get('Factura/consulta', 'FacturaController@consulta');
+
+Route::resource('Venta','VentaController');
+Route::resource('Productos_has_venta','Productos_has_ventaController');
+Route::get('Productos/pdf', 'ProductosController@pdf');
+Route::resource('Productos','ProductosController');
+Route::resource('Entrada','EntradaController');
+Route::get('{id}/Entrada', 'EntradaController@entrada');
+
+
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
 Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoController@cobra_todo');
 Route::post('ventas_has_producto/duplicar_productos', 'Ventas_has_productoController@duplicar_productos');
+
+Route::resource('Factura','FacturaController');
 
 
 Route::get('Producto/consulta', 'ProductoController@consulta');
@@ -27,6 +40,13 @@ Route::Resource('punto', 'puntoController');
 Route::get('punto_vista', 'puntoController@vista');
 Route::get('venta/obtener_data', 'ventaController@obtener_data');
 
+Route::get('venta/{id}/PDF', 'VentaController@PDF');
+Route::get('index/procesar_compra', 'IndexController@procesar_compra');
+Route::get('index/micarrito', 'IndexController@micarrito');
+Route::get('index/Inventario', 'IndexController@Inventario');
+
+Route::Resource('index','IndexController');
+
 Route::get('Proveedor/pdf', 'ProveedorController@pdf');
 Route::resource('Proveedor','ProveedorController');
 Route::post('Proveedor/changeStatus', array('as' => 'changeStatus', 'uses' => 'ProveedorController@changeStatus'));
@@ -36,7 +56,6 @@ Route::group(['middleware' => ['web']], function () {
     Route::get('/', function () {
         return view('layout');
     });
-
     Route::get('lang/{lang}', function ($lang) {
         session(['lang' => $lang]);
         return \Redirect::back();
@@ -55,11 +74,13 @@ Route::resource('Proveedor','ProveedorController');
 Route::resource('Producto','ProductoController');
 Route::post('Producto/update/{id}', 'ProductoController@update');
 Route::put( 'Producto/update/{id}', 'ProductoController@update');
-use App\municipiosModel;
-//URL::forceSchema('https');
 
-//\URL::forceScheme('https');
+Route::post('Productos/update/{id}', 'ProductosController@update');
+Route::put( 'Productos/update/{id}', 'ProductosController@update');
+use App\municipiosModel;
 Route::resource('frutas', 'FrutasController');
+
+
 
 Route::get('perfil/{file}', function ($file) {
     return Storage::response("perfil/$file");
@@ -267,3 +288,15 @@ Route::resource('Auditoria', 'AuditoriaController');
 Route::post('Auditoria/changeStatus', array('as' => 'changeStatus', 'uses' => 'AuditoriaController@changeStatus'));
 Route::post('Reportes/auditoria_pdf', array('as' => 'Reportes', 'uses' => 'ReportesController@auditoria_pdf'));
 Route::post('Auditoria', array('as' => 'index', 'uses' => 'AuditoriaController@index'));
+
+
+Route::get('/clear', function() {
+
+   Artisan::call('cache:clear');
+   Artisan::call('config:clear');
+   Artisan::call('config:cache');
+   Artisan::call('view:clear');
+
+   return "configuracion actualizado en ENV!";
+
+});

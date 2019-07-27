@@ -5,7 +5,6 @@ use App\punto;
 use App\VentasModel;
 use App\Ventas_has_productoModel;
 use Illuminate\Http\Request;
-
 class ventaController extends Controller
 {
     /**
@@ -16,7 +15,6 @@ class ventaController extends Controller
     public function vista()
     {
         return view('punto.vista', []);
-
     }
     public function obtener_data()
     {
@@ -55,7 +53,6 @@ class ventaController extends Controller
         if ($punto->save()) {
             return new puntoResource($punto);
         }
-
     }
     /**
      * Display the specified resource.

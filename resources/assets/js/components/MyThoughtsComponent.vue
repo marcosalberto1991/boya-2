@@ -8,7 +8,7 @@
       value="1"
       required="required"
       autofocus
-      v-model="actualiza_id"
+      v-model="actualiza_id" 
     >
 
     <div class="col-md-12">
@@ -45,12 +45,12 @@
                 <th class="text-center">Cantidad</th>
                 <th class="text-center">Total</th>
                 <th class="text-center">Acciones</th>
-              </tr>
+              </tr> 
             </thead>
             <tbody>
               <tr v-for="producto in venta.ventas_has_producto_all" v-bind:key="producto.id">
                 <td>
-                  <div class="widget-content p-0">
+                  <div class="widget-content p-0"> 
                     <div class="widget-content-wrapper">
                       <div class="widget-content-left mr-3">
                         <div class="widget-content-left">
@@ -165,7 +165,7 @@
                 :required="true"
               >
               </vue-single-select>
-              -->
+              -->  
               
                   <Select2
                   width="80px"
@@ -214,14 +214,14 @@ import VueSingleSelect from "vue-single-select";
 import Select2 from 'v-select2-component';
 
 //import VueToast from "vue-toast-notification";
-//import "vue-toast-notification/dist/index.css";
+//import "vue-toast-notification/dist/index.css"; 
 
 //https://www.npmjs.com/package/vue-toastr-2
 import VueToastr2 from "vue-toastr-2";
 import "vue-toastr-2/dist/vue-toastr-2.min.css";
 window.toastr = require("toastr");
 Vue.use(VueToastr2);
-
+ 
 export default {
   data() {
     venta_id: "";
