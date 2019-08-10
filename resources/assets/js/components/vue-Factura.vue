@@ -1,6 +1,30 @@
 <template>
   <div>
+    <!--
+    <link rel="stylesheet" href="/path/to/select2.css" />
+    <link rel="stylesheet" href="/path/to/select2-bootstrap4.css" />
+    -->
+
     <div class="col-lg-12">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item">
+            <a class="page-link" @click="consulta(this.first_page_url)" href="#">Previous</a>
+          </li>
+
+          <li class="page-item" v-for="data in this.last_page" v-bind:key="data.id">
+            <a class="page-link" href="#">{{data.id}}</a>
+          </li>
+
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+          <li class="page-item">
+            <a class="page-link" @click="consulta(this.last_page_url)" href="#">Previous</a>
+          </li>
+        </ul>
+      </nav>
+
       <b-button
         v-b-modal.moda-registro
         @click="anadir_registro()"
@@ -72,7 +96,7 @@
       <form ref="form" v-on:submit.prevent="formulario()">
         <div class="row">
           <div class="col-md-12">
-            <input type="text" v-model="input_FacturaController_id" />
+            <input type="text" v-model="input_Factura_id" />
 
             <div class="form-group">
               <label for="exampleInputEmail1">id</label>
@@ -121,15 +145,22 @@
 
             <div class="form-group">
               <label for="exampleInputEmail1">proveedor_id</label>
-              <input
-                type="text"
-                v-model="input_proveedor_id"
+              <Select2
+                style="sswidth:200px"
                 class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Enter email"
+                v-model="input_proveedor_id"
+                :options="data_foraneo_proveedor_id"
+                :settings="{theme: 'bootstrap', settingOption: value, settingOption: value }"
               />
-              <small id="emailHelp" class="form-text text-muted">Informacion de los datos</small>
+              <!--
+              <select v-model="input_proveedor_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
+              <option v-for="option in data_foraneo_proveedor_id" v-bind:value="option.id">
+                  {{ option.nombre }}
+                </option>
+
+              </select>
+              -->
+              <small id="emailHelp" class="form-text text-muted"></small>
               <div
                 v-if="errors && errors.proveedor_id"
                 class="text-danger"
@@ -137,27 +168,41 @@
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Nombre</label>
-              <select
-                v-model="input_estados_id"
+              <label for="exampleInputEmail1">estados_id</label>
+              <Select2
                 class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Seleccionar una opcion"
-              ></select>
+                v-model="input_estados_id"
+                :options="data_foraneo_proveedor_id"
+                :settings="{ settingOption: value, settingOption: value }"
+              />
+              <!--
+              <select v-model="input_estados_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
+              <option v-for="option in data_foraneo_estados_id" v-bind:value="option.id">
+                  {{ option.nombre }}
+                </option>
+
+              </select>
+              -->
               <small id="emailHelp" class="form-text text-muted"></small>
               <div v-if="errors && errors.estados_id" class="text-danger">{{ errors.estados_id[0] }}</div>
             </div>
 
             <div class="form-group">
-              <label for="exampleInputEmail1">Nombre</label>
-              <select
-                v-model="input_users_id"
+              <label for="exampleInputEmail1">users_id</label>
+              <Select2
                 class="form-control"
-                id="exampleInputEmail1"
-                aria-describedby="emailHelp"
-                placeholder="Seleccionar una opcion"
-              ></select>
+                v-model="input_users_id"
+                :options="data_foraneo_proveedor_id"
+                :settings="{ settingOption: value, settingOption: value }"
+              />
+              <!--
+              <select v-model="input_users_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
+              <option v-for="option in data_foraneo_users_id" v-bind:value="option.id">
+                  {{ option.nombre }}
+                </option>
+
+              </select>
+              -->
               <small id="emailHelp" class="form-text text-muted"></small>
               <div v-if="errors && errors.users_id" class="text-danger">{{ errors.users_id[0] }}</div>
             </div>
@@ -232,7 +277,9 @@ export default {
       data: [],
       datas: [],
       input_Factura_id: [],
-
+      data_foraneo_proveedor_id: [],
+      data_foraneo_estados_id: [],
+      data_foraneo_users_id: [],
       input_id: [],
       input_numero_factura: [],
       input_fecha: [],
@@ -241,6 +288,21 @@ export default {
       input_users_id: [],
       input_updated_at: [],
       input_created_at: [],
+      pagination: {
+        total: 0,
+        current_page: 0,
+        per_page: 0,
+        last_page: 0,
+        from: 0,
+        to: 0
+      },
+      //paginate
+      first_page_url: 1,
+      last_page_url: {},
+      path: {},
+      per_page: {},
+      to: {},
+      path: {},
 
       errors: {},
       mensaje_formulario: ""
@@ -249,6 +311,14 @@ export default {
   mounted() {
     //this.fetchArticles();
     this.consulta();
+    axios.get("Factura/create").then(response => {
+      this.data_foraneo_proveedor_id = response.data.proveedor_id;
+      this.data_foraneo_estados_id = response.data.estados_id;
+      this.data_foraneo_users_id = response.data.users_id;
+
+      //this.productos_all = response.data;
+      //this.data_foraneo_estado_id = response.data.estado_id;
+    });
     /*
     axios.get("productos_all").then(response => {
       this.productos_all = response.data;
@@ -262,10 +332,58 @@ export default {
     VueSingleSelect,
     VueToastr2
   },
+  computed: {
+    isActived: function() {
+      return this.pagination.current_page;
+    },
+    pagesNumber: function() {
+      if (!this.pagination.to) {
+        return [];
+      }
+
+      var from = this.pagination.current_page - this.offset;
+      if (from < 1) {
+        from = 1;
+      }
+
+      var to = from + this.offset * 2;
+      if (to >= this.pagination.last_page) {
+        to = this.pagination.last_page;
+      }
+
+      var pagesArray = [];
+      while (from <= to) {
+        pagesArray.push(from);
+        from++;
+      }
+      return pagesArray;
+    }
+  },
   methods: {
-    consulta() {
-      axios.get(`Factura/consulta`).then(response => {
+    /*
+    axios.get(Factura/created).then(response => {
+      this.productos_all = response.data;
+    });
+    */
+
+    consulta(page) {
+      alert(page);
+      var urlKeeps = "Factura/consulta?page=" + page;
+      axios.get(urlKeeps).then(response => {
         this.datas = response.data.data;
+        this.first_page_url = response.first_page_url;
+        this.path = response.path;
+        this.last_page_url = response.last_page_url;
+        this.last_page = response.last_page;
+
+        this.pagination = response.data.pagination;
+      });
+    },
+    getKeeps: function(page) {
+      var urlKeeps = "Factura/consulta?page=" + page;
+      axios.get(urlKeeps).then(response => {
+        (this.keeps = response.data.tasks.data),
+          (this.pagination = response.data.pagination);
       });
     },
     eliminar_registro(data_id) {
@@ -303,7 +421,7 @@ export default {
       };
 
       if (this.editar_dato == true) {
-        axios.put(`users/${this.input_Factura_id}`, data).then(
+        axios.put(`Factura/${this.input_Factura_id}`, data).then(
           response => {
             const datos = response.data;
             if (response.data.errors) {
@@ -344,14 +462,14 @@ export default {
     editar_registro(data_id) {
       //show
       this.mensaje_formulario = "Editar un registro";
-      axios.get(`users/${data_id}`).then(response => {
+      axios.get(`Factura/${data_id}`).then(response => {
         const data = response.data;
         if (!response.data) {
           this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
         } else {
           this.$toastr.success("Operacio exitosa", "Regitro obtenido");
           this.editar_dato = true;
-
+          this.input_Factura_id = data.id;
           this.input_id = data.id;
           this.input_numero_factura = data.numero_factura;
           this.input_fecha = data.fecha;
@@ -363,9 +481,12 @@ export default {
 
           //this.input_user_id = data.id;
           //this.input_name = data.name;
-          //this.input_email = data.email;
         }
       });
+    },
+    changePage: function(page) {
+      this.pagination.current_page = page;
+      this.getKeeps(page);
     }
   }
 };

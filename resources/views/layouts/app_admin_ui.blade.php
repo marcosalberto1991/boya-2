@@ -21,7 +21,11 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
     <link href="{{ asset('Architectui/assets/css/main.css') }}" rel="stylesheet">
-
+    <!--
+    <link rel="stylesheet" href="select2-bootstrap4-theme/dist/select2.css" />
+    
+    <link rel="stylesheet" href="select2-bootstrap4-theme/dist/select2-bootstrap4.min.css" />
+    -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
 </head>
 
@@ -32,6 +36,7 @@
       line-height: .5;
       border-radius: .2rem;
     }
+    
 </style>
 <body>
     <div id="app"  class="app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header ">
@@ -829,7 +834,11 @@ $('.switch-header-cs-class').on('click', function() {
 
 
 </script>
-
+ <style>
+    .select2-container {
+      width: 100%;
+    }
+      </style>
 
 
 

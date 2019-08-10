@@ -6,14 +6,26 @@ import Vue from 'vue';
 import VueToastr2 from 'vue-toastr-2';
 import 'vue-toastr-2/dist/vue-toastr-2.min.css';
 
-//import BootstrapVue from 'bootstrap-vue'
-//Vue.use(BootstrapVue);
+import BootstrapVue from 'bootstrap-vue';
+Vue.use(BootstrapVue);
 //import 'bootstrap/dist/css/bootstrap.css'
-//import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+//import select2-theme-bootstrap4 from 'select2-theme-bootstrap4';
+//require('./select2-theme-bootstrap4');
+
+import 'select2-theme-bootstrap4/dist/select2-bootstrap.min.css';
+
+//<link rel="stylesheet" href="" />
+//   <link rel="stylesheet" href="" />
 
 window.toastr = require('toastr');
 Vue.use(VueToastr2);
+
+//https://www.npmjs.com/package/v-select2-component
+import Select2 from 'v-select2-component';
+Vue.component('Select2', Select2);
+
 
 Vue.component(
     'listamesa-component',

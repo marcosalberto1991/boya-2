@@ -110,13 +110,20 @@ class NewController_3_2_vue extends Command
 		}
 		//echo "$consultaBD";
 		$foranea="";
+		$foranea_vue="";
 		$foraneaVi="";
 
 		foreach ($tables as  $value) {
 		   	if ($value->Key=="MUL") {
 		   	
 		   	$foranea=$foranea.'$'.$value->Field.' = '.$NombreModel.'::select("id","id as nombre")->get();
-		   	';
+        ';
+        $foranea_vue=$foranea_vue.'"'.$value->Field.'" => '.$NombreModel.'::select("id","id as nombre","id as text")->get(),
+        ';
+        //"estados_id" => EstadoModel::select("id","nombre")->get(),
+
+         
+
 		   	$foraneaVi=$foraneaVi.'"'.$value->Field.'" => $'.$value->Field.',';
 		   	}		
 	   	}
@@ -172,7 +179,15 @@ class '.$namecontrol.' extends Controller {
 
 	}
 
-	public function create(){}
+	public function create(){
+    $data_foraneos = [
+      '.$foranea_vue.'
+      //"estados_id" => EstadoModel::select("id","nombre")->get(),
+			//"users_id" => User::select("id","nombre")->get(),
+		];
+		return response()->json($data_foraneos);
+
+  }
 
 	public function store(Request $request){
 		$validator = Validator::make(Input::all(), $this->rules);
@@ -307,7 +322,7 @@ $vue_componete=$vue_componete.'
     <form ref="form"   v-on:submit.prevent="formulario()">
       <div class="row"> 
         <div class="col-md-12">
-          <input type="text" v-model="input_'.$namecontrol.'_id">   
+          <input type="text" v-model="input_'.$nombrecoNtrol.'_id">   
 ';
 
       foreach ($tables as  $value) {
@@ -315,8 +330,21 @@ $vue_componete=$vue_componete.'
 
           $vue_componete=$vue_componete.'
           <div class="form-group">
-              <label for="exampleInputEmail1">Nombre</label>
-              <select v-model="input_'.$value->Field.'" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion"></select>
+              <label for="exampleInputEmail1">'.$value->Field.'</label>
+              <Select2
+                class="form-control"
+                v-model="input_'.$value->Field.'"
+                :options="data_foraneo_proveedor_id"
+                :settings="{ settingOption: value, settingOption: value }"
+              />
+              <!--
+              <select v-model="input_'.$value->Field.'" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
+              <option v-for="option in data_foraneo_'.$value->Field.'" v-bind:value="option.id">
+                  {{ option.nombre }}
+                </option>
+
+              </select>
+              -->
               <small id="emailHelp" class="form-text text-muted"></small>
               <div v-if="errors && errors.'.$value->Field.'" class="text-danger">{{ errors.'.$value->Field.'[0] }}</div>
           </div>
@@ -378,6 +406,22 @@ $peso='$';
 $toastr='$toastr';
 $tilde_grave='`';
 $input_id ='input_'.$nombrecoNtrol.'_id';
+$data_foraneo='';
+$return_data='';
+
+//$his='this';
+foreach ($tables as  $value) {
+  if($value->Key=='MUL'){
+    
+   $data_foraneo =$data_foraneo.'this.data_foraneo_'.$value->Field.'= response.data.'.$value->Field.'
+   ';
+   $return_data = $return_data.'data_foraneo_'.$value->Field.':[],';
+   //input_id:[],
+
+  }
+}
+
+
 
 $vue_componete=$vue_componete.'
 
@@ -405,7 +449,7 @@ export default {
       data: [],
       datas: [],
       input_'.$nombrecoNtrol.'_id:[],
-
+      '.$return_data.'
       '.$input_data.'
       
       errors: {},
@@ -416,6 +460,11 @@ export default {
   mounted() {
     //this.fetchArticles();
     this.consulta();
+    axios.get("'.$nombrecoNtrol.'/create").then(response => {
+      '.$data_foraneo.'
+      //this.productos_all = response.data;
+      //this.data_foraneo_estado_id = response.data.estado_id;
+    });
     /*
     axios.get("productos_all").then(response => {
       this.productos_all = response.data;
@@ -430,6 +479,12 @@ export default {
     VueToastr2
   },
   methods: {
+    /*
+    axios.get('.$nombrecoNtrol.'/created).then(response => {
+      this.productos_all = response.data;
+    });
+    */
+
     consulta(){
         axios.get('.$tilde_grave.''.$nombrecoNtrol.'/consulta'.$tilde_grave.').then(response => {
         this.datas = response.data.data;
@@ -464,7 +519,7 @@ export default {
       };
       
       if(this.editar_dato == true){
-        axios.put('.$tilde_grave.'users/'.$peso.'{this.'.$input_id.'}'.$tilde_grave.', data)
+        axios.put('.$tilde_grave.''.$nombrecoNtrol.'/'.$peso.'{this.'.$input_id.'}'.$tilde_grave.', data)
         .then(response => {
 
             const datos = response.data;
@@ -507,18 +562,17 @@ export default {
    
     editar_registro(data_id){//show 
         this.mensaje_formulario="Editar un registro"
-        axios.get('.$tilde_grave.'users/'.$peso.'{data_id}'.$tilde_grave.').then(response => {
+        axios.get('.$tilde_grave.''.$nombrecoNtrol.'/'.$peso.'{data_id}'.$tilde_grave.').then(response => {
             const data = response.data;
             if(!response.data){
               this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
             }else{
               this.$toastr.success("Operacio exitosa", "Regitro obtenido");
               this.editar_dato = true;
-
+              this.input_'.$nombrecoNtrol.'_id = data.id
               '.$input_sutmib.'
               //this.input_user_id = data.id;
               //this.input_name = data.name;
-              //this.input_email = data.email;
             }
         });
     },
