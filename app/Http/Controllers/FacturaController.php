@@ -35,14 +35,26 @@ class FacturaController extends Controller {
 
 		$Factura = FacturaModel::all();
 
-		$estados_id = FacturaModel::select("id","id as nombre")->get();
-		   	$users_id = FacturaModel::select("id","id as nombre")->get();
-		   	
-		return view('Factura.index', [ "estados_id" => $estados_id,"users_id" => $users_id, 'listmysql' => $Factura] );
+		$proveedor_id = FacturaModel::select("id","id as nombre")->get();
+        $estados_id = FacturaModel::select("id","id as nombre")->get();
+        $users_id = FacturaModel::select("id","id as nombre")->get();
+        
+		return view('Factura.index', [ "proveedor_id" => $proveedor_id,"estados_id" => $estados_id,"users_id" => $users_id, 'listmysql' => $Factura] );
 
 	}
 
-	public function create(){}
+	public function create(){
+    $data_foraneos = [
+      "proveedor_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
+        "estados_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
+        "users_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
+        
+      //"estados_id" => EstadoModel::select("id","nombre")->get(),
+			//"users_id" => User::select("id","nombre")->get(),
+		];
+		return response()->json($data_foraneos);
+
+  }
 
 	public function store(Request $request){
 		$validator = Validator::make(Input::all(), $this->rules);
@@ -68,7 +80,7 @@ class FacturaController extends Controller {
         return response()->json(FacturaModel::findOrFail($id));
     }
     public function consulta(){
-        return response()->json(FacturaModel::paginate(5));
+        return response()->json(FacturaModel::paginate(2));
     }
 
 	public function edit($id){}
