@@ -8,7 +8,7 @@
       value="1"
       required="required"
       autofocus
-      v-model="actualiza_id"
+      v-model="actualiza_id" 
     >
 
     <div class="col-md-12">
@@ -23,7 +23,7 @@
           
         >{{ lista_mesas.nombre }}
         </button>
-      </div>
+      </div> 
       <br>
     </div>
     <div v-for="venta in ventas" v-bind:key="venta.id" class="col-md-6">
@@ -45,12 +45,12 @@
                 <th class="text-center">Cantidad</th>
                 <th class="text-center">Total</th>
                 <th class="text-center">Acciones</th>
-              </tr>
+              </tr> 
             </thead>
             <tbody>
               <tr v-for="producto in venta.ventas_has_producto_all" v-bind:key="producto.id">
                 <td>
-                  <div class="widget-content p-0">
+                  <div class="widget-content p-0"> 
                     <div class="widget-content-wrapper">
                       <div class="widget-content-left mr-3">
                         <div class="widget-content-left">
@@ -61,6 +61,18 @@
                           >
                         </div>
                       </div>
+                      <Select2
+                        v-if="editar_producto && producto.id == actualiza_id"
+                        placeholder="producto" 
+                        :required="true"
+                        v-model="actualiza_producto_id" 
+                        :options = "productos_all"
+                        :myOptions = "productos_all"
+                   
+                  />
+
+<!--
+
                       <vue-single-select
                         v-if="editar_producto && producto.id == actualiza_id"
                         v-model="actualiza_producto_id"
@@ -74,6 +86,7 @@
                         option-label="nombre"
                         :required="true"
                       ></vue-single-select>
+                      -->
 
                       <div v-else class="widget-content-left flex2">
                         <div class="widget-heading">{{ producto.producto_id_pk.nombre }}</div>
@@ -138,7 +151,7 @@
           <form class="form-inline" action v-on:submit.prevent="newproducto(venta.id)">
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
               <label for="exampleEmail22" class="mr-sm-2">Productos</label>
-
+<!--
               <vue-single-select
                 v-model="producto_id"
                 name="producto"
@@ -150,7 +163,20 @@
                 the-post-has-a-title="make sure to show these"
                 option-label="nombre"
                 :required="true"
-              ></vue-single-select>
+              >
+              </vue-single-select>
+              -->  
+              
+                  <Select2
+                  width="80px"
+                  placeholder="producto" 
+                  :required="true"
+                  v-model="producto_id" 
+                  :options = "productos_all"
+                  :myOptions = "productos_all"
+                   
+                  />
+
             </div>
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
               <label for="examplePassword22" class="mr-sm-2">Cantidad</label>
@@ -163,6 +189,7 @@
                 required="required"
                 autofocus
                 v-model="cantidad"
+                style="width: 56px;"
               >
             </div>
             <button type=button class="btn-wide btn btn-info" @click="cantidad_max_min(1)">+</button>
@@ -184,15 +211,17 @@
 import Vue from "vue";
 import VueSingleSelect from "vue-single-select";
 
+import Select2 from 'v-select2-component';
+
 //import VueToast from "vue-toast-notification";
-//import "vue-toast-notification/dist/index.css";
+//import "vue-toast-notification/dist/index.css"; 
 
 //https://www.npmjs.com/package/vue-toastr-2
 import VueToastr2 from "vue-toastr-2";
 import "vue-toastr-2/dist/vue-toastr-2.min.css";
 window.toastr = require("toastr");
 Vue.use(VueToastr2);
-
+ 
 export default {
   data() {
     venta_id: "";
@@ -226,7 +255,8 @@ export default {
   },
   components: {
     VueSingleSelect,
-    VueToastr2
+    VueToastr2,
+    Select2
   },
   methods: {
     formatPrice(value) {
@@ -325,14 +355,14 @@ export default {
 
       const params = {
         id: this.actualiza_id,
-        producto_id: this.actualiza_producto_id.id,
+        producto_id: this.actualiza_producto_id,
         cantidad: this.actualiza_cantidad
-      };
+      }; 
       axios
         .put(`ventas_has_producto/${this.actualiza_id}`, params)
         .then(response => {
           const venta = response.data;
-
+ 
           this.fetchArticles();
         });
     },
@@ -345,7 +375,7 @@ export default {
       console.info(this.ventas);
       console.info(this.venta[0]);
       const params = {
-        producto_id: this.producto_id.id,
+        producto_id: this.producto_id,
         cantidad: this.cantidad,
         ventas_id: venta_id
       };

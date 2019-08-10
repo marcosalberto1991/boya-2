@@ -32,6 +32,8 @@ Route::post('ventas_has_producto/duplicar_productos', 'Ventas_has_productoContro
 Route::resource('Factura','FacturaController');
 
 
+Route::get('Producto/consulta', 'ProductoController@consulta');
+
 Route::Resource('ventas', 'VentasController');
 Route::get('productos_all', 'ProductoController@productos_all');
 Route::Resource('punto', 'puntoController');

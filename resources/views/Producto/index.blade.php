@@ -186,6 +186,22 @@
 				@endcan
 				</h5>
 				<div class=""> 
+				<!--
+				<table id="myTables" style="swidth: s100%;"   role="grid" aria-describedby="example_info">
+				<thead style="width: 100%;">
+							<tr style="width: 100%;">
+								<th>id</th>
+								<th>name</th>
+								<th>email</th>
+							</tr>
+
+				</thead>
+				<tbody>
+				</tbody>
+	
+
+				</table>					
+					-->
 					<table id="myTable" style="swidth: s100%;"  class="table table-hover table-striped table-bordered dataTable dtr-inline compact nowrap" role="grid" aria-describedby="example_info">
 						<thead style="width: 100%;">
 							<tr style="width: 100%;">
@@ -487,6 +503,8 @@
 
 
 <script type='text/javascript'>
+
+
 </script>
 
 <script type='text/javascript'>
@@ -647,6 +665,32 @@ $(document).on('change', '.calculo', function() {
 
 
 <script type="text/javascript">
+
+
+$(document).ready (function() {
+    
+	$.ajax({
+        type: 'GET',
+		url: "Producto/consulta",
+		data: {
+		'_token': $('input[name=_token]').val()
+		},
+        success : function(data) {
+            //var o = JSON.parse(data);//A la variable le asigno el json decodificado
+            $('#myTables').dataTable( {
+               
+				columns: [{data}
+				],
+            });
+        }       
+    });
+
+	
+});
+
+
+
+
 	function verificar(data) {
 	$('.errorid').addClass('d-none');
 	$('.errornombre_proveedor').addClass('d-none');
