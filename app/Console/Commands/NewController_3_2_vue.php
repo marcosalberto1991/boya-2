@@ -201,13 +201,12 @@ class '.$namecontrol.' extends Controller {
 			return response()->json($'.$nombrecoNtrol.');
 		}
 	}
-
-    public function show($id){
+  public function show($id){
         return response()->json('.$NombreModel.'::findOrFail($id));
     }
-    public function consulta(){
+  public function consulta(){
         return response()->json('.$NombreModel.'::paginate(5));
-    }
+  }
 
 	public function edit($id){}
 
@@ -433,7 +432,7 @@ import VueSingleSelect from "vue-single-select";
 
 //import VueToast from "vue-toast-notification";
 //import "vue-toast-notification/dist/index.css";
-
+import Select2 from "v-select2-component";
 //https://www.npmjs.com/package/vue-toastr-2
 import VueToastr2 from "vue-toastr-2";
 import "vue-toastr-2/dist/vue-toastr-2.min.css";
@@ -476,7 +475,8 @@ export default {
   },
   components: {
     VueSingleSelect,
-    VueToastr2
+    VueToastr2,
+    Select2
   },
   methods: {
     /*

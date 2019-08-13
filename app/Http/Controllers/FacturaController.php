@@ -80,7 +80,7 @@ class FacturaController extends Controller {
         return response()->json(FacturaModel::findOrFail($id));
     }
     public function consulta(){
-        return response()->json(FacturaModel::paginate(2));
+        return response()->json(FacturaModel::paginate(5));
     }
 
 	public function edit($id){}
@@ -92,9 +92,9 @@ class FacturaController extends Controller {
 		} else {
 			$Factura = FacturaModel::findOrFail($id);
 			
-			 $Factura->numero_factura=$request->numero_factura;
-				 $Factura->fecha=$request->fecha;
-				 $Factura->proveedor_id=$request->proveedor_id;
+			$Factura->numero_factura=$request->numero_factura;
+			$Factura->fecha=$request->fecha;
+			$Factura->proveedor_id=$request->proveedor_id;
 				 $Factura->estados_id=$request->estados_id;
 				 $Factura->users_id=$request->users_id;
 				 $Factura->updated_at=$request->updated_at;

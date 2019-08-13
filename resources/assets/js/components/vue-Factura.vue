@@ -1,30 +1,6 @@
 <template>
-  <div>
-    <!--
-    <link rel="stylesheet" href="/path/to/select2.css" />
-    <link rel="stylesheet" href="/path/to/select2-bootstrap4.css" />
-    -->
-
-    <div class="col-lg-12">
-      <nav aria-label="Page navigation example">
-        <ul class="pagination">
-          <li class="page-item">
-            <a class="page-link" @click="consulta(this.first_page_url)" href="#">Previous</a>
-          </li>
-
-          <li class="page-item" v-for="data in this.last_page" v-bind:key="data.id">
-            <a class="page-link" href="#">{{data.id}}</a>
-          </li>
-
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-          <li class="page-item">
-            <a class="page-link" @click="consulta(this.last_page_url)" href="#">Previous</a>
-          </li>
-        </ul>
-      </nav>
-
+  <div class="col-lg-12">
+    <div>
       <b-button
         v-b-modal.moda-registro
         @click="anadir_registro()"
@@ -146,11 +122,10 @@
             <div class="form-group">
               <label for="exampleInputEmail1">proveedor_id</label>
               <Select2
-                style="sswidth:200px"
                 class="form-control"
                 v-model="input_proveedor_id"
                 :options="data_foraneo_proveedor_id"
-                :settings="{theme: 'bootstrap', settingOption: value, settingOption: value }"
+                :settings="{ settingOption: value, settingOption: value }"
               />
               <!--
               <select v-model="input_proveedor_id" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
@@ -266,6 +241,7 @@ import VueSingleSelect from "vue-single-select";
 //https://www.npmjs.com/package/vue-toastr-2
 import VueToastr2 from "vue-toastr-2";
 import "vue-toastr-2/dist/vue-toastr-2.min.css";
+import Select2 from "v-select2-component";
 window.toastr = require("toastr");
 Vue.use(VueToastr2);
 
@@ -288,21 +264,6 @@ export default {
       input_users_id: [],
       input_updated_at: [],
       input_created_at: [],
-      pagination: {
-        total: 0,
-        current_page: 0,
-        per_page: 0,
-        last_page: 0,
-        from: 0,
-        to: 0
-      },
-      //paginate
-      first_page_url: 1,
-      last_page_url: {},
-      path: {},
-      per_page: {},
-      to: {},
-      path: {},
 
       errors: {},
       mensaje_formulario: ""
@@ -330,34 +291,8 @@ export default {
   },
   components: {
     VueSingleSelect,
-    VueToastr2
-  },
-  computed: {
-    isActived: function() {
-      return this.pagination.current_page;
-    },
-    pagesNumber: function() {
-      if (!this.pagination.to) {
-        return [];
-      }
-
-      var from = this.pagination.current_page - this.offset;
-      if (from < 1) {
-        from = 1;
-      }
-
-      var to = from + this.offset * 2;
-      if (to >= this.pagination.last_page) {
-        to = this.pagination.last_page;
-      }
-
-      var pagesArray = [];
-      while (from <= to) {
-        pagesArray.push(from);
-        from++;
-      }
-      return pagesArray;
-    }
+    VueToastr2,
+    Select2
   },
   methods: {
     /*
@@ -366,24 +301,9 @@ export default {
     });
     */
 
-    consulta(page) {
-      alert(page);
-      var urlKeeps = "Factura/consulta?page=" + page;
-      axios.get(urlKeeps).then(response => {
+    consulta() {
+      axios.get(`Factura/consulta`).then(response => {
         this.datas = response.data.data;
-        this.first_page_url = response.first_page_url;
-        this.path = response.path;
-        this.last_page_url = response.last_page_url;
-        this.last_page = response.last_page;
-
-        this.pagination = response.data.pagination;
-      });
-    },
-    getKeeps: function(page) {
-      var urlKeeps = "Factura/consulta?page=" + page;
-      axios.get(urlKeeps).then(response => {
-        (this.keeps = response.data.tasks.data),
-          (this.pagination = response.data.pagination);
       });
     },
     eliminar_registro(data_id) {
@@ -483,10 +403,6 @@ export default {
           //this.input_name = data.name;
         }
       });
-    },
-    changePage: function(page) {
-      this.pagination.current_page = page;
-      this.getKeeps(page);
     }
   }
 };
