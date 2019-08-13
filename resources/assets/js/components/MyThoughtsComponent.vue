@@ -13,16 +13,32 @@
 
     <div class="col-md-12">
       <div  class="col-md-12">
+        <!-- 
+          <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }"></div>
+         v-bind:style={   
+            margin-bottom: 5px, 
+            margin: 5px,
+            background-color:lista_mesas.elemento_color_id_pk.background-color,
+            color:lista_mesas.elemento_color_id_pk.color,
+            border-color:lista_mesas.elemento_color_id_pk.border-color
+          }
+        -->
+        <div v-bind:style="{ display: ['margin: 5px', '-ms-flexbox', 'flex'] }">
         <button v-for="lista_mesas in lista_mesa" v-bind:key="lista_mesas.id"
           @click="lista_mesa_add(lista_mesas.id)"
           type="button"
           class="btn btn-success btn-lg"
           data-toggle="button"
-          aria-pressed="false"
-          style="margin-bottom: 5px; margin: 5px;" 
+          aria-pressed="false" 
+           
+          
+         
+            
+          
           
         >{{ lista_mesas.nombre }}
         </button>
+        </div>
       </div> 
       <br>
     </div>
@@ -324,7 +340,7 @@ export default {
 
       //alert(producto.producto_id_pk.nombre);
       this.actualiza_id = producto.id;
-      this.actualiza_producto_id = producto.producto_id_pk;
+      this.actualiza_producto_id = producto.producto_id_pk.id;
       this.actualiza_cantidad = producto.cantidad;
     },
     lista_mesa_add(mesa_id) {
