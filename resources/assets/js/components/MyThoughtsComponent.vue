@@ -7,7 +7,7 @@
       class="form-control"
       value="1"
       required="required"
-      autofocus
+      autofocus 
       v-model="actualiza_id" 
     >
 

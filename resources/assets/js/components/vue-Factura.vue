@@ -4,10 +4,10 @@
       <b-button
         v-b-modal.moda-registro
         @click="anadir_registro()"
-        type="button"
-        class="btn btn-wangir btn-lg"
+        type="button" 
+        class="btn btn-wangir btn-lg" 
         data-toggle="button"
-        aria-pressed="false"
+        aria-pressed="false" 
         style="margin-bottom: 5px; margin: 5px;"
       >Añadir registro</b-button>
       <div class="panel-body" style="overflow-x:auto;">
