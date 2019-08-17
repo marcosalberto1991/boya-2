@@ -28,6 +28,7 @@ Vue.component('my-thoughts-component', require('./components/MyThoughtsComponent
 //Vue.component('punto-component', require('./components/puntoComponent.vue'));
 //Vue.component('mesa-component', require('./components/mesaComponent.vue'));
 Vue.component('vue-factura', require('./components/vue-Factura.vue'));
+Vue.component('pagination', require('laravel-vue-pagination'));//https://www.npmjs.com/package/laravel-vue-pagination
 
 const app = new Vue({
     el: '#app_vue',

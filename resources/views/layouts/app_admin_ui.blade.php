@@ -24,6 +24,51 @@
     * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
     -->
     <link href="{{ asset('Architectui/assets/css/main.css') }}" rel="stylesheet">
+    
+    <style>
+    .margin-right-5{
+        margin-right: 10px;
+    }
+    .searchbar {
+    margin-bottom: auto;
+    margin-top: auto;
+    height: 30px;
+    background-color: #353b48;
+    border-radius: 30px;
+    border-radius: 7px;
+    padding: 5px;
+}
+    .search_input{
+    color: white;
+    border: 0;
+    outline: 0;
+    background: none;
+    width: 0;
+    caret-color:transparent;
+    line-height: 20px;
+    transition: width 0.4s linear;
+    }
+    .searchbar:hover > .search_input{
+    padding: 0 10px;
+    width: 200px;
+    caret-color:red;
+    transition: width 0.4s linear;
+    }
+    .searchbar:hover > .search_icon{
+    background: white;
+    color: #e74c3c;
+    }
+    .search_icon {
+    height: 20px;
+    width: 20px;
+    float: right;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    color: white;
+}
+    </style>
     <!--
     <link rel="stylesheet" href="select2-bootstrap4-theme/dist/select2.css" />
     

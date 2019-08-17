@@ -1,15 +1,49 @@
 <template>
   <div class="col-lg-12">
     <div>
+      <nav>
+        <!--
+        <pagination :data="consulta_datos">
+    <span slot="prev-nav">&lt; Previous</span>
+    <span slot="next-nav">Next &gt;</span>
+</pagination>
+-->
+        <!--
+        <ul>
+          <li v-for="post in consulta_datos.data" :key="post.id">{{ post.id }}</li>
+        </ul>
+        -->
+ 
+        <pagination :data="consulta_datos" @pagination-change-page="consulta"></pagination>
+
+     
+
+
+      </nav>
+      <nav class="nav">
       <b-button
         v-b-modal.moda-registro
         @click="anadir_registro()"
-        type="button" 
-        class="btn btn-wangir btn-lg" 
-        data-toggle="button"
+        type="button"  
+        size="sm"
+        class="btn btn-wangir btn-lg margin-right-5" 
+        data-toggle="button" 
         aria-pressed="false" 
-        style="margin-bottom: 5px; margin: 5px;"
+        variant="success"  
       >Añadir registro</b-button>
+       
+       <div class="d-flex justify-content-right">
+        <div class="searchbar">
+          <input class="search_input" type="text" name="" placeholder="Search...">
+          <input class="search_input" type="text" name="" placeholder="Search...">
+          <input class="search_input" type="text" name="" placeholder="Search...">
+          <a href="#" class="search_icon"><i class="fas fa-search"></i></a>
+        </div>
+      </div>
+      
+      </nav>
+      <p></p>
+
       <div class="panel-body" style="overflow-x:auto;">
         <table class="table table-striped table-bordered table-hover compact nowrap" id="myTable_">
           <thead>
@@ -45,7 +79,8 @@
                   class="btn btn-wangir btn-lg"
                   data-toggle="button"
                   aria-pressed="false"
-                  style="margin-bottom: 5px; margin: 5px;"
+                  size="sm"
+                  variant="warning"
                 >Editar</b-button>
                 <b-button
                   v-b-modal.moda-eliminar
@@ -54,7 +89,7 @@
                   class="btn btn-danger btn-lg"
                   data-toggle="button"
                   aria-pressed="false"
-                  style="margin-bottom: 5px; margin: 5px;"
+                  size="sm"
                 >Eliminar</b-button>
               </td>
             </tr>
@@ -247,6 +282,14 @@ Vue.use(VueToastr2);
 
 export default {
   data() {
+    //  pagination: {
+    //     'total': 0,
+    //     'current_page': 0,
+    //     'per_page': 0,
+    //     'last_page': 0,
+    //     'from': 0,
+    //     'to': 0
+    // },
     return {
       validacion: [],
       editar_dato: false,
@@ -264,6 +307,10 @@ export default {
       input_users_id: [],
       input_updated_at: [],
       input_created_at: [],
+      consulta_datos: {},
+
+     
+      
 
       errors: {},
       mensaje_formulario: ""
@@ -272,22 +319,14 @@ export default {
   mounted() {
     //this.fetchArticles();
     this.consulta();
+    //this.getResults();
     axios.get("Factura/create").then(response => {
       this.data_foraneo_proveedor_id = response.data.proveedor_id;
       this.data_foraneo_estados_id = response.data.estados_id;
       this.data_foraneo_users_id = response.data.users_id;
 
-      //this.productos_all = response.data;
-      //this.data_foraneo_estado_id = response.data.estado_id;
     });
-    /*
-    axios.get("productos_all").then(response => {
-      this.productos_all = response.data;
-    });
-    axios.get("mesa/lista_mesa").then(response => {
-      this.lista_mesa = response.data;
-    });
-    */
+   
   },
   components: {
     VueSingleSelect,
@@ -299,12 +338,27 @@ export default {
     axios.get(Factura/created).then(response => {
       this.productos_all = response.data;
     });
-    */
-
-    consulta() {
-      axios.get(`Factura/consulta`).then(response => {
-        this.datas = response.data.data;
-      });
+    
+    getResults(page = 1) {
+      axios.get('Factura/consulta?page=' + page)
+        .then(response => {
+          this.consulta_datos = response.data;
+          this.datas=response.data.data;
+        });
+    },
+*/
+    consulta(page = 1) {
+      axios.get('Factura/consulta?page=' + page)
+        .then(response => {
+          this.consulta_datos = response.data;
+          this.datas=response.data.data;
+        });
+      
+      //axios.get(`Factura/consulta`).then(response => {
+        //this.datas = response.data.data.data; 
+        //this.pagination = response.data.pagination;
+        //console.info(response.data.pagination);
+      //});
     },
     eliminar_registro(data_id) {
       this.input_Factura_id = data_id;

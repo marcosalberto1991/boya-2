@@ -21,36 +21,26 @@ class FacturaController extends Controller {
 	protected $rules =
 	[
 		'id' => 'required|min:1|max:99999999',
-	   			'numero_factura' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
-	   			'fecha' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
-	   			'proveedor_id' => 'required|min:1|max:99999999',
-	   			'estados_id' => 'required|min:1|max:99999999',
-	   			'users_id' => 'required|min:1|max:99999999',
-	   			
+	   	'numero_factura' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
+	   	'fecha' => 'required|min:2|max:255|regex:/^([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-])+((\s*)+([0-9a-zA-ZñÑáéíóúÁÉÍÓÚ.,()_-]*)*)+$/',
+	   	'proveedor_id' => 'required|min:1|max:99999999',
+	   	'estados_id' => 'required|min:1|max:99999999',
+	   	'users_id' => 'required|min:1|max:99999999',
 	];
 
 	public function index(){
-
 		//$id_tipo = Solicitude_tipo::select("solicitude_tipos.id","solicitude_tipos.descripcion as nombre")->get();
-
 		$Factura = FacturaModel::all();
-
 		$proveedor_id = FacturaModel::select("id","id as nombre")->get();
         $estados_id = FacturaModel::select("id","id as nombre")->get();
         $users_id = FacturaModel::select("id","id as nombre")->get();
-        
 		return view('Factura.index', [ "proveedor_id" => $proveedor_id,"estados_id" => $estados_id,"users_id" => $users_id, 'listmysql' => $Factura] );
-
 	}
-
 	public function create(){
     $data_foraneos = [
       "proveedor_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
         "estados_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
         "users_id" => FacturaModel::select("id","id as nombre","id as text")->get(),
-        
-      //"estados_id" => EstadoModel::select("id","nombre")->get(),
-			//"users_id" => User::select("id","nombre")->get(),
 		];
 		return response()->json($data_foraneos);
 
@@ -79,8 +69,9 @@ class FacturaController extends Controller {
     public function show($id){
         return response()->json(FacturaModel::findOrFail($id));
     }
-    public function consulta(){
-        return response()->json(FacturaModel::paginate(5));
+    public function consulta(Request $request){
+		$data=FacturaModel::paginate(3);
+        return response()->json($data);
     }
 
 	public function edit($id){}
