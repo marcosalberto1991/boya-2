@@ -1,7 +1,6 @@
 @extends('layouts.App_admin_ui')
 @section('content')
-<vue-factura></vue-factura>
-<div class='container'>
-
-</div>
+    <div class='container'>
+        <vue-factura></vue-factura>
+    </div>
 @endsection

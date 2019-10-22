@@ -1,16 +1,10 @@
 <?php
 
 namespace App\Console\Commands;
-
-//use Illuminate\Console\Command;
-
 use App\User;
 use App\DripEmailer;
 use Illuminate\Console\Command;
 use DB;
-
-
-
 
 class NewController_3_2_vue extends Command
 {
@@ -204,13 +198,14 @@ class '.$namecontrol.' extends Controller {
   public function show($id){
         return response()->json('.$NombreModel.'::findOrFail($id));
     }
-  public function consulta(){
-        return response()->json('.$NombreModel.'::paginate(5));
+  public function consulta(Request $request){
+        $data='.$NombreModel.'::paginate(5);
+        return response()->json($data);
   }
 
-	public function edit($id){}
+  public function edit($id){}
 
-	public function update(Request $request, $id){
+    public function update(Request $request, $id){
 		$validator = Validator::make(Input::all(), $this->rules);
 		if ($validator->fails()) {
 			return Response::json(array('.$p.'errors'.$p.' => $validator->getMessageBag()->toArray()));
@@ -253,10 +248,15 @@ $data="";
 $vue_componete=$vue_componete."<template>
   <div>
     <div class='col-lg-12'>
-      <b-button v-b-modal.moda-registro @click='anadir_registro()' type='button' class='btn btn-wangir btn-lg' data-toggle='button' aria-pressed='false' style='margin-bottom: 5px; margin: 5px;'>Añadir registro
+      <nav>
+        <pagination :data='consulta_datos' @pagination-change-page='consulta'></pagination>
+      </nav>
+      <nav class='nav'>
+      <b-button v-b-modal.moda-registro @click='anadir_registro()' type='button' class='btn btn-wangir btn-lg' data-toggle='button' size='sm' aria-pressed='false' variant='success' style='margin-bottom: 5px; margin: 5px;'>Añadir registro
       </b-button>
+      </nav>
       <div class='panel-body' style='overflow-x:auto;'>
-        <table class='table table-striped table-bordered table-hover compact nowrap' id='myTable_' >
+        <table class='table   table-striped table-bordered table-hover compact nowrap' id='myTable_' >
           <thead>
             <tr>
             ";
@@ -293,11 +293,12 @@ $vue_componete=$vue_componete."
         <tr v-for='data in datas' v-bind:key='data.id'>
         $data_dt
           <td>
-            <b-button v-b-modal.moda-registro @click='editar_registro(data.id)'
+            <b-button v-b-modal.moda-registro size='sm'
+            variant='warning' @click='editar_registro(data.id)'
               type='button' class='btn btn-wangir btn-lg' data-toggle='button' aria-pressed='false' style='margin-bottom: 5px; margin: 5px;'>Editar
             </b-button>
             <b-button v-b-modal.moda-eliminar @click='eliminar_registro(data.id)'
-              type='button' class='btn btn-danger btn-lg' data-toggle='button' aria-pressed='false' style='margin-bottom: 5px; margin: 5px;'>Eliminar
+              type='button' class='btn btn-danger btn-lg' size='sm' data-toggle='button' aria-pressed='false' style='margin-bottom: 5px; margin: 5px;'>Eliminar
             </b-button>
 
           </td>
@@ -331,18 +332,18 @@ $vue_componete=$vue_componete.'
           <div class="form-group">
               <label for="exampleInputEmail1">'.$value->Field.'</label>
               <Select2
-                class="form-control"
+                class=""
                 v-model="input_'.$value->Field.'"
                 :options="data_foraneo_proveedor_id"
                 :settings="{ settingOption: value, settingOption: value }"
               />
               <!--
-              <select v-model="input_'.$value->Field.'" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
-              <option v-for="option in data_foraneo_'.$value->Field.'" v-bind:value="option.id">
-                  {{ option.nombre }}
-                </option>
-
-              </select>
+              <Select2 v-model="input_'.$value->Field.'" 
+                class="" id="exampleInputEmail1" 
+                v-model="input_'.$value->Field.'"
+                aria-describedby="emailHelp" placeholder="Seleccionar una opcion">
+              
+              />
               -->
               <small id="emailHelp" class="form-text text-muted"></small>
               <div v-if="errors && errors.'.$value->Field.'" class="text-danger">{{ errors.'.$value->Field.'[0] }}</div>
@@ -450,7 +451,7 @@ export default {
       input_'.$nombrecoNtrol.'_id:[],
       '.$return_data.'
       '.$input_data.'
-      
+      consulta_datos: {},
       errors: {},
       mensaje_formulario: "",
       
@@ -485,10 +486,12 @@ export default {
     });
     */
 
-    consulta(){
-        axios.get('.$tilde_grave.''.$nombrecoNtrol.'/consulta'.$tilde_grave.').then(response => {
-        this.datas = response.data.data;
-        });
+    consulta(page = 1){
+      axios.get("'.$nombrecoNtrol.'/consulta?page=" +page)
+      .then(response => {
+        this.consulta_datos = response.data;
+        this.datas=response.data.data;
+      });
     },
     eliminar_registro(data_id){
     this.input_'.$nombrecoNtrol.'_id=data_id;
