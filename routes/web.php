@@ -24,6 +24,8 @@ Route::resource('Entrada','EntradaController');
 Route::get('{id}/Entrada', 'EntradaController@entrada');
 
 
+Route::get('mesa/proveedores', 'mesaController@proveedores');
+
 Route::Resource('thoughts', 'ThoughtController');
 Route::Resource('ventas_has_producto', 'Ventas_has_productoController');
 Route::post('ventas_has_producto/cobra_todo/{id}', 'Ventas_has_productoController@cobra_todo');

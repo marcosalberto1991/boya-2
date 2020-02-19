@@ -47,6 +47,8 @@ class Ventas_has_productoController extends Controller
         $thought->producto_id = $request->producto_id;
         $thought->ventas_id = $request->ventas_id;
         $thought->cantidad = $request->cantidad;
+        $thought->precio = $request->precio;
+
         //$thought->user_id = auth()->id();
         $thought->save();
         $thought=VentasModel::with('mesa_id_pk','ventas_has_producto_all.producto_id_pk')->get();
@@ -72,6 +74,8 @@ class Ventas_has_productoController extends Controller
         $thought->producto_id = $request->producto_id;
         //$thought->ventas_id = $request->ventas_id;
         $thought->cantidad = $request->cantidad;
+        $thought->precio = $request->precio;
+
         $thought->save();
         return $thought;
     }

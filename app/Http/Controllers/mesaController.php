@@ -7,6 +7,8 @@ use App\VentasModel;
 use App\MesaModel;
 
 use App\Http\Resources\punto as puntoResource;
+use App\ProveedorModel;
+
 class mesaController extends Controller
 {
     /**
@@ -54,13 +56,16 @@ class mesaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id){
-        
         $mesa = MesaModel::all();
         return $mesa; 
     }
     public function lista_mesa(){
         $mesa = MesaModel::all();
         return $mesa;
+    }
+    public function proveedores(){
+        $Proveedor = ProveedorModel::select('id','nombre as text')->get();
+        return $Proveedor;
     }
     /**
      * Remove the specified resource from storage.

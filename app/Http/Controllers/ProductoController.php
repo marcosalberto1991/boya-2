@@ -81,6 +81,8 @@ class ProductoController extends Controller
 			$Producto->nombre=$request->nombre;
 			//$Producto->imagen=$request->imagen;
 			$Producto->precio_venta=$request->precio_venta;
+			$Producto->precio_venta_2=$request->precio_venta_2;
+			
 			/*
 			$Producto->precio_caja=$request->precio_caja;
 			$Producto->cantidad_caja=$request->cantidad_caja;
@@ -97,7 +99,11 @@ class ProductoController extends Controller
 		}
 	}
 
-	public function show($id){}
+	public function show($id){
+		$Producto = ProductoModel::findOrFail($id);
+		return response()->json($Producto);
+
+	}
 
 	public function edit($id){}
 
@@ -117,6 +123,8 @@ class ProductoController extends Controller
 			$Producto->nombre=$request->nombre;
 			//$Producto->imagen=$request->imagen;
 			$Producto->precio_venta=$request->precio_venta;
+			$Producto->precio_venta_2=$request->precio_venta_2;
+
 			/*
 			$Producto->precio_caja=$request->precio_caja;
 			$Producto->cantidad_caja=$request->cantidad_caja;
