@@ -77498,6 +77498,16 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -77575,22 +77585,32 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
         this.cantidad--;
       }
     },
-    fetchArticles: function fetchArticles(page_url) {
+    buscar_productos: function buscar_productos() {
       var _this2 = this;
+
+      axios.get("Producto/" + this.producto_id).then(function (response) {
+        var datas = response.data;
+        //this.fetchArticles();
+
+        _this2.input_producto_precio = datas.precio_venta;
+      });
+    },
+    fetchArticles: function fetchArticles(page_url) {
+      var _this3 = this;
 
       var vm = this;
       page_url = page_url || "venta/obtener_data";
       fetch(page_url).then(function (res) {
         return res.json();
       }).then(function (res) {
-        _this2.ventas = res.data;
+        _this3.ventas = res.data;
         //vm.makePagination(res.meta, res.links);
       }).catch(function (err) {
         return console.log(err);
       });
     },
     Eliminar_producto: function Eliminar_producto(id) {
-      var _this3 = this;
+      var _this4 = this;
 
       if (confirm("Esta seguro que desea eliminar?")) {
         var params = {
@@ -77599,21 +77619,21 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
         axios.delete("ventas_has_producto/" + id, params).then(function (response) {
           var venta = response.data;
           console.info(response.data);
-          _this3.fetchArticles();
+          _this4.fetchArticles();
         });
       }
     },
     cobra_todo: function cobra_todo(venta_id) {
-      var _this4 = this;
+      var _this5 = this;
 
       axios.post("ventas_has_producto/cobra_todo/" + venta_id).then(function (response) {
         var venta = response.data;
         console.info(response.data);
-        _this4.fetchArticles();
+        _this5.fetchArticles();
       });
     },
     duplicar_producto: function duplicar_producto(producto_id, venta_id, cantidad) {
-      var _this5 = this;
+      var _this6 = this;
 
       //axios
       //.post(`ventas_has_producto/duplicar_productos`)
@@ -77625,11 +77645,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       };
       axios.post("ventas_has_producto/duplicar_productos", params).then(function (response) {
         var venta = response.data;
-        _this5.fetchArticles();
+        _this6.fetchArticles();
       });
     },
     Editar_producto: function Editar_producto(producto) {
       this.editar_producto = true;
+
+      this.input_producto_precio = producto.precio;
       console.info(producto);
 
       //alert(producto.producto_id_pk.nombre);
@@ -77638,17 +77660,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       this.actualiza_cantidad = producto.cantidad;
     },
     lista_mesa_add: function lista_mesa_add(mesa_id) {
-      var _this6 = this;
+      var _this7 = this;
 
       axios.get("ventas_has_producto/lista_mesa_add/" + mesa_id).then(function (response) {
         var venta = response.data;
 
         if (venta.nombre == false) {
-          _this6.$toastr.info("mesa ocupada", "mesa creada");
+          _this7.$toastr.info("mesa ocupada", "mesa creada");
         } else {
-          _this6.$toastr.success("mesa creada con exito", "mesa creada");
+          _this7.$toastr.success("mesa creada con exito", "mesa creada");
         }
-        _this6.fetchArticles();
+        _this7.fetchArticles();
         //Vue.use(VueToast);
         /*
         newFunction().success("mesa creado con exito", {
@@ -77661,26 +77683,28 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       });
     },
     post_editar_producto: function post_editar_producto() {
-      var _this7 = this;
+      var _this8 = this;
 
       this.editar_producto = false;
 
       var params = {
         id: this.actualiza_id,
         producto_id: this.actualiza_producto_id,
-        cantidad: this.actualiza_cantidad
+        cantidad: this.actualiza_cantidad,
+        precio: this.input_producto_precio
+
       };
       axios.put("ventas_has_producto/" + this.actualiza_id, params).then(function (response) {
         var venta = response.data;
 
-        _this7.fetchArticles();
+        _this8.fetchArticles();
       });
     },
     cancelar_editar_producto: function cancelar_editar_producto() {
       this.editar_producto = false;
     },
     Edita_producto: function Edita_producto(producto) {
-      var _this8 = this;
+      var _this9 = this;
 
       axios.get("Producto/" + producto.producto_id).then(function (response) {
         var data = response.data;
@@ -77688,17 +77712,17 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
           //this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
         } else {
 
-          _this8.input_producto_id = data.id;
-          _this8.input_nombre_proveedor = data.nombre_proveedor;
-          _this8.input_nombre = data.nombre;
-          _this8.input_precio_1 = data.precio_venta;
-          _this8.input_precio_2 = data.precio_venta_2;
-          _this8.input_proveedor_id = data.proveedor_id;
+          _this9.input_producto_id = data.id;
+          _this9.input_nombre_proveedor = data.nombre_proveedor;
+          _this9.input_nombre = data.nombre;
+          _this9.input_precio_1 = data.precio_venta;
+          _this9.input_precio_2 = data.precio_venta_2;
+          _this9.input_proveedor_id = data.proveedor_id;
         }
       });
     },
     formulario_producto: function formulario_producto() {
-      var _this9 = this;
+      var _this10 = this;
 
       var data = {
         nombre_proveedor: this.input_nombre_proveedor,
@@ -77711,13 +77735,13 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       axios.put("Producto/" + this.input_producto_id, data).then(function (response) {
         var venta = response.data;
         if (response.data.id) {
-          _this9.$toastr.success("Operacio exitosa", "Datos modificados");
+          _this10.$toastr.success("Operacio exitosa", "Datos modificados");
         }
         //  this.fetchArticles();
       });
     },
     newproducto: function newproducto(venta_id) {
-      var _this10 = this;
+      var _this11 = this;
 
       //añadir un nuevo productos
       console.info(venta_id);
@@ -77735,7 +77759,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       axios.post("ventas_has_producto", params).then(function (response) {
         var venta = response.data;
 
-        _this10.fetchArticles();
+        _this11.fetchArticles();
       });
     },
     clearForm: function clearForm() {
@@ -85064,7 +85088,8 @@ var render = function() {
                                                         _vm.formatPrice(
                                                           producto.precio
                                                         )
-                                                      )
+                                                      ) +
+                                                        "\n                        "
                                                     )
                                                   ]
                                                 )
@@ -85115,31 +85140,76 @@ var render = function() {
                                     _vm._v(_vm._s(producto.cantidad))
                                   ]),
                               _vm._v(" "),
-                              _c("td", { staticClass: "text-center" }, [
-                                _c(
-                                  "div",
-                                  { staticClass: "font-size-xlg text-muted" },
-                                  [
+                              _vm.editar_producto &&
+                              producto.id == _vm.actualiza_id
+                                ? _c("td", { staticClass: "text-center" }, [
+                                    _vm.editar_producto &&
+                                    producto.id == _vm.actualiza_id
+                                      ? _c("div", [
+                                          _c("input", {
+                                            directives: [
+                                              {
+                                                name: "model",
+                                                rawName: "v-model",
+                                                value:
+                                                  _vm.input_producto_precio,
+                                                expression:
+                                                  "input_producto_precio"
+                                              }
+                                            ],
+                                            staticClass: "form-control",
+                                            staticStyle: { width: "100%" },
+                                            attrs: {
+                                              type: "text",
+                                              value: "1",
+                                              min: "1",
+                                              required: "required",
+                                              autofocus: ""
+                                            },
+                                            domProps: {
+                                              value: _vm.input_producto_precio
+                                            },
+                                            on: {
+                                              input: function($event) {
+                                                if ($event.target.composing) {
+                                                  return
+                                                }
+                                                _vm.input_producto_precio =
+                                                  $event.target.value
+                                              }
+                                            }
+                                          })
+                                        ])
+                                      : _vm._e()
+                                  ])
+                                : _c("td", { staticClass: "text-center" }, [
                                     _c(
-                                      "small",
-                                      { staticClass: "opacity-5 pr-1" },
-                                      [_vm._v("$")]
-                                    ),
-                                    _vm._v(" "),
-                                    _c("span", [
-                                      _vm._v(
-                                        _vm._s(
-                                          _vm.formatPrice(
-                                            producto.cantidad * producto.precio
+                                      "div",
+                                      {
+                                        staticClass: "font-size-xlg text-muted"
+                                      },
+                                      [
+                                        _c(
+                                          "small",
+                                          { staticClass: "opacity-5 pr-1" },
+                                          [_vm._v("$")]
+                                        ),
+                                        _vm._v(" "),
+                                        _c("span", [
+                                          _vm._v(
+                                            _vm._s(
+                                              _vm.formatPrice(
+                                                producto.cantidad *
+                                                  producto.precio
+                                              )
+                                            )
                                           )
-                                        )
-                                      )
-                                    ]),
-                                    _vm._v(" "),
-                                    _vm._m(1, true)
-                                  ]
-                                )
-                              ]),
+                                        ]),
+                                        _vm._v(" "),
+                                        _vm._m(1, true)
+                                      ]
+                                    )
+                                  ]),
                               _vm._v(" "),
                               _vm.editar_producto &&
                               producto.id == _vm.actualiza_id
@@ -85295,6 +85365,11 @@ var render = function() {
                               options: _vm.productos_all,
                               myOptions: _vm.productos_all
                             },
+                            on: {
+                              change: function($event) {
+                                return _vm.buscar_productos()
+                              }
+                            },
                             model: {
                               value: _vm.producto_id,
                               callback: function($$v) {
@@ -85333,7 +85408,7 @@ var render = function() {
                               }
                             ],
                             staticClass: "form-control",
-                            staticStyle: { width: "56px" },
+                            staticStyle: { width: "70px" },
                             attrs: {
                               type: "text",
                               value: "1",
