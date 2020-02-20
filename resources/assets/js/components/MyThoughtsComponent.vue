@@ -70,11 +70,9 @@
                     <div class="widget-content-wrapper">
                       <div class="widget-content-left mr-3">
                         <div class="widget-content-left">
-                          <img
-                            width="40"
-                            class="rounded-circle"
-                            v-bind:src="'perfil_usuario/' + producto.producto_id_pk.imagen"
-                          >
+                          <a v-b-modal.modal-1 @click="Edita_producto(producto)">
+                            <img width="40" class="rounded-circle" v-bind:src="'perfil_usuario/' + producto.producto_id_pk.imagen">
+                          </a>
                         </div>
                       </div>
                       <Select2
@@ -85,7 +83,7 @@
                         :options = "productos_all"
                         :myOptions = "productos_all"
                    
-                  />
+                        />
 
 <!--
 
@@ -106,10 +104,11 @@
 
                       <div v-else class="widget-content-left flex2">
                         <div class="widget-heading">{{ producto.producto_id_pk.nombre }}</div>
-                        <div
-                          class="widget-subheading opacity-7"
-                        >{{ formatPrice(producto.producto_id_pk.precio_venta) }}</div>
+                        <div  class="widget-subheading opacity-7">{{ formatPrice(producto.precio) }}
+                        </div>
+                        
                       </div>
+                      
                     </div>
                   </div>
                 </td>
@@ -126,10 +125,19 @@
                   >
                 </td>
                 <td v-else class="text-center">{{ producto.cantidad }}</td>
-                <td class="text-center">
+                
+                <td v-if="editar_producto && producto.id == actualiza_id" class="text-center">
+                      <div v-if="editar_producto && producto.id == actualiza_id" >
+                          <input type="text" class="form-control" value="1" min="1"  required="required" autofocus v-model="input_producto_precio" style="width: 100%;">
+                      </div>
+
+                </td>
+
+
+                <td v-else class="text-center">
                   <div class="font-size-xlg text-muted">
                     <small class="opacity-5 pr-1">$</small>
-                    <span>{{ formatPrice(producto.cantidad*producto.producto_id_pk.precio_venta) }}</span>
+                    <span>{{ formatPrice(producto.cantidad*producto.precio) }}</span>
                     <small class="text-warning pl-2">
                       <i class="fa fa-dot-circle"></i>
                     </small>
@@ -183,7 +191,7 @@
               </vue-single-select>
               -->  
               
-                  <Select2
+                  <Select2  @change="buscar_productos()"
                   width="80px"
                   placeholder="producto" 
                   :required="true"
@@ -193,6 +201,19 @@
                    
                   />
 
+            </div>
+            <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
+              <label for="examplePassword22" class="mr-sm-2">$</label>
+              <input
+                type="text"
+                class="form-control"
+                value="1"
+                min="1" 
+                required="required"
+                autofocus
+                v-model="input_producto_precio"
+                style="width: 70px;"
+              >
             </div>
             <div class="mb-2 mr-sm-2 mb-sm-0 position-relative form-group">
               <label for="examplePassword22" class="mr-sm-2">Cantidad</label>
@@ -216,12 +237,64 @@
       </div>
     </div>
   </div>
+  
+  <b-modal id="modal-1" size="xl" title="BootstrapVue">
+     
+                 <form  action v-on:submit.prevent="formulario_producto()">
+
+       <div class="row">
+       
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Nombre Proveedor</label>
+        <input type="text" class="form-control" v-model="input_nombre_proveedor" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Nombre</label>
+        <input type="text" class="form-control" v-model="input_nombre" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group col-2">
+        <label for="exampleInputEmail1">Precio 1</label>
+        <input type="text" class="form-control" v-model="input_precio_1" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group col-2">
+        <label for="exampleInputEmail1">Precio 2</label>
+        <input type="text" class="form-control" v-model="input_precio_2" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Proveedor</label>
+          <Select2 style="width:100%" :required="true" v-model="input_proveedor_id" :options = "data_foraneo_proveedor_id" :myOptions = "data_foraneo_proveedor_id"
+            />      
+      </div>
+      <div class="form-group col-4">
+        <label for="exampleInputEmail1">Imagen</label>
+        <input type="file" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+      </div>
+      <div class="form-group col-12">
+
+
+
+      
+      <button type="submit"     
+   class="btn btn-primary">Actualiza</button>
+      </div>
+
+     </div>
+
+    </form>
+
+
+
+     
+  </b-modal> 
   </div>
   <!--
   <script src="https://unpkg.com/vue/dist/vue.js"></script>
   <script src="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.js"></script>
   <link rel="stylesheet" href="https://unpkg.com/vue-toastr-2/dist/vue-toastr-2.min.css">
   -->
+
+  
 </template> 
 <script type="application/javascript">
 import Vue from "vue";
@@ -257,7 +330,17 @@ export default {
       producto_id: "",
       cantidad: "1",
       productos_all: [],
-      lista_mesa: []
+      input_producto_precio:[],
+      lista_mesa: [],
+      input_precio_1:[],
+      input_precio_2:[],
+
+      input_nombre_proveedor:[],
+      input_nombre:[],
+      input_precio_1:[],
+      input_precio_2:[],
+      input_proveedor_id:[],
+      data_foraneo_proveedor_id:[],
     };
   },
   mounted() {
@@ -267,6 +350,9 @@ export default {
     });
     axios.get("mesa/lista_mesa").then(response => {
       this.lista_mesa = response.data;
+    });
+    axios.get("mesa/proveedores").then(response => {
+      this.data_foraneo_proveedor_id = response.data;
     });
   },
   components: {
@@ -286,6 +372,16 @@ export default {
         this.cantidad--;
       }
       
+    },
+    buscar_productos(){
+      
+      axios.get(`Producto/${this.producto_id}`).then(response => {
+          const datas = response.data;
+          //this.fetchArticles();
+          
+        this.input_producto_precio = datas.precio_venta;
+      });
+    
     },
     fetchArticles(page_url) {
       let vm = this;
@@ -325,7 +421,8 @@ export default {
       const params = {
         producto_id: producto_id,
         ventas_id: venta_id,
-        cantidad: cantidad
+        cantidad: cantidad,
+        
       };
       axios
         .post(`ventas_has_producto/duplicar_productos`, params)
@@ -336,6 +433,8 @@ export default {
     },
     Editar_producto(producto) {
       this.editar_producto = true;
+
+      this.input_producto_precio = producto.precio;
       console.info(producto);
 
       //alert(producto.producto_id_pk.nombre);
@@ -372,7 +471,9 @@ export default {
       const params = {
         id: this.actualiza_id,
         producto_id: this.actualiza_producto_id,
-        cantidad: this.actualiza_cantidad
+        cantidad: this.actualiza_cantidad,
+        precio: this.input_producto_precio
+
       }; 
       axios
         .put(`ventas_has_producto/${this.actualiza_id}`, params)
@@ -385,6 +486,45 @@ export default {
     cancelar_editar_producto() {
       this.editar_producto = false;
     },
+    Edita_producto(producto){
+     
+      axios.get(`Producto/${producto.producto_id}`).then(response => {
+            const data = response.data;
+            if(!response.data){
+              //this.$toastr.warning("Operacio no exitosa", "Regitro no obtenido");
+            }else{
+            
+              this.input_producto_id = data.id
+              this.input_nombre_proveedor = data.nombre_proveedor
+              this.input_nombre = data.nombre
+              this.input_precio_1 = data.precio_venta
+              this.input_precio_2 = data.precio_venta_2
+              this.input_proveedor_id = data.proveedor_id
+             
+            }
+      });
+
+
+    },
+    formulario_producto(){
+      const data = {
+        nombre_proveedor:this.input_nombre_proveedor,
+        nombre:this.input_nombre,
+        precio_venta:this.input_precio_1,
+        precio_venta_2:this.input_precio_2,
+        proveedor_id:this.input_proveedor_id,
+             
+        
+        };
+      axios.put(`Producto/${this.input_producto_id}`, data).then(response => {
+        const venta = response.data;
+        if(response.data.id){
+          this.$toastr.success("Operacio exitosa", "Datos modificados");
+        }
+      //  this.fetchArticles();
+      });
+
+    },
     newproducto(venta_id) {
       //añadir un nuevo productos
       console.info(venta_id);
@@ -393,7 +533,8 @@ export default {
       const params = {
         producto_id: this.producto_id,
         cantidad: this.cantidad,
-        ventas_id: venta_id
+        ventas_id: venta_id,
+        precio:this.input_producto_precio
       };
       this.producto_id = "";
       this.cantidad = 1;
