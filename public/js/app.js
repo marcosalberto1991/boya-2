@@ -77508,6 +77508,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 
@@ -85677,7 +85680,7 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("Select2", {
-                      staticClass: "width='100%'",
+                      staticStyle: { width: "100%" },
                       attrs: {
                         required: true,
                         options: _vm.data_foraneo_proveedor_id,
@@ -85710,11 +85713,16 @@ var render = function() {
                   })
                 ]),
                 _vm._v(" "),
-                _c(
-                  "button",
-                  { staticClass: "btn btn-primary", attrs: { type: "submit" } },
-                  [_vm._v("Submit")]
-                )
+                _c("div", { staticClass: "form-group col-12" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [_vm._v("Actualiza")]
+                  )
+                ])
               ])
             ]
           )
