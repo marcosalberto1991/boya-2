@@ -38,6 +38,8 @@ class Ventas_has_productoController extends Controller
         $thought->producto_id = $request->producto_id;
         $thought->ventas_id = $request->ventas_id;
         $thought->cantidad = $request->cantidad;
+        $thought->precio = $request->precio;
+        
         //$thought->user_id = auth()->id();
         $thought->save();
     }

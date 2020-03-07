@@ -169,7 +169,7 @@
                 </td>
                 <td class="text-center" v-else>
                   <button @click="Editar_producto(producto)" class="btn btn-info btn-sm">Editar</button>
-                  <button @click="duplicar_producto(producto.producto_id_pk.id,venta.id,producto.cantidad)" class="btn btn-success btn-sm">Duplicar Productos</button>
+                  <button @click="duplicar_producto(producto.producto_id_pk.id,venta.id,producto.cantidad,producto.precio )" class="btn btn-success btn-sm">Copia</button>
                   <button @click="Eliminar_producto(producto.id)" class="btn btn-danger btn-sm" >Eliminar</button>
                 </td>
               </tr>
@@ -444,13 +444,15 @@ export default {
           this.fetchArticles();
         });
     },
-    duplicar_producto(producto_id,venta_id,cantidad){
+    duplicar_producto(producto_id,venta_id,cantidad,precio){
       //axios
         //.post(`ventas_has_producto/duplicar_productos`)
       const params = {
         producto_id: producto_id,
         ventas_id: venta_id,
         cantidad: cantidad,
+        precio: precio,
+        
         
       };
       axios

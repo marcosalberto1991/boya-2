@@ -78319,7 +78319,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
         _this5.fetchArticles();
       });
     },
-    duplicar_producto: function duplicar_producto(producto_id, venta_id, cantidad) {
+    duplicar_producto: function duplicar_producto(producto_id, venta_id, cantidad, precio) {
       var _this6 = this;
 
       //axios
@@ -78327,7 +78327,8 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_3_vue_
       var params = {
         producto_id: producto_id,
         ventas_id: venta_id,
-        cantidad: cantidad
+        cantidad: cantidad,
+        precio: precio
 
       };
       axios.post("ventas_has_producto/duplicar_productos", params).then(function (response) {
@@ -85741,12 +85742,13 @@ var render = function() {
                                             return _vm.duplicar_producto(
                                               producto.producto_id_pk.id,
                                               venta.id,
-                                              producto.cantidad
+                                              producto.cantidad,
+                                              producto.precio
                                             )
                                           }
                                         }
                                       },
-                                      [_vm._v("Duplicar Productos")]
+                                      [_vm._v("Copia")]
                                     ),
                                     _vm._v(" "),
                                     _c(
