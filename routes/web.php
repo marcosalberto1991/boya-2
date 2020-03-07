@@ -14,6 +14,11 @@
 
 //Route::apiResource('thoughts', 'ThoughtController');
 
+
+Route::get('Producto/consulta', 'ProductoController@consulta');
+Route::resource('Producto','ProductoController');
+
+
 Route::get('Factura/consulta', 'FacturaController@consulta');
 
 Route::resource('Venta','VentaController');

@@ -87,7 +87,7 @@
     
 </style>
 <body>
-    <div id="app" class="content app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header ">
+    <div id="app" class="content app-container app-theme-white body-tabs-shadow fixed-sidebar fixed-header  closed-sidebar">
         <div class="app-header header-shadow bg-info header-text-dark">
             <div class="app-header__logo">
                 <div class="logo-src"></div>

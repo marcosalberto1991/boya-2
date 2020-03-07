@@ -12,7 +12,18 @@ import 'vue-toastr-2/dist/vue-toastr-2.min.css';
 import BootstrapVue from 'bootstrap-vue' //https://bootstrap-vue.js.org/
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+
+Vue.use(BootstrapVue);
+
+
+//Vue.component('multiselect', Multiselect)
+//import Permissions from './mixins/Permissions';
+//Vue.mixin(Permissions);
 Vue.use(BootstrapVue)
+
+
+
 
 window.toastr = require('toastr');
 Vue.use(VueToastr2);
@@ -27,8 +38,11 @@ Vue.component('my-thoughts-component', require('./components/MyThoughtsComponent
 //Vue.component('null-component', require('./components/nullComponent.vue'));
 //Vue.component('punto-component', require('./components/puntoComponent.vue'));
 //Vue.component('mesa-component', require('./components/mesaComponent.vue'));
+Vue.component('vue-producto', require('./components/vue-Producto.vue'));
+
+
 Vue.component('vue-factura', require('./components/vue-Factura.vue'));
-Vue.component('pagination', require('laravel-vue-pagination'));//https://www.npmjs.com/package/laravel-vue-pagination
+Vue.component('pagination', require('laravel-vue-pagination')); //https://www.npmjs.com/package/laravel-vue-pagination
 
 const app = new Vue({
     el: '#app_vue',
