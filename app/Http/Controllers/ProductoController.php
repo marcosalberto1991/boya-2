@@ -122,9 +122,7 @@ class ProductoController extends Controller {
 		$Producto->precio_venta_2=$request->precio_venta_2;
 		$Producto->ganacia=$request->ganacia;
 		$Producto->proveedor_id=$request->proveedor_id;
-		$Producto->created_at=$request->created_at;
-		$Producto->updated_at=$request->updated_at;
-
+		
 		$Producto->save();
 		return response()->json($Producto);
 		}
@@ -133,7 +131,12 @@ class ProductoController extends Controller {
         return response()->json(ProductoModel::findOrFail($id));
     }
   
-
+	public function productos_all(){
+		$Producto = ProductoModel::pluck('nombre','id');		
+		$Producto = ProductoModel::select('id','nombre')->get();		
+		$Producto = ProductoModel::select('id','nombre','nombre as text')->get();		
+		return response()->json($Producto);
+	}
   public function edit($id){}
 
     public function update(Request $request, $id){

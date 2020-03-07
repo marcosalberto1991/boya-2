@@ -1,5 +1,10 @@
+
 <template>
 <div class="row">
+<!--
+  ALTER TABLE `ventas` ADD `lista_precio_id` INT NOT NULL AFTER `mesa_id`;
+
+-->
     <div v-if="formulario_Producto" class="col-lg-12 ">
         <div class="main-card mb-3 card formulario">
             <div class="card-body"><h1 class="card-title"></h1>
@@ -97,7 +102,7 @@
             </div>
             <div class="form-group col-md-4 col-sm-12">
               <label for="exampleInputEmail1">Proveedor</label>
-              <Select2 v-model="input_proveedor_id" :options="data_foraneo_proveedor_id" :settings="{ settingOption: value, settingOption: value }"/>
+              <Select2 v-model="input_proveedor_id" :options="data_foraneo_proveedor_id" />
               <small id="emailHelp" class="form-text text-muted"></small>
               <b-alert show  v-if="validacion.proveedor_id" variant="danger" >{{validacion.proveedor_id[0]}}</b-alert>
             </div>
@@ -174,7 +179,9 @@
       </template>
       
       <template v-slot:cell(imagen)='data'>
-        <img height="10px" width="10px" :src="'intervenir/'+data.item.imagen" alt="">
+        
+        <img v-if="data.item.imagen" height="30px" width="30px" :src="'intervenir/'+data.item.imagen" alt="">
+      
       </template> 
       <template v-slot:cell(Acciones)='data'>
 
@@ -489,7 +496,7 @@ export default {
       
       this.validacion="";
 
-    },
+    }, 
    
   }
 };

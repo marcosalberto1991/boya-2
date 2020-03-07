@@ -38,6 +38,18 @@
           
         >{{ lista_mesas.nombre }}
         </button>
+
+          <Select2  
+                  width="80px"
+                  placeholder="producto" 
+                  :required="true"
+                  v-model="input_lista_precio_id" 
+                  :options = "lista_precio"
+                  :myOptions = "lista_precio"
+                   
+                  />
+
+        
         </div>
       </div> 
       <br>
@@ -47,7 +59,14 @@
         <div class="card-header">
           <h3><b>{{ venta.mesa_id_pk.nombre }}</b></h3>
           <div class="btn-actions-pane-right">
+             <!--
+             <b-form-group label="">
+                <b-form-radio v-model="ventas.lista_precio_id" name="some-radios" value="1">Option A</b-form-radio>
+                <b-form-radio v-model="ventas.lista_precio_id" name="some-radios" value="2">Option B</b-form-radio>
+              </b-form-group>
+              -->
             <div role="group" class="btn-group-sm btn-group">
+              
              
               <button @click="cobra_todo(venta.id)" class="btn btn-focus">Cerrar</button>
             </div>
@@ -340,7 +359,12 @@ export default {
       input_precio_1:[],
       input_precio_2:[],
       input_proveedor_id:[],
+      input_lista_precio_id:1,
       data_foraneo_proveedor_id:[],
+      lista_precio:[
+        {id:1,text:'1'},
+        {id:2,text:'2'}
+        ]
     };
   },
   mounted() {
@@ -378,8 +402,13 @@ export default {
       axios.get(`Producto/${this.producto_id}`).then(response => {
           const datas = response.data;
           //this.fetchArticles();
-          
-        this.input_producto_precio = datas.precio_venta;
+          if(this.input_lista_precio_id==1){
+            this.input_producto_precio = datas.precio_venta;
+          }
+          if(this.input_lista_precio_id==2){
+            this.input_producto_precio = datas.precio_venta_2;
+          }
+
       });
     
     },
