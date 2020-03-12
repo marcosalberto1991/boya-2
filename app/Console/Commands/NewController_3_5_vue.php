@@ -48,7 +48,7 @@ class NewController_3_5_vue extends Command
 		$nombrecoNtrol = $this->ask('Nombre de Namecontroller ej: "Consulta" => ConsultaNamecontroller.php ');
 		//$nombrecoNtrol="Proyecto_prueba";
 		$namedatabase = $this->ask('Nombre de la tabla en la base de datos  ');
-		$is_subir_archivo = $this->ask('configura para subir archivos');
+		$is_subir_archivo = $this->ask('configura para subir archivos (S/N) ');
 		//$namedatabase="proyecto";
 		$NameController="Controller";
 		$NameModel="Model";

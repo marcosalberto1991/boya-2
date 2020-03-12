@@ -19,6 +19,16 @@
         "vue": "^2.6.10"
     },
     "dependencies": {
+        "@ckeditor/ckeditor5-build-balloon-block": "^16.0.0",
+        "@ckeditor/ckeditor5-build-classic": "^16.0.0",
+        "@ckeditor/ckeditor5-build-decoupled-document": "^16.0.0",
+        "@ckeditor/ckeditor5-build-inline": "^16.0.0",
+        "@ckeditor/ckeditor5-vue": "^1.0.1",
+        "@fullcalendar/core": "^4.3.1",
+        "@fullcalendar/daygrid": "^4.3.0",
+        "@fullcalendar/resource-timegrid": "^4.3.0",
+        "@fullcalendar/resource-timeline": "^4.3.0",
+        "@fullcalendar/vue": "^4.3.1",
         "ajv": "^6.0.0",
         "bootstrap": "^4.3.1",
         "bootstrap-vue": "^2.0.3",

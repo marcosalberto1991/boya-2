@@ -296,6 +296,10 @@ Route::post('Auditoria/changeStatus', array('as' => 'changeStatus', 'uses' => 'A
 Route::post('Reportes/auditoria_pdf', array('as' => 'Reportes', 'uses' => 'ReportesController@auditoria_pdf'));
 Route::post('Auditoria', array('as' => 'index', 'uses' => 'AuditoriaController@index'));
 
+Route::get('Ventas/consulta', 'VentasController@consulta');
+Route::resource('Ventas','VentasController');
+
+
 
 Route::get('/clear', function() {
 

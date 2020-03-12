@@ -123,7 +123,7 @@
 
                       <div v-else class="widget-content-left flex2">
                         <div class="widget-heading">{{ producto.producto_id_pk.nombre }}</div>
-                        <div  class="widget-subheading opacity-7">{{ formatPrice(producto.precio) }}
+                        <div  class="widget-subheading opacity-7"><span class="precio-color">{{ formatPrice(producto.precio) }}</span> - <span class="color-hora"> {{ producto.created_at.substr(11,18)}}</span>
                         </div>
                         
                       </div>
@@ -589,3 +589,13 @@ function newFunction() {
   return Vue.$toast;
 }
 </script>
+<style>
+.precio-color{
+  color:#0c08eeec; 
+  font-weight: bold;
+}
+.color-hora{
+  color:#f11e1eec; 
+  font-weight: bold;
+}
+</style>

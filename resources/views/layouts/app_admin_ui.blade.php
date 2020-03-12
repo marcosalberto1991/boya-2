@@ -550,6 +550,14 @@
                                         Productos
                                     </a>
                                 </li>
+                                <li>
+                                    <a href="{{ action('VentasController@index') }}">
+                                        <i class="metismenu-icon pe-7s-rocket"></i>
+                                        Ventas
+                                    </a>
+                                </li>
+
+                                
                                 <!--
                                 <li>
                                     <a href="{{ action('ProductosController@index') }}">

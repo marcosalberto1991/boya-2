@@ -18,6 +18,10 @@
 		public function producto_id_pk() {
     		return $this->belongsTo('App\ProductoModel', 'producto_id');
 		}
+		public function producto_id() {
+    		return $this->belongsTo('App\ProductoModel', 'producto_id');
+		}
+		
 		
 	    	
 
